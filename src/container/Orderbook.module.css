@@ -1,0 +1,60 @@
+.Orderbook {
+  display: flex;
+  background-color: #262e3e;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  padding: 10px;
+  margin: 2px 5px 2px 5px;
+}
+
+.Title {
+  background-color: #121828;
+  display: flex;
+  width: 1000px;
+}
+
+.left {
+  padding: 10px;
+  width: 33.3%;
+  display: flex;
+}
+
+.Orders {
+  display: flex;
+  justify-content: center;
+  margin: 2px 5px 2px 5px;
+  flex-direction: column;
+}
+.header {
+  background-color: #121828;
+  margin: 2px 5px 2px 5px;
+}
+
+body {
+  font-weight: bold;
+}
+
+@media (max-width: 600px) {
+  .Orderbook {
+    padding: 0;
+    margin: 0;
+  }
+
+  .Orders {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+  }
+
+  .Title {
+    width: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+  .left {
+    padding: 10 15px;
+  }
+}

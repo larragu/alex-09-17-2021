@@ -1,0 +1,15 @@
+.Spread {
+  padding: 10px;
+  width: 33.3%;
+  display: flex;
+  justify-content: center;
+  color: #474e5d;
+}
+
+@media (max-width: 600px) {
+  .Spread {
+    width: 100%;
+    background-color: #121828;
+    box-sizing: border-box;
+  }
+}

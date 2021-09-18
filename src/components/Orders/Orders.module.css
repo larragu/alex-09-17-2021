@@ -1,0 +1,49 @@
+.Orders {
+  display: flex;
+}
+
+.TotalCell {
+  height: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  padding: 5px 5px 5px 0;
+}
+
+.Footer {
+  display: flex;
+  justify-content: center;
+  background-color: #121828;
+  padding: 15px;
+}
+
+.ToggleButton {
+  border: none;
+  width: 100px;
+  height: 30px;
+  border-radius: 6px;
+  background-color: #614ee2;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.ToggleButton:hover {
+  background-color: #211b53;
+}
+
+.ToggleButton:active {
+  background-color: #6c63c4;
+}
+
+.ToggleButton:disabled {
+  background-color: #38373b;
+  color: darkgray;
+}
+
+@media (max-width: 600px) {
+  .Orders {
+    flex-direction: column;
+    flex-direction: column-reverse;
+  }
+}

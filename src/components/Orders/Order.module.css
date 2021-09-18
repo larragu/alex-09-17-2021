@@ -1,0 +1,38 @@
+.Order {
+  height: 20px;
+  width: 100%;
+  display: flex;
+  padding: 5px;
+}
+
+.Cell {
+  width: 50%;
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 5px;
+}
+
+.BidPriceCell {
+  color: #1c7156;
+}
+
+.AskPriceCell {
+  color: #ab3539;
+}
+
+@media (max-width: 600px) {
+  .Order {
+    overflow: hidden;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .OrderBuy {
+    display: flex;
+    flex-direction: row-reverse;
+  }
+
+  .Cell {
+    padding-right: 5px;
+  }
+}

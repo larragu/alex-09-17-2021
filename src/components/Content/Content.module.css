@@ -1,0 +1,82 @@
+.Content {
+  display: flex;
+  flex-direction: column;
+}
+
+.Header {
+  display: flex;
+  background-color: #121828;
+  margin: 0 0 2px 0;
+  padding: 5px;
+  padding-right: 20px;
+}
+
+.HeaderCell {
+  display: flex;
+  color: #474e5d;
+  justify-content: flex-end;
+  width: 33.3%;
+}
+
+.Columns {
+  display: flex;
+  flex-direction: column;
+}
+.Column {
+  width: 33.3%;
+}
+
+.ColumnContainer {
+  display: flex;
+  width: 500px;
+  height: 500px;
+  background-color: #121828;
+}
+
+.TotalColumn {
+  width: 33.3%;
+  padding-right: 23px;
+}
+
+.TwoColumns {
+  width: 66.6%;
+
+  padding-left: 15px;
+}
+
+.TotalColumnReversed {
+  width: 33.3%;
+  padding-left: 0;
+}
+
+.TwoColumnsReversed {
+  width: 66.6%;
+
+  padding-right: 15px;
+}
+
+@media (max-width: 600px) {
+  .ColumnContainer {
+    width: 100%;
+    height: 480px;
+  }
+  .TotalColumn {
+    padding-right: 17px;
+  }
+  .BuyColumnContainer {
+    display: flex;
+    flex-direction: row-reverse;
+  }
+
+  .BuyTotalCell {
+    padding-right: 20px;
+  }
+
+  .Header {
+    padding-right: 15px;
+  }
+
+  .TwoColumnsReversed {
+    padding-right: 0;
+  }
+}
