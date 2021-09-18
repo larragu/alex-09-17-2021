@@ -13,11 +13,11 @@
 }
 
 .BidPriceCell {
-  color: #1c7156;
+  color: #00ffae;
 }
 
 .AskPriceCell {
-  color: #ab3539;
+  color: rgb(253, 33, 33);
 }
 
 @media (max-width: 600px) {

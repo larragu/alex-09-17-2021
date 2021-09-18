@@ -5,6 +5,7 @@ import {  OrderType, ReducersState } from "../../models";
 import Order from "./Order";
 import styles from './../Orders/Orders.module.css';
 import { Content } from "../Content/Content";
+import { BarGraph } from "../BarGraph/BarGraph";
 
 const Asks = () => {
   const asksMap = useSelector((state:ReducersState) => state.asks.map);
@@ -26,11 +27,21 @@ const Asks = () => {
   })
 
   return(
+    <React.Fragment>
+      <div style={{position:'relative'}}>
+        {asksArray.length > 0 &&
+          <BarGraph 
+              orderType={OrderType.SELL}
+              totalArray={totalArray}
+              />
+        }
+      </div>
       <Content 
       totalCells={totalCells}
       orders={orders}
       orderType={OrderType.SELL}
       />
+    </React.Fragment>
   );
 }
 
