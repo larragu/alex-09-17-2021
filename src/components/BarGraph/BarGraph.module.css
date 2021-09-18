@@ -20,7 +20,7 @@
 
 .BuyBar {
   background: green;
-  opacity: 25%;
+  opacity: 0.25;
 }
 
 .SellBar {
