@@ -25,7 +25,7 @@
 
 .SellBar {
   background: red;
-  opacity: 25%;
+  opacity: 0.25;
 }
 
 @media (max-width: 600px) {
