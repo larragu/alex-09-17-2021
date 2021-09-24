@@ -1,4 +1,4 @@
-.Orderbook {
+.orderbook {
   display: flex;
   background-color: #262e3e;
   flex-direction: column;
@@ -9,7 +9,7 @@
   margin: 2px 5px 2px 5px;
 }
 
-.Title {
+.title {
   background-color: #121828;
   display: flex;
   width: 1000px;
@@ -21,34 +21,26 @@
   display: flex;
 }
 
-.Orders {
+.orders {
   display: flex;
   justify-content: center;
   margin: 2px 5px 2px 5px;
   flex-direction: column;
 }
-.header {
-  background-color: #121828;
-  margin: 2px 5px 2px 5px;
-}
-
-body {
-  font-weight: bold;
-}
 
 @media (max-width: 600px) {
-  .Orderbook {
+  .orderbook {
     padding: 0;
     margin: 0;
   }
 
-  .Orders {
+  .orders {
     width: 100%;
     padding: 0;
     margin: 0;
   }
 
-  .Title {
+  .title {
     width: 100%;
     display: flex;
     align-items: center;

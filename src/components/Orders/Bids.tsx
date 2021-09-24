@@ -23,7 +23,7 @@ const Bids = () => {
   });
   
   totalCells = totalArray.map(total => {
-    return <div key={`BidTotal:${total}`} className={styles.TotalCell}>{total.toLocaleString()}</div>
+    return <div key={`BidTotal:${total}`} className={styles['total-cell']}>{total.toLocaleString()}</div>
   });
 
   return(
