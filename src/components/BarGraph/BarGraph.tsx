@@ -17,16 +17,13 @@ export const BarGraph:React.FC<BarGraphProps>  = ({totalArray, orderType}) => {
   }
   const list = totalArray.map((total:number,i:number)=> {
   const percent = ((total / totalArray[totalArray.length-1])) * 100
-
     return <Bar key={i} percent={percent} />
   });
 
   let transformBar = "";
   if(isMobile) {
-    if(orderType === OrderType.BUY) {
-      transformBar = styles['bar-lines-container-green'];
-    } else {
-      transformBar = styles['bar-lines-container-red'];
+    if(orderType === OrderType.SELL) {
+      transformBar = styles['bar-lines-container--red'];
     }
   } else {
     if(orderType === OrderType.BUY) {
@@ -35,12 +32,10 @@ export const BarGraph:React.FC<BarGraphProps>  = ({totalArray, orderType}) => {
   }
   
   return (
-    <div className={styles['graph-wrapper']}>
-      <div className={styles['graph']}>
+    <div className={styles['graph']}>
         <div className={`${styles['bar-lines-container']} ${barColor} ${transformBar}`}>
           {list}
         </div>
-      </div>
     </div>
   );
 }

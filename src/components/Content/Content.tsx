@@ -2,21 +2,29 @@
 import React from 'react';
 import useMediaQuery from '../../hooks/useMediaQuery';
 import { OrderType } from '../../models';
+import { BarGraph } from '../BarGraph/BarGraph';
 import styles from './Content.module.css';
 
 interface ContentProps {
   totalCells: React.ReactNode,
   orders: React.ReactNode[],
   orderType: OrderType,
+  totalArray: number[]
 }
 
-export const Content:React.FC<ContentProps> = ({ orders, totalCells, orderType}) => {
+export const Content:React.FC<ContentProps> = ({totalArray, orders, totalCells, orderType}) => {
   let isMobile = useMediaQuery('(max-width: 600px)')
   const mobileBuyTotalCell= orderType === OrderType.BUY ? styles['buy-total-cell'] : "";
   const mobileBuyColumnContainer = orderType === OrderType.BUY ? styles['buy-column-container'] : "";
 
   let columnOrder = (
     <React.Fragment>
+      {totalArray.length > 0 &&
+        <BarGraph 
+            orderType={orderType}
+            totalArray={totalArray}
+            />
+      }
       <div className={styles['two-columns']}>{orders}</div>
       <div className={styles['total-column']}>{totalCells}</div>
     </React.Fragment>
@@ -25,6 +33,12 @@ export const Content:React.FC<ContentProps> = ({ orders, totalCells, orderType})
   if(orderType === OrderType.BUY) {
     columnOrder = (
       <React.Fragment>
+        {totalArray.length > 0 &&
+          <BarGraph 
+              orderType={orderType}
+              totalArray={totalArray}
+              />
+        }
         <div className={`${styles['total-column-reversed']} ${mobileBuyTotalCell}`}>{totalCells}</div>
         <div className={styles['two-columns-reversed']}>{orders}</div>
       </React.Fragment>

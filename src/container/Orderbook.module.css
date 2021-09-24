@@ -1,9 +1,7 @@
 .orderbook {
   display: flex;
-  background-color: #262e3e;
+  /* background-color: #262e3e; */
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
   color: white;
   padding: 10px;
   margin: 2px 5px 2px 5px;
@@ -12,7 +10,6 @@
 .title {
   background-color: #121828;
   display: flex;
-  width: 1000px;
 }
 
 .left {
@@ -22,16 +19,18 @@
 }
 
 .orders {
+  position: relative;
   display: flex;
   justify-content: center;
-  margin: 2px 5px 2px 5px;
   flex-direction: column;
+  margin: 1px 0;
 }
 
 @media (max-width: 600px) {
   .orderbook {
     padding: 0;
     margin: 0;
+    width: 100%;
   }
 
   .orders {

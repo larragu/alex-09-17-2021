@@ -27,22 +27,12 @@ const Bids = () => {
   });
 
   return(
-    <React.Fragment>
-      <div style={{position:'relative'}}>
-        {bidsArray.length > 0 &&
-          <BarGraph 
-              orderType={OrderType.BUY}
-              totalArray={totalArray}
-              />
-        }
-      </div>
       <Content 
         totalCells={totalCells}
         orders={orders}
+        totalArray={totalArray}
         orderType={OrderType.BUY}
       />
-    </React.Fragment>
-
   );
 }
 
