@@ -5,7 +5,6 @@ import { OrderType, ReducersState } from "../../models";
 import Order from "./Order";
 import styles from './../Orders/Orders.module.css';
 import { Content } from "../Content/Content";
-import { BarGraph } from "../BarGraph/BarGraph";
 
 const Bids = () => {
   const bidsMap = useSelector((state:ReducersState) => state.bids.map);
