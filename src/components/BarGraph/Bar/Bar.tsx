@@ -8,6 +8,6 @@ interface BarProps {
 
 export const Bar:React.FC<BarProps> = ({percent}) => {
   return (
-    <div className={styles.Bar} key={percent} style={{height: `${percent}%`}}/ >
+    <div className={styles['bar']} key={percent} style={{height: `${percent}%`}}/ >
   )
 }

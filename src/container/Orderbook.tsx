@@ -38,8 +38,8 @@ const Orderbook = () => {
 
   const Title = () => {
     return (
-    <div className={styles.Title}>
-      <div className={styles.left}>
+    <div className={styles['title']}>
+      <div className={styles['left']}>
         Order Book
       </div>
       {!isMobile && <Spread />}
@@ -49,10 +49,10 @@ const Orderbook = () => {
   }
 
   return (
-    <div className={styles.Orderbook}>
+    <div className={styles['orderbook']}>
       {!isConnected && <Notification selectedMarket={selectedMarket} /> }
       <Title/>
-      <div className={styles.Orders}>
+      <div className={styles['orders']}>
         <Orders selectedMarket={selectedMarket}/>
       </div>
     </div>

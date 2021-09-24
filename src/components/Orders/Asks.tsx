@@ -23,7 +23,7 @@ const Asks = () => {
     });
   
   totalCells = totalArray.map(total => {
-    return <div key={`AskTotal:${total}`} className={styles.TotalCell}>{total.toLocaleString()}</div>
+    return <div key={`AskTotal:${total}`} className={styles['total-cell']}>{total.toLocaleString()}</div>
   })
 
   return(

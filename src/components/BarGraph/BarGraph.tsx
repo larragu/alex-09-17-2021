@@ -10,10 +10,10 @@ interface BarGraphProps {
 
 export const BarGraph:React.FC<BarGraphProps>  = ({totalArray, orderType}) => {
   let isMobile = useMediaQuery('(max-width: 600px)');
-  let barColor = styles.BuyBar;
+  let barColor = styles['buy-bar'];
 
   if(orderType === OrderType.SELL) {
-    barColor = styles.SellBar;
+    barColor = styles['sell-bar'];
   }
   const list = totalArray.map((total:number,i:number)=> {
   const percent = ((total / totalArray[totalArray.length-1])) * 100
@@ -24,9 +24,9 @@ export const BarGraph:React.FC<BarGraphProps>  = ({totalArray, orderType}) => {
   let transformBar = "";
   if(isMobile) {
     if(orderType === OrderType.BUY) {
-      transformBar = styles.BarLinesContainerGreen
+      transformBar = styles['bar-lines-container-green'];
     } else {
-      transformBar = styles.BarLinesContainerRed;
+      transformBar = styles['bar-lines-container-red'];
     }
   } else {
     if(orderType === OrderType.BUY) {
@@ -35,9 +35,9 @@ export const BarGraph:React.FC<BarGraphProps>  = ({totalArray, orderType}) => {
   }
   
   return (
-    <div className={styles.GraphWrapper}>
-      <div className={styles.Graph}>
-        <div className={`${styles.BarLinesContainer} ${barColor} ${transformBar}`}>
+    <div className={styles['graph-wrapper']}>
+      <div className={styles['graph']}>
+        <div className={`${styles['bar-lines-container']} ${barColor} ${transformBar}`}>
           {list}
         </div>
       </div>

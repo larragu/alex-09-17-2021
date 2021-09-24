@@ -30,13 +30,13 @@ const Orders:React.FC<OrdersProps> = ({selectedMarket}) => {
 
   return(
     <React.Fragment>
-      <div className={styles.Orders}>
+      <div className={styles['orders']}>
         <Bids />
         {isMobile && <Spread/>}
         <Asks />
       </div>
-      <div className={styles.Footer}>
-        <button disabled={!isConnected} className={styles.ToggleButton} onClick={toggleHandler}>
+      <div className={styles['footer']}>
+        <button disabled={!isConnected} className={styles['toggle-button']} onClick={toggleHandler}>
           Toggle Feed
         </button>
       </div>

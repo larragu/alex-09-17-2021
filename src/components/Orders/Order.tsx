@@ -9,23 +9,23 @@ interface OrderProps {
 }
 
 const Order:React.FunctionComponent<OrderProps> = ({size,price, orderType}) => {
-  const priceColor = orderType === OrderType.BUY ? styles.BidPriceCell : styles.AskPriceCell ;
-  const mobileOrderBuy = orderType === OrderType.BUY ? styles.OrderBuy : "";
+  const priceColor = orderType === OrderType.BUY ? styles['bid-price-cell'] : styles['ask-price-cell'];
+  const mobileOrderBuy = orderType === OrderType.BUY ?styles['order-buy'] : "";
   
   const sizeCell =  
-    <div key={size} className={styles.Cell}>
+    <div key={size} className={styles['cell']}>
       {size.toLocaleString()}
     </div>
     
   const priceCell =  
-    <div key={price} className={`${styles.Cell} ${priceColor}`}>
+    <div key={price} className={`${styles['cell']} ${priceColor}`}>
       {price.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
     </div>
 
   const columns = [sizeCell, priceCell];
 
   return( 
-    <div className={`${styles.Order} ${mobileOrderBuy}`}>
+    <div className={`${styles['order']} ${mobileOrderBuy}`}>
       {orderType === OrderType.BUY ? columns : columns.reverse()}
     </div>
   );

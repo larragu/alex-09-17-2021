@@ -1,4 +1,4 @@
-.Notification {
+.notification {
   background-color: rgb(141, 7, 7);
   width: 1000px;
   display: flex;
@@ -7,7 +7,7 @@
   box-sizing: border-box;
 }
 
-.ReconnectButton {
+.reconnect-button {
   padding: 10px;
   border: none;
   height: 100%;
@@ -18,16 +18,16 @@
   cursor: pointer;
 }
 
-.ReconnectButton:hover {
+.reconnect-button:hover {
   background-color: rgb(187, 2, 2);
 }
 
-.ReconnectButton:active {
+.reconnect-button:active {
   background-color: rgb(184, 71, 71);
 }
 
 @media (max-width: 600px) {
-  .Notification {
+  .notification {
     width: 100%;
   }
 }

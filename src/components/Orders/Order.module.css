@@ -1,38 +1,38 @@
-.Order {
+.order {
   height: 20px;
   width: 100%;
   display: flex;
   padding: 5px;
 }
 
-.Cell {
+.cell {
   width: 50%;
   display: flex;
   justify-content: flex-end;
   padding-right: 5px;
 }
 
-.BidPriceCell {
+.bid-price-cell {
   color: #00ffae;
 }
 
-.AskPriceCell {
+.ask-price-cell {
   color: rgb(253, 33, 33);
 }
 
 @media (max-width: 600px) {
-  .Order {
+  .order {
     overflow: hidden;
     padding-left: 0;
     padding-right: 0;
   }
 
-  .OrderBuy {
+  .order-buy {
     display: flex;
     flex-direction: row-reverse;
   }
 
-  .Cell {
+  .cell {
     padding-right: 5px;
   }
 }

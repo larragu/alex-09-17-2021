@@ -12,29 +12,29 @@ interface ContentProps {
 
 export const Content:React.FC<ContentProps> = ({ orders, totalCells, orderType}) => {
   let isMobile = useMediaQuery('(max-width: 600px)')
-  const mobileBuyTotalCell= orderType === OrderType.BUY ? styles.BuyTotalCell : "";
-  const mobileBuyColumnContainer = orderType === OrderType.BUY ? styles.BuyColumnContainer : "";
+  const mobileBuyTotalCell= orderType === OrderType.BUY ? styles['buy-total-cell'] : "";
+  const mobileBuyColumnContainer = orderType === OrderType.BUY ? styles['buy-column-container'] : "";
 
   let columnOrder = (
     <React.Fragment>
-      <div className={styles.TwoColumns}>{orders}</div>
-      <div className={styles.TotalColumn}>{totalCells}</div>
+      <div className={styles['two-columns']}>{orders}</div>
+      <div className={styles['total-column']}>{totalCells}</div>
     </React.Fragment>
   );
 
   if(orderType === OrderType.BUY) {
     columnOrder = (
       <React.Fragment>
-        <div className={`${styles.TotalColumnReversed} ${mobileBuyTotalCell}`}>{totalCells}</div>
-        <div className={styles.TwoColumnsReversed}>{orders}</div>
+        <div className={`${styles['total-column-reversed']} ${mobileBuyTotalCell}`}>{totalCells}</div>
+        <div className={styles['two-columns-reversed']}>{orders}</div>
       </React.Fragment>
     )
   }
 
   return (
-  <div className={styles.Content}>
+  <div className={styles['content']}>
     <Header orderType={orderType} isMobile={isMobile} />
-      <div className={`${styles.ColumnContainer} ${mobileBuyColumnContainer}`}>
+      <div className={`${styles['column-container']} ${mobileBuyColumnContainer}`}>
         {columnOrder}
       </div>
   </div>
@@ -48,7 +48,7 @@ interface HeaderProp {
 const Header:React.FC<HeaderProp> = ({orderType, isMobile}) => {
 
   let headerNames = ['PRICE', 'SIZE', 'TOTAL'];
-  let headerCss = styles.Header;
+  let headerCss = styles['header'];
 
   if(orderType === OrderType.BUY && isMobile) {
     headerNames = [];
@@ -57,7 +57,7 @@ const Header:React.FC<HeaderProp> = ({orderType, isMobile}) => {
     headerNames = ['TOTAL', 'SIZE', 'PRICE']
   }
 
-  let content = headerNames.reverse().map(name => <div key={name} className={styles.HeaderCell}>{name}</div>);
+  let content = headerNames.reverse().map(name => <div key={name} className={styles['header-cell']}>{name}</div>);
 
   return (
     <div className={headerCss}>

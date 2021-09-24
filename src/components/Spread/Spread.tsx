@@ -20,7 +20,7 @@ const Spread = () => {
   }
 
   return (
-    <div className={styles.Spread}>
+    <div className={styles['spread']}>
       Spread: {spread && `${spread.toFixed(1)} (${percentage}%)`}
     </div>
   );
