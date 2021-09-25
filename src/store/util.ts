@@ -1,4 +1,4 @@
-import { HighestLowest, SortOption } from "../models";
+import { HighestLowest, OrderMap, SortOption } from "../models";
 
 const sort = (a:number,b:number, sortOption:SortOption) => {
   if(a > b) {
@@ -8,6 +8,16 @@ const sort = (a:number,b:number, sortOption:SortOption) => {
     return sortOption === SortOption.ASCENDING ? -1 : 1;
   }
   return 0;
+}
+
+const getDepthArray = (list:number[], map:OrderMap) => {
+  const depthArray:number[] = [];
+  let totalSize = 0;
+  list.forEach((price:number) => {
+      totalSize = totalSize + map[price];
+      depthArray.push(totalSize)
+  });
+  return depthArray;
 }
 
 const deleteAndAdd = (
@@ -110,5 +120,7 @@ export const transformData = (
     highLow = HighestLowest.LOWEST
   }
 
-  return {list:[...arr],map:{...map}, [highLow]:lowestHighestBidAskPrice};
+  const depthArray = getDepthArray(arr, map)
+
+  return {depthArray: [...depthArray], list:[...arr],map:{...map}, [highLow]:lowestHighestBidAskPrice};
 }

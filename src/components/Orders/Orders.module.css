@@ -1,14 +1,13 @@
 .orders {
-  display: flex;
+  display: block;
   position: relative;
+  height: 100%;
+  margin: 1px 0;
 }
 
-.total-cell {
-  height: 20px;
-  width: 99%;
-  display: flex;
-  justify-content: flex-end;
-  padding: 5px 5px 5px 0;
+.orders__table {
+  width: 100%;
+  border-collapse: collapse;
 }
 
 .footer {
@@ -16,6 +15,7 @@
   justify-content: center;
   background-color: #121828;
   padding: 15px;
+  margin: 1px 0;
 }
 
 .toggle-button {

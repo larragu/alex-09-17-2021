@@ -7,14 +7,14 @@ import Orders from "../components/Orders/Orders";
 import Notification from "../components/Notification/Notification";
 import store from "../store";
 import { socketActions } from "../store/socket";
-import Spread from "../components/Spread/Spread";
+import Title from "../components/Orders/OrderTable/Title/Title";
 import useMediaQuery from "../hooks/useMediaQuery";
 
 const Orderbook = () => {
-  let isMobile = useMediaQuery('(max-width: 600px)');
   const isConnected = useSelector((state:ReducersState) => state.socket.isConnected);
   const selectedMarket = useSelector((state:ReducersState) => state.socket.selectedMarket);
   
+  let isMobile = useMediaQuery('(max-width: 600px)')
   const VISIBILITY_CHANGE = "visibilitychange";
 
 
@@ -36,23 +36,11 @@ const Orderbook = () => {
     return () => window.removeEventListener(VISIBILITY_CHANGE, toggleConnectionHandler);
   },[toggleConnectionHandler]);
 
-  const Title = () => {
-    return (
-    <div className={styles['title']}>
-      <div className={styles['left']}>
-        Order Book
-      </div>
-      {!isMobile && <Spread />}
-    </div>
-    )
-
-  }
-
   return (
     <div className={styles['orderbook']}>
       {!isConnected && <Notification selectedMarket={selectedMarket} /> }
-      <Title/>
       <div className={styles['orders']}>
+        <Title isMobile={isMobile}/>
         <Orders selectedMarket={selectedMarket}/>
       </div>
     </div>

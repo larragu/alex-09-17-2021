@@ -19,8 +19,7 @@ export interface AsksPayload {
 }
 
 export interface AsksState {
-  list: number[],
-  map: {[key: number]: number }
+  feed:Feed,
   highestAskPrice: number,
   lowestAskPrice: number
 }
@@ -38,9 +37,18 @@ export interface Order {
   price: number
 }
 
-export interface BidsState {
+export interface Feed {
   list: number[],
-  map: {[key: number]: number }
+  map: OrderMap,
+  depthArray: number[]
+}
+
+export interface OrderMap {
+  [key: number]: number
+}
+
+export interface BidsState {
+  feed:Feed,
   lowestBidPrice: number,
   highestBidPrice: number
 }
