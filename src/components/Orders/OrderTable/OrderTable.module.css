@@ -12,25 +12,6 @@
   display: inline-block;
 }
 
-.header {
-  display: block;
-  width: 100%;
-  border-bottom: 1px solid #262e3e;
-}
-
-.header__row {
-  display: flex;
-  text-align: right;
-  justify-content: flex-end;
-}
-
-.header-cell {
-  color: #474e5d;
-  display: inline-block;
-  width: 25%;
-  padding: 5px 15px;
-}
-
 .table__body {
   display: block;
   position: relative;
@@ -56,13 +37,5 @@
 
   .table__body {
     width: 100%;
-  }
-
-  .header {
-    margin: 1px 0;
-  }
-  .header__row--bid {
-    justify-content: flex-start;
-    flex-direction: row-reverse;
   }
 }

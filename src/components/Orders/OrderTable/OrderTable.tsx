@@ -3,6 +3,7 @@ import React from 'react';
 import useMediaQuery from '../../../hooks/useMediaQuery';
 import { Feed, OrderMap, OrderType } from '../../../models';
 import { BarGraph } from '../../BarGraph/BarGraph';
+import OrderHeader from './OrderHeader/OrderHeader';
 import OrderRow from './OrderRow/OrderRow';
 import styles from './OrderTable.module.css';
 
@@ -30,36 +31,11 @@ export const OrderTable:React.FC<OrderTableProps> = ({feed, orderType}) => {
           depthArray={feed.depthArray}/>
         }
         <table className={styles['table']}>
-          {!(isMobile && orderType === OrderType.SELL) && <Header orderType={orderType} /> }
+          {!(isMobile && orderType === OrderType.SELL) && <OrderHeader orderType={orderType} /> }
           <tbody className={`${styles['table__body']}`}>
             {feed.list.length > 0 && feedRows}
           </tbody>
       </table>
     </div>
   );
-}
-
-interface HeaderProp {
-  orderType: OrderType
-}
-
-const Header:React.FC<HeaderProp> = ({orderType}) => {
-  const headerNames = ['TOTAL', 'SIZE', 'PRICE'];
-
-  if (orderType === OrderType.SELL) {
-    headerNames.reverse();
-  }
-
-  let headerElements = headerNames.map(name => <th key={name} className={styles['header-cell']}>{name}</th>);
-
-  return (
-    <thead className={styles['header']}>
-      <tr 
-        className={`${styles['header__row']} 
-          ${orderType === OrderType.BUY ? styles['header__row--bid'] : ''} 
-        `}>
-        {headerElements}
-      </tr>
-    </thead>
-  )
 }
