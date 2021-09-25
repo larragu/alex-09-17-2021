@@ -32,13 +32,9 @@ const Orders:React.FC<OrdersProps> = ({selectedMarket}) => {
   return(
     <React.Fragment>
       <div className={styles['orders']}>
-          {bidsFeed.depthArray.length > 0 &&
-            <OrderTable feed={bidsFeed} orderType={OrderType.BUY} />
-          }
+          <OrderTable feed={bidsFeed} orderType={OrderType.BUY} />
           {isMobile && <Spread/>}
-          {asksFeed.depthArray.length > 0 &&
-            <OrderTable feed={asksFeed} orderType={OrderType.SELL} />
-          }
+          <OrderTable feed={asksFeed} orderType={OrderType.SELL} />
       </div>
       <div className={styles['footer']}>
         <button disabled={!isConnected} className={styles['toggle-button']} onClick={toggleHandler}>

@@ -13,9 +13,9 @@
 }
 
 .header {
-  background-color: #121828;
   display: block;
   width: 100%;
+  border-bottom: 1px solid #262e3e;
 }
 
 .header__row {

@@ -1,3 +1,10 @@
+.header-container {
+  background-color: #121828;
+  display: flex;
+  padding: 10px 0;
+  border-bottom: 1px solid #262e3e;
+}
+
 .title {
   vertical-align: middle;
   width: 33.3%;
@@ -6,10 +13,4 @@
   align-items: center;
   padding: 0 0 0 15px;
   margin: 0;
-}
-
-.headers {
-  background-color: #121828;
-  display: flex;
-  padding: 10px 0;
 }
