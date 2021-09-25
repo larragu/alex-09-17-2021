@@ -1,13 +1,12 @@
 import React from "react";
-import Asks from "./Asks";
-import Bids from "./Bids";
-import { Markets, ReducersState } from "../../models";
+import { Markets, OrderType, ReducersState } from "../../models";
 import styles from './Orders.module.css';
 import store from "../../store";
 import { socketActions } from "../../store/socket";
 import { useSelector } from "react-redux";
 import Spread from "../Spread/Spread";
 import useMediaQuery from "../../hooks/useMediaQuery";
+import { OrderTable } from "./OrderTable/OrderTable";
 
 interface OrdersProps {
   selectedMarket: Markets
@@ -16,6 +15,8 @@ interface OrdersProps {
 const Orders:React.FC<OrdersProps> = ({selectedMarket}) => {
   let isMobile = useMediaQuery('(max-width: 600px)')
   const isConnected = useSelector((state:ReducersState) => state.socket.isConnected);
+  const bidsFeed = useSelector((state:ReducersState) => state.bids.feed);
+  const asksFeed = useSelector((state:ReducersState) => state.asks.feed);
   
   let newMarket:Markets;
   if(selectedMarket === Markets.XBT_USD) {
@@ -31,9 +32,13 @@ const Orders:React.FC<OrdersProps> = ({selectedMarket}) => {
   return(
     <React.Fragment>
       <div className={styles['orders']}>
-        <Bids />
-        {isMobile && <Spread/>}
-        <Asks />
+          {bidsFeed.depthArray.length > 0 &&
+            <OrderTable feed={bidsFeed} orderType={OrderType.BUY} />
+          }
+          {isMobile && <Spread/>}
+          {asksFeed.depthArray.length > 0 &&
+            <OrderTable feed={asksFeed} orderType={OrderType.SELL} />
+          }
       </div>
       <div className={styles['footer']}>
         <button disabled={!isConnected} className={styles['toggle-button']} onClick={toggleHandler}>

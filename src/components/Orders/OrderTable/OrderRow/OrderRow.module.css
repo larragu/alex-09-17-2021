@@ -1,0 +1,26 @@
+.order {
+  width: 100%;
+  display: block;
+  text-align: right;
+}
+
+.cell {
+  width: 25%;
+  padding: 5px 15px;
+  display: inline-block;
+}
+
+.cell__price--bid {
+  color: #00ffae;
+}
+
+.cell__price--ask {
+  color: rgb(255 146 146);
+}
+
+@media (max-width: 600px) {
+  .order--buy {
+    display: flex;
+    flex-direction: row-reverse;
+  }
+}

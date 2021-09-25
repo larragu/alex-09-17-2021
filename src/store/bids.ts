@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { BidsState, BidsPayload, SortOption } from "../models";
 import { transformData } from "./util";
 
-const initialBidsState:BidsState = { list: [], map: {}, lowestBidPrice: Number.MAX_SAFE_INTEGER, highestBidPrice: Number.MIN_SAFE_INTEGER };
+const initialBidsState:BidsState = { feed:{ depthArray: [], list: [], map: {}}, lowestBidPrice: Number.MAX_SAFE_INTEGER, highestBidPrice: Number.MIN_SAFE_INTEGER };
 
 const bidsSlice:any = createSlice({
   name: 'bids',
@@ -12,21 +12,23 @@ const bidsSlice:any = createSlice({
       const data = 
         transformData(
           action.payload, 
-          state.map,
+          state.feed.map,
           state.lowestBidPrice,
-          state.list,
+          state.feed.list,
           SortOption.DESCENDING)
         
-      state.list = data.list;
+      state.feed.depthArray = data.depthArray;
+      state.feed.list = data.list;
       state.lowestBidPrice = data.lowestBidPrice;
       state.highestBidPrice = data.list[0];
-      state.map = data.map;
+      state.feed.map = data.map;
     },
     clearData(state:BidsState) {
-      state.list = initialBidsState.list;
+      state.feed.depthArray = initialBidsState.feed.depthArray;
+      state.feed.list = initialBidsState.feed.list;
       state.lowestBidPrice = initialBidsState.lowestBidPrice;
       state.highestBidPrice = initialBidsState.highestBidPrice;
-      state.map = initialBidsState.map;
+      state.feed.map = initialBidsState.feed.map;
     }
   }
 });
