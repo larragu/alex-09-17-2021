@@ -25,14 +25,14 @@ export const OrderTable:React.FC<OrderTableProps> = ({feed, orderType}) => {
 
   return (
       <div className={styles['order-table']}>
-        <BarGraph 
+        {feed.list.length > 0 && <BarGraph 
           orderType={orderType}
-          depthArray={feed.depthArray}
-        />
+          depthArray={feed.depthArray}/>
+        }
         <table className={styles['table']}>
           {!(isMobile && orderType === OrderType.SELL) && <Header orderType={orderType} /> }
           <tbody className={`${styles['table__body']}`}>
-            {feedRows}
+            {feed.list.length > 0 && feedRows}
           </tbody>
       </table>
     </div>
