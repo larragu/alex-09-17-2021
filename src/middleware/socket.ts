@@ -1,10 +1,11 @@
+import { Dispatch } from 'react';
+import { Action, MiddlewareAPI } from 'redux';
 import { Markets, SocketAction, SocketActions, SocketEvent, SocketEventData } from '../models';
 import { asksActions } from '../store/asks';
 import { bidsActions } from '../store/bids';
 import { socketActions } from '../store/socket';
 
-
-const webSocket = (store:any) => {
+const webSocket = (store:MiddlewareAPI) => {
   const WEB_SOCKET_URL = "wss://www.cryptofacilities.com/ws/v1";
   let socket:WebSocket;
   const NORMAL_CLOSURE = 1000;
@@ -13,7 +14,7 @@ const webSocket = (store:any) => {
   const TIMEOUT = 5000;
   let timeoutCounter = 0;
   
-  const waitForSocket = (message:any) => {
+  const waitForSocket = (message:string) => {
     setTimeout(() => {
       if (socket && socket.readyState === 1) {
         socket.send(message)
@@ -68,7 +69,6 @@ const webSocket = (store:any) => {
         }
       }
     };
-
     return socket;
   }
 
@@ -85,7 +85,7 @@ const webSocket = (store:any) => {
     waitForSocket(sendUnsubscribeData);
   }
 
-  return (next:any) => (action:SocketAction) => {
+  return (next:Dispatch<Action>) => (action:SocketAction) => {
       switch(action.type) {
         case SocketActions.CONNECT:
           socket = initializeSocket(socket);

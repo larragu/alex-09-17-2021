@@ -15,7 +15,7 @@ export enum SortOption {
 }
 
 export interface AsksPayload {
-  payload: Order[]
+  payload: number[][]
 }
 
 export interface AsksState {
@@ -29,7 +29,7 @@ export interface AskDataPayload {
 }
 
 export interface BidsPayload {
-  payload: Order[]
+  payload: number[][]
 }
 
 export interface Order {
@@ -53,6 +53,16 @@ export interface BidsState {
   highestBidPrice: number
 }
 
+export interface TransformedData {
+  feed:Feed,
+  highestAskPrice?: number,
+  lowestAskPrice?: number,  
+  lowestBidPrice?: number,
+  highestBidPrice?: number
+}
+
+
+
 export interface BidDataPayload {
   payload: BidsState
 }
@@ -60,7 +70,7 @@ export interface BidDataPayload {
 export interface ReducersState {
   bids: BidsState,
   asks:AsksState,
-  socket: any
+  socket: SocketState
 }
 
 export enum Markets {
@@ -91,8 +101,8 @@ export interface SocketEventData {
 }
 
 export interface SocketState {
-  isConnected: boolean, 
-  isSubscribed: boolean, 
+  isConnected?: boolean, 
+  isSubscribed?: boolean, 
   selectedMarket: Markets
 }
 
@@ -105,7 +115,9 @@ export interface SocketAction {
   payload: SocketState
 }
 
-export enum HighestLowest {
-  HIGHEST = 'highestAskPrice',
-  LOWEST =  'lowestBidPrice'
+export enum BidOrAsk {
+  LOWEST_ASK = 'lowestAskPrice',
+  HIGHEST_ASK = 'highestAskPrice',
+  LOWEST_BID =  'lowestBidPrice',
+  HIGHEST_BID = 'highestBidPrice',
 }

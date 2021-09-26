@@ -45,7 +45,7 @@ const Orderbook = () => {
       <div className={styles['orders']}>
         <Header isMobile={isMobile}/>
         <Orders/>
-        <Footer selectedMarket={selectedMarket} isConnected={isConnected} />
+        <Footer selectedMarket={selectedMarket} isConnected={isConnected!} />
       </div>
     </div>
   );

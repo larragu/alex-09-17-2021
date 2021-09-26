@@ -1,4 +1,4 @@
-import { HighestLowest, OrderMap, SortOption } from "../models";
+import { BidOrAsk, Order, OrderMap, SortOption, TransformedData } from "../models";
 
 const sort = (a:number,b:number, sortOption:SortOption) => {
   if(a > b) {
@@ -21,50 +21,51 @@ const getDepthArray = (list:number[], map:OrderMap) => {
 }
 
 const deleteAndAdd = (
-  originalOrder:any,valueToDelete:number, 
+  originalOrder:Order,
+  valueToDelete:number, 
   originalArr:number[], 
-  originalMap:any, 
+  originalMap:OrderMap, 
   sortOption:SortOption): number => {
-  const PRICE = 0;
-  const SIZE = 1;
-
-  const arr = originalArr.slice();
+  const arr = [...originalArr];
   const map = {...originalMap}
   const order = {...originalOrder};
-  
-  delete map[order[valueToDelete]];
 
-  map[order[PRICE]] = order[SIZE];
+  delete map[valueToDelete];
+
+  map[order.price] = order.size;
+
   arr.pop();
-  arr.push(order[PRICE])
+  arr.push(order.price)
   arr.sort((a:number,b:number) => sort(a,b, sortOption));
+
   return arr[arr.length-1];
 }
 
 
 export const transformData = (
-  originalFilteredOrders:any[], 
-  originalMap:any, 
+  originalFilteredOrders:number[][], 
+  originalMap:OrderMap, 
   lowestHighestBidAskPrice:number, 
   originalArray:number[], 
-  sortOption:SortOption ) => {
-  const map = {...originalMap}
-  const arr = originalArray.slice();
-  const filteredOrders = originalFilteredOrders.slice();
+  sortOption:SortOption ): TransformedData => {  
   const PRICE = 0;
   const SIZE = 1;
   const MAX_SIZE = 16;
 
-  filteredOrders.forEach((filt:[number, number]) => {
+  const map = {...originalMap}
+  const arr = originalArray.slice();
+  const filteredOrders: Order[] = originalFilteredOrders.map((el:number[]) => ({price: el[PRICE], size:el[SIZE]}));;
+
+  filteredOrders.forEach((filt:Order) => {
     //if max size has been reached
     if(Object.keys(map).length >= MAX_SIZE) {
 
     if(sortOption === SortOption.DESCENDING) {
-      if(filt[PRICE] <= lowestHighestBidAskPrice) {
+      if(filt.price <= lowestHighestBidAskPrice) {
         return;
       }
     } else {
-      if(filt[PRICE] >= lowestHighestBidAskPrice) {
+      if(filt.price >= lowestHighestBidAskPrice) {
         return;
       }
     }
@@ -72,55 +73,58 @@ export const transformData = (
     //the new price is greater than the lowest price
     //therefore: delete lowest price, add new price, and change lowest price to the next lowest price
     if(sortOption === SortOption.DESCENDING) {
-      if(!map[filt[PRICE]] && filt[PRICE] > lowestHighestBidAskPrice) {
+      if(!map[filt.price] && filt.price > lowestHighestBidAskPrice) {
         lowestHighestBidAskPrice = deleteAndAdd(filt,lowestHighestBidAskPrice,arr,map,sortOption);
         return;
       } 
     } else {
-      if(!map[filt[PRICE]] && filt[PRICE] < lowestHighestBidAskPrice) {
+      if(!map[filt.price] && filt.price < lowestHighestBidAskPrice) {
         lowestHighestBidAskPrice = deleteAndAdd(filt,lowestHighestBidAskPrice,arr,map,sortOption)
         return;
       }
     }
 
-    if(!map[filt[PRICE]]) {
-      map[filt[PRICE]] = filt[SIZE];
-      arr.push(filt[PRICE]);
+    if(!map[filt.price]) {
+      map[filt.price] = filt.size;
+      arr.push(filt.price);
       arr.sort((a:number,b:number) => sort(a,b, sortOption));
     } else {
-      let prevSize = map[filt[PRICE]];
+      let prevSize = map[filt.price];
 
-      if(prevSize !== filt[SIZE]) {
-        map[filt[PRICE]] = filt[SIZE];
+      if(prevSize !== filt.size) {
+        map[filt.price] = filt.size;
       }
     }
 
     //Array is less than 25
     } else {
       //New Price
-      if(!map[filt[PRICE]]) {
-        map[filt[PRICE]] = filt[SIZE];
-        arr.push(filt[PRICE]);
+      if(!map[filt.price]) {
+        map[filt.price] = filt.size;
+        arr.push(filt.price);
         arr.sort((a:number,b:number) => sort(a,b, sortOption));
+
         lowestHighestBidAskPrice = arr[arr.length-1];
         //Same Price, compare Size
       } else {
-        let prevSize = map[filt[PRICE]];
+        let prevSize = map[filt.price];
 
-        if(prevSize !== filt[SIZE]) {
-          map[filt[PRICE]] = filt[SIZE];
+        if(prevSize !== filt.size) {
+          map[filt.price] = filt.size;
         }
       }
     }
 
   })
 
-  let highLow = HighestLowest.HIGHEST
+  let highLow = BidOrAsk.HIGHEST_ASK;
+  let highLow2 = BidOrAsk.LOWEST_ASK
   if(sortOption === SortOption.DESCENDING) {
-    highLow = HighestLowest.LOWEST
+    highLow = BidOrAsk.LOWEST_BID;
+    highLow2 = BidOrAsk.HIGHEST_BID;
   }
 
-  const depthArray = getDepthArray(arr, map)
+  const depthArray = getDepthArray(arr, map);
 
-  return {depthArray: [...depthArray], list:[...arr],map:{...map}, [highLow]:lowestHighestBidAskPrice};
+  return {feed:{depthArray: [...depthArray], list:[...arr],map:{...map}}, [highLow]:lowestHighestBidAskPrice, [highLow2]: arr[0]};
 }
