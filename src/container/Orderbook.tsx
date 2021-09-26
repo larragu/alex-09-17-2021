@@ -9,8 +9,9 @@ import store from "../store";
 import { socketActions } from "../store/socket";
 import Header from "../components/Header/Header";
 import useMediaQuery from "../hooks/useMediaQuery";
+import Footer from "../components/Footer/Footer";
 
-let loaded = false;
+let isLoaded = false;
 const Orderbook = () => {
   const isConnected = useSelector((state:ReducersState) => state.socket.isConnected);
   const selectedMarket = useSelector((state:ReducersState) => state.socket.selectedMarket);
@@ -22,7 +23,7 @@ const Orderbook = () => {
   useEffect(() => {
     store.dispatch(socketActions.connect());
     store.dispatch(socketActions.subscribe({selectedMarket: Markets.XBT_USD}));
-    loaded = true;
+    isLoaded = true;
   }, [])
 
   const toggleConnectionHandler = useCallback(() => {
@@ -40,10 +41,11 @@ const Orderbook = () => {
 
   return (
     <div className={styles['orderbook']}>
-      {loaded && !isConnected && <Notification selectedMarket={selectedMarket} /> }
+      {isLoaded && !isConnected && <Notification selectedMarket={selectedMarket} /> }
       <div className={styles['orders']}>
         <Header isMobile={isMobile}/>
-        <Orders selectedMarket={selectedMarket}/>
+        <Orders/>
+        <Footer selectedMarket={selectedMarket} isConnected={isConnected} />
       </div>
     </div>
   );

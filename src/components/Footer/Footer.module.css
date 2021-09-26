@@ -1,0 +1,31 @@
+.footer {
+  display: flex;
+  justify-content: center;
+  background-color: #121828;
+  padding: 15px;
+  border-top: 1px solid #262e3e;
+}
+
+.toggle-button {
+  border: none;
+  width: 100px;
+  height: 30px;
+  border-radius: 6px;
+  background-color: #614ee2;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.toggle-button:hover {
+  background-color: #211b53;
+}
+
+.toggle-button:active {
+  background-color: #6c63c4;
+}
+
+.toggle-button:disabled {
+  background-color: #38373b;
+  color: darkgray;
+}
