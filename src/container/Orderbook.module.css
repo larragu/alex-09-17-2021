@@ -1,6 +1,5 @@
 .orderbook {
   display: flex;
-  /* background-color: #262e3e; */
   flex-direction: column;
   color: white;
   padding: 10px;

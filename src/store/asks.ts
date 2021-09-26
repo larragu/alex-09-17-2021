@@ -1,9 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { AsksPayload, AsksState, SortOption } from "../models";
 import { transformData } from "./util";
-const initialAsksState:AsksState = { feed:{ depthArray: [], list: [], map: {}}, highestAskPrice: Number.MIN_SAFE_INTEGER, lowestAskPrice: Number.MAX_SAFE_INTEGER };
+const initialAsksState:AsksState = { 
+  feed: { 
+    depthArray: [], 
+    list: [], 
+    map: {}
+  }, 
+  highestAskPrice: Number.MIN_SAFE_INTEGER, 
+  lowestAskPrice: Number.MAX_SAFE_INTEGER 
+};
 
-const asksSlice:any = createSlice({
+const asksSlice = createSlice({
   name: 'asks',
   initialState: initialAsksState,
   reducers: {
@@ -14,13 +22,13 @@ const asksSlice:any = createSlice({
           state.feed.map,
           state.highestAskPrice,
           state.feed.list,
-          SortOption.ASCENDING)
+          SortOption.ASCENDING);
           
-      state.feed.depthArray = data.depthArray;
-      state.feed.list = data.list;
-      state.highestAskPrice = data.highestAskPrice;
-      state.feed.map = data.map;
-      state.lowestAskPrice = data.list[0]
+      state.feed.depthArray = data.feed.depthArray;
+      state.feed.list = data.feed.list;
+      state.feed.map = data.feed.map;
+      state.lowestAskPrice = data.lowestAskPrice!;
+      state.highestAskPrice = data.highestAskPrice!;
     },
     clearData(state:AsksState) {
       state.feed.depthArray = initialAsksState.feed.depthArray;

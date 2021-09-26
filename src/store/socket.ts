@@ -1,25 +1,25 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { Markets, SocketPayload, SocketState } from "../models";
-const initialSocketState:any = { isConnected: false, isSubscribed: false, selectedMarket: Markets.XBT_USD};
+const initialSocketState:SocketState = { isConnected: false, isSubscribed: false, selectedMarket: Markets.XBT_USD};
 
-const socketSlice:any = createSlice({
+const socketSlice = createSlice({
   name: 'socket',
   initialState: initialSocketState,
   reducers: {
-    connect(state:any, action:SocketPayload) {
+    connect(state:SocketState) {
       state.isConnected = true;
     },    
-    disconnect(state:any, action:SocketPayload) {
+    disconnect(state:SocketState) {
       state.isConnected = false;
     },
-    subscribe(state:any, action:SocketPayload) {
+    subscribe(state:SocketState, action:SocketPayload) {
       state.isSubscribed = true;
     },
-    unsubscribe(state:any, action:SocketPayload) {
+    unsubscribe(state:SocketState) {
       state.isSubscribed = false;
     },
     changeMarket(state:SocketState, action:SocketPayload) {
-      state.selectedMarket = action.payload.selectedMarket;
+      state.selectedMarket = action.payload.selectedMarket!;
     }
   }
 });
