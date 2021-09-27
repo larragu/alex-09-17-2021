@@ -4,7 +4,7 @@ import styles from './Orders.module.css';
 import { useSelector } from "react-redux";
 import Spread from "../Spread/Spread";
 import useMediaQuery from "../../hooks/useMediaQuery";
-import { OrderTable } from "./OrderTable/OrderTable";
+import OrderTable from "./OrderTable/OrderTable";
 
 
 const Orders= () => {
