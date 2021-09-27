@@ -1,20 +1,20 @@
 
 import React from 'react';
 import useMediaQuery from '../../../hooks/useMediaQuery';
-import { Feed, OrderMap, OrderType } from '../../../models';
+import { Ask, Bid, OrderMap, OrderType } from '../../../models';
 import { BarGraph } from '../../BarGraph/BarGraph';
 import OrderHeader from './OrderHeader/OrderHeader';
 import OrderRow from './OrderRow/OrderRow';
 import styles from './OrderTable.module.css';
 
 interface OrderTableProps {
-  feed: Feed,
+  feed: Bid | Ask,
   orderType: OrderType
 }
 
-export const OrderTable:React.FC<OrderTableProps> = ({feed, orderType}) => {
-  const isMobile = useMediaQuery('(max-width: 600px)')
-  
+const OrderTable:React.FC<OrderTableProps> = ({feed, orderType}) => {
+  const isMobile = useMediaQuery('(max-width: 600px)');
+
   const getRows = (totalAsksArray:number[], list:number[], map:OrderMap, type:OrderType) => {
     return list.map((price:number, i:number) => {
         let size = map[price] || 0;
@@ -39,3 +39,10 @@ export const OrderTable:React.FC<OrderTableProps> = ({feed, orderType}) => {
     </div>
   );
 }
+
+const areEqual = (prevProps:OrderTableProps,nextProps:OrderTableProps) => {
+  return JSON.stringify(prevProps.feed.depthArray) === JSON.stringify(nextProps.feed.depthArray) &&
+  JSON.stringify(prevProps.feed.map) === JSON.stringify(nextProps.feed.map);
+}
+
+export default React.memo(OrderTable, areEqual);
