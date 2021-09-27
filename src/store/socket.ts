@@ -26,10 +26,6 @@ const socketSlice = createSlice({
     },
     unsubscribeSuccess(state:SocketState) {
       state.isSubscribed = false;
-    },
-    changeMarket(state:SocketState, action:SocketPayload) {
-      state.selectedMarket = action.payload.selectedMarket!;
-      state.isSubscribed = true;
     }
   }
 });
