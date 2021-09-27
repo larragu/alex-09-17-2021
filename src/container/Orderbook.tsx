@@ -24,7 +24,7 @@ const Orderbook = () => {
     store.dispatch(socketActions.connect());
     store.dispatch(socketActions.subscribe({selectedMarket: Markets.XBT_USD}));
     isLoaded = true;
-  }, [])
+  }, []);
 
   const toggleConnectionHandler = useCallback(() => {
     if(document.visibilityState === VisibilityState.HIDDEN) {
