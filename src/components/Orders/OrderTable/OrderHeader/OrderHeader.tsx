@@ -1,5 +1,4 @@
 import React from 'react';
-import useMediaQuery from '../../../../hooks/useMediaQuery';
 import { OrderType } from '../../../../models';
 
 import styles from './OrderHeader.module.css';
@@ -9,10 +8,9 @@ interface OrderHeaderProp {
 }
 
 const OrderHeader:React.FC<OrderHeaderProp> = ({orderType}) => {
-  const isMobile = useMediaQuery('(max-width: 600px)');
   const headerNames = ['TOTAL', 'SIZE', 'PRICE'];
 
-  if (orderType === OrderType.SELL || (OrderType.BUY && isMobile)) {
+  if (orderType === OrderType.SELL) {
     headerNames.reverse();
   }
 
