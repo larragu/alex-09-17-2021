@@ -78,11 +78,12 @@ export enum Markets {
   ETH_USD = 'PI_ETHUSD'
 }
 
+
 export enum SocketActions {
   CONNECT = 'socket/connect',
   DISCONNECT = 'socket/disconnect',
   SUBSCRIBE = 'socket/subscribe',
-  UNSUSCRIBE = 'socket/unsubscribe'
+  UNSUSCRIBE = 'socket/unsubscribe',
 }
 
 export enum SocketEvent {

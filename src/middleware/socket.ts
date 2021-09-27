@@ -36,12 +36,16 @@ const webSocket = (store:MiddlewareAPI) => {
   const initializeSocket = (socket:WebSocket) => {
     socket = new WebSocket(WEB_SOCKET_URL);
 
+    socket.onopen = function() {
+      store.dispatch(socketActions.connectSuccess());
+    };
+
     socket.onclose = (event:CloseEvent) => {
       if(event.code !== NORMAL_CLOSURE) {
         console.error('WebSocket Client Error Code: ', event.code);
       }
 
-      store.dispatch(socketActions.disconnect())
+      store.dispatch(socketActions.disconnectSuccess())
     };
 
     socket.onmessage = (messageEvent:MessageEvent) => {
@@ -52,7 +56,9 @@ const webSocket = (store:MiddlewareAPI) => {
         const newMarket = data.product_ids[NEW_MARKET];
         store.dispatch(bidsActions.clearData());
         store.dispatch(asksActions.clearData());
-        store.dispatch(socketActions.changeMarket({selectedMarket:newMarket}))
+        store.dispatch(socketActions.subscribeSuccess({selectedMarket:newMarket}))
+      } else if (data.event === SocketEvent.unsubscribed) {
+        store.dispatch(socketActions.unsubscribeSuccess())
       }
 
       if(data.bids?.length > 0) {
@@ -89,15 +95,17 @@ const webSocket = (store:MiddlewareAPI) => {
       switch(action.type) {
         case SocketActions.CONNECT:
           socket = initializeSocket(socket);
-          break;
+          return;
         case SocketActions.DISCONNECT:
           socket.close(NORMAL_CLOSURE);
-          break;
+          return;
         case SocketActions.SUBSCRIBE:
           susbscribeToMarket(action.payload.selectedMarket);
-          break;
+          return;
         case SocketActions.UNSUSCRIBE:
           unsuscribeFromMarket(action.payload.selectedMarket);
+          return;
+        default:
           break;
       }
     return next(action);

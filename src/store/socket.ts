@@ -6,20 +6,30 @@ const socketSlice = createSlice({
   name: 'socket',
   initialState: initialSocketState,
   reducers: {
-    connect(state:SocketState) {
+    connect() {
+    },  
+    connectSuccess(state:SocketState) {
       state.isConnected = true;
     },    
-    disconnect(state:SocketState) {
+    disconnect() {
+    },    
+    disconnectSuccess(state:SocketState) {
       state.isConnected = false;
     },
     subscribe(state:SocketState, action:SocketPayload) {
-      state.isSubscribed = true;
     },
-    unsubscribe(state:SocketState) {
+    subscribeSuccess(state:SocketState, action:SocketPayload) {
+      state.isSubscribed = true;
+      state.selectedMarket = action.payload.selectedMarket!;
+    },
+    unsubscribe() {
+    },
+    unsubscribeSuccess(state:SocketState) {
       state.isSubscribed = false;
     },
     changeMarket(state:SocketState, action:SocketPayload) {
       state.selectedMarket = action.payload.selectedMarket!;
+      state.isSubscribed = true;
     }
   }
 });
