@@ -1,11 +1,10 @@
 import {  configureStore, Store } from '@reduxjs/toolkit';
-import bidsReducer from './bids';
-import asksReducer from './asks';
+import feedReducer from './feed';
 import socketReducer from './socket';
 import webSocket from '../middleware/socket';
 
 const store:Store = configureStore({
-  reducer: { bids: bidsReducer, asks: asksReducer, socket: socketReducer },
+  reducer: { feed: feedReducer, socket: socketReducer },
   middleware: [webSocket]
 });
 

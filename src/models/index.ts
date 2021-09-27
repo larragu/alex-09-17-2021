@@ -14,22 +14,35 @@ export enum SortOption {
   DESCENDING = "DESCENDNG"
 }
 
-export interface AsksPayload {
-  payload: number[][]
+export interface FeedState {
+  feed: {
+    bid: Bid,
+    ask: Ask
+  }
 }
 
-export interface AsksState {
-  feed:Feed,
-  highestAskPrice: number,
-  lowestAskPrice: number
+export interface Bid {
+  list: number[],
+  map: OrderMap,
+  depthArray: number[],
+  lowestBidPrice: number, 
+  highestBidPrice: number
 }
 
-export interface AskDataPayload {
-  payload: AsksState
+export interface Ask {
+  list: number[],
+  map: OrderMap,
+  depthArray: number[],
+  highestAskPrice: number, 
+  lowestAskPrice: number 
 }
 
-export interface BidsPayload {
-  payload: number[][]
+
+export interface FeedPayload {
+  payload: {
+    bids?: number[][],
+    asks?: number[][]
+  }
 }
 
 export interface Order {
@@ -47,29 +60,16 @@ export interface OrderMap {
   [key: number]: number
 }
 
-export interface BidsState {
-  feed:Feed,
-  lowestBidPrice: number,
-  highestBidPrice: number
-}
-
 export interface TransformedData {
   feed:Feed,
-  highestAskPrice?: number,
-  lowestAskPrice?: number,  
   lowestBidPrice?: number,
-  highestBidPrice?: number
-}
-
-
-
-export interface BidDataPayload {
-  payload: BidsState
+  highestBidPrice?: number,
+  highestAskPrice?: number, 
+  lowestAskPrice?: number 
 }
 
 export interface ReducersState {
-  bids: BidsState,
-  asks:AsksState,
+  feed:FeedState
   socket: SocketState
 }
 

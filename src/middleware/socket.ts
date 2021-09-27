@@ -1,8 +1,7 @@
 import { Dispatch } from 'react';
 import { Action, MiddlewareAPI } from 'redux';
 import { Markets, SocketAction, SocketActions, SocketEvent, SocketEventData } from '../models';
-import { asksActions } from '../store/asks';
-import { bidsActions } from '../store/bids';
+import { feedActions } from '../store/feed';
 import { socketActions } from '../store/socket';
 
 const webSocket = (store:MiddlewareAPI) => {
@@ -54,8 +53,7 @@ const webSocket = (store:MiddlewareAPI) => {
       if(data.event === SocketEvent.subscribed) {
         const NEW_MARKET = 0;
         const newMarket = data.product_ids[NEW_MARKET];
-        store.dispatch(bidsActions.clearData());
-        store.dispatch(asksActions.clearData());
+        store.dispatch(feedActions.clearData());
         store.dispatch(socketActions.subscribeSuccess({selectedMarket:newMarket}))
       } else if (data.event === SocketEvent.unsubscribed) {
         store.dispatch(socketActions.unsubscribeSuccess())
@@ -64,14 +62,14 @@ const webSocket = (store:MiddlewareAPI) => {
       if(data.bids?.length > 0) {
         let filtBids:number[][] = data.bids.filter((el:number[]) => el[SIZE] > 0);
         if (filtBids.length > 0) { 
-          store.dispatch(bidsActions.processSocketData(filtBids));
+          store.dispatch(feedActions.processSocketData({bids:filtBids}));
         }
       }
 
       if(data.asks?.length > 0) {
         let filtAsks:number[][] = data.asks.filter((el:number[]) => el[SIZE] > 0);
         if (filtAsks.length > 0) { 
-          store.dispatch(asksActions.processSocketData(filtAsks));
+          store.dispatch(feedActions.processSocketData({asks:filtAsks}));
         }
       }
     };
