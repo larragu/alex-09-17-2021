@@ -12,13 +12,21 @@ const Orders= () => {
   const {bid, ask} = useSelector((state:ReducersState) => state.feed.feed);
 
   return(
-    <React.Fragment>
-      <div className={styles['orders']}>
-          <OrderTable feed={bid} orderType={OrderType.BUY} />
-          {isMobile && <Spread/>}
+    <div className={styles['orders']}>
+      {!isMobile &&
+      <React.Fragment>
+        <OrderTable feed={bid} orderType={OrderType.BUY} />
+        <OrderTable feed={ask} orderType={OrderType.SELL} />
+      </React.Fragment>
+      }
+        {isMobile && 
+        <React.Fragment>
           <OrderTable feed={ask} orderType={OrderType.SELL} />
-      </div>
-   </React.Fragment>
+            <Spread/>
+          <OrderTable feed={bid} orderType={OrderType.BUY} />
+        </React.Fragment>
+        }
+    </div>
   );
 }
 

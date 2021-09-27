@@ -1,4 +1,5 @@
 import React from "react";
+import useMediaQuery from "../../../../hooks/useMediaQuery";
 import { OrderType } from "../../../../models";
 import styles from './OrderRow.module.css';
 
@@ -10,8 +11,8 @@ interface OrderRowProps {
 }
 
 const OrderRow:React.FunctionComponent<OrderRowProps> = ({total, size,price, orderType}) => {
+  const isMobile = useMediaQuery('(max-width: 600px)');
   const priceColor = orderType === OrderType.BUY ? styles['cell__price--bid'] : styles['cell__price--ask'];
-  const mobileOrderBuy = orderType === OrderType.BUY ? styles['order--buy'] : "";
   
   const totalCell =  
     <td key={`total:${total}`} className={styles['cell']}>
@@ -31,8 +32,8 @@ const OrderRow:React.FunctionComponent<OrderRowProps> = ({total, size,price, ord
   const columns = [totalCell, sizeCell, priceCell];
 
   return( 
-    <tr key={price} className={`${styles['order']} ${mobileOrderBuy}`}>
-      {orderType === OrderType.BUY ? columns : columns.reverse()}
+    <tr key={price} className={styles['order']}>
+      {orderType === OrderType.BUY && !isMobile ? columns : columns.reverse()}
     </tr>
   );
 }

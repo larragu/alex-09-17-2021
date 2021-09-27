@@ -17,7 +17,7 @@ const OrderTable:React.FC<OrderTableProps> = ({feed, orderType}) => {
 
   const getRows = (totalAsksArray:number[], list:number[], map:OrderMap, type:OrderType) => {
     return list.map((price:number, i:number) => {
-        let size = map[price] || 0;
+        let size = map[price]!;
         return <OrderRow key={`${type}:${price}`} total={totalAsksArray[i]} size={size} price={price} orderType={type}/>
       });
   }
@@ -32,8 +32,8 @@ const OrderTable:React.FC<OrderTableProps> = ({feed, orderType}) => {
         }
         <table className={styles['table']}>
           {!(isMobile && orderType === OrderType.SELL) && <OrderHeader orderType={orderType} /> }
-          <tbody className={`${styles['table__body']}`}>
-            {feed.list.length > 0 && feedRows}
+          <tbody>
+            {feed.list.length > 0 && isMobile ? feedRows.reverse() : feedRows}
           </tbody>
       </table>
     </div>

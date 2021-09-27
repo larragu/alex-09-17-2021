@@ -4,7 +4,6 @@
   height: 93.5%;
   bottom: 0;
   z-index: 0;
-  margin: 1px 0;
 }
 
 .graph__buy {
@@ -23,12 +22,12 @@
 }
 
 .buy-bar {
-  background: green;
+  background: #143c3c;
   left: 0;
 }
 
 .sell-bar {
-  background: rgb(112, 22, 22);
+  background: #45212d;
   right: 0;
 }
 
