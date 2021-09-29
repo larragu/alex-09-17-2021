@@ -13,7 +13,7 @@ interface OrderTableProps {
 }
 
 const OrderTable:React.FC<OrderTableProps> = ({feed, orderType}) => {
-  const isMobile = useMediaQuery('(max-width: 600px)');
+  const isMobile = useMediaQuery('(max-width: 40rem)');
 
   const getRows = (totalAsksArray:number[], list:number[], map:OrderMap, type:OrderType) => {
     return list.map((price:number, i:number) => {

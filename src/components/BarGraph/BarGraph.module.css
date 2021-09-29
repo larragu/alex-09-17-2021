@@ -31,7 +31,7 @@
   right: 0;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 40rem) {
   .graph {
     height: 100%;
     margin: 0;

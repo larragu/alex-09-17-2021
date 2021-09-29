@@ -1,19 +1,19 @@
 .footer {
-  display: flex;
-  justify-content: center;
+  text-align: center;
   background-color: #121828;
-  padding: 15px;
+  padding: 0.9375rem;
   border-top: 1px solid #262e3e;
 }
 
 .toggle-button {
   border: none;
-  width: 100px;
-  height: 30px;
+  width: 6.25rem;
+  height: 1.875rem;
   border-radius: 6px;
   background-color: #614ee2;
   color: white;
   font-weight: bold;
+  font-size: 0.8rem;
   cursor: pointer;
 }
 
