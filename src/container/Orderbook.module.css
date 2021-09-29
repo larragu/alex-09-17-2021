@@ -1,22 +1,24 @@
 .orderbook {
-  display: flex;
-  flex-direction: column;
   color: white;
-  padding: 10px;
-  margin: 5px 20%;
-  width: 100%;
+  padding: 0.625rem;
+  margin: auto;
+  width: 85vw;
+  min-width: 600px;
+  max-width: 845px;
   height: 100%;
 }
 
 .orders {
-  margin: 1px 0;
+  margin: 0.0625rem 0;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 40rem) {
   .orderbook {
     padding: 0;
     margin: 0;
     width: 100%;
+    min-width: 100%;
+    max-width: 100%;
   }
 
   .orders {

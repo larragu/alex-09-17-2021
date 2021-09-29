@@ -8,11 +8,11 @@
 
 .header-cell {
   color: #474e5d;
-  padding: 5px 15px;
+  padding: 0.31rem 0.93rem;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 40rem) {
   .header {
-    margin: 1px 0;
+    margin: 0.0625rem 0;
   }
 }

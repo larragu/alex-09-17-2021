@@ -8,7 +8,7 @@ import OrderTable from "./OrderTable/OrderTable";
 
 
 const Orders= () => {
-  let isMobile = useMediaQuery('(max-width: 600px)')
+  let isMobile = useMediaQuery('(max-width: 40rem)')
   const {bid, ask} = useSelector((state:ReducersState) => state.feed.feed);
 
   return(

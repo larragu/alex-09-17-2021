@@ -16,7 +16,7 @@ const Orderbook = () => {
   const isConnected = useSelector((state:ReducersState) => state.socket.isConnected);
   const selectedMarket = useSelector((state:ReducersState) => state.socket.selectedMarket);
   
-  let isMobile = useMediaQuery('(max-width: 600px)')
+  let isMobile = useMediaQuery('(max-width: 40rem)')
   const VISIBILITY_CHANGE = "visibilitychange";
 
 
@@ -52,5 +52,4 @@ const Orderbook = () => {
 };
 
 export default Orderbook;
-
 

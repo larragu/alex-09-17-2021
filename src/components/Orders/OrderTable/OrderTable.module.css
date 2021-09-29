@@ -10,10 +10,11 @@
   border-collapse: collapse;
   width: 100%;
   table-layout: fixed;
-  overflow: hidden;
+
+  min-height: 29.713125rem;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 40rem) {
   .order-table {
     width: 100%;
   }
