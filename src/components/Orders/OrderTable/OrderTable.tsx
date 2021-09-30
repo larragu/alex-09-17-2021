@@ -30,7 +30,7 @@ const OrderTable:React.FC<OrderTableProps> = ({feed, orderType}) => {
           orderType={orderType}
           depthArray={feed.depthArray}/>
         }
-        <table className={styles['table']}>
+        <table>
           {!(isMobile && orderType === OrderType.BUY) && <OrderHeader orderType={orderType} /> }
           <tbody>
             {(feed.list.length > 0 && isMobile && orderType === OrderType.SELL) ? feedRows.reverse() : feedRows}

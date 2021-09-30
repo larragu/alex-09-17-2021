@@ -3,6 +3,7 @@ import styles from './BarGraph.module.css';
 import { OrderType } from '../../models';
 import { Bar } from './Bar/Bar';
 import useMediaQuery from '../../hooks/useMediaQuery';
+
 interface BarGraphProps {
   depthArray: number[],
   orderType: OrderType,
