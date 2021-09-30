@@ -14,7 +14,7 @@ const OrderHeader:React.FC<OrderHeaderProp> = ({orderType}) => {
     headerNames.reverse();
   }
 
-  let headerElements = headerNames.map(name => <th key={name} scope="col" className={styles['header-cell']}>{name}</th>);
+  const headerElements = headerNames.map(name => <th key={name} scope="col" className={styles['header-cell']}>{name}</th>);
 
   return (
     <thead className={styles['header']}>
