@@ -11,7 +11,7 @@ interface BarGraphProps {
 export const BarGraph:React.FC<BarGraphProps>  = ({depthArray, orderType}) => {
   let isMobile = useMediaQuery('(max-width: 40rem)');
   let barColor = styles['buy-bar'];
-  let barGraph = styles['graph__buy'];
+  let barGraph = '';
 
   if(orderType === OrderType.SELL) {
     barColor = styles['sell-bar'];

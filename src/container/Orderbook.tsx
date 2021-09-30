@@ -42,11 +42,9 @@ const Orderbook = () => {
   return (
     <div className={styles['orderbook']}>
       {isLoaded && !isConnected && <Notification selectedMarket={selectedMarket} /> }
-      <div className={styles['orders']}>
-        <Header isMobile={isMobile}/>
-        <Orders/>
-        <Footer selectedMarket={selectedMarket} isConnected={isConnected!} />
-      </div>
+      <Header isMobile={isMobile}/>
+      <Orders/>
+      <Footer selectedMarket={selectedMarket} isConnected={isConnected!} />
     </div>
   );
 };

@@ -1,18 +1,12 @@
 .header {
-  border-bottom: 1px solid #262e3e;
+	border-bottom: 1px solid #262e3e;
 }
 
 .header__row {
-  text-align: right;
+	text-align: right;
 }
 
 .header-cell {
-  color: #474e5d;
-  padding: 0.31rem 0.93rem;
-}
-
-@media (max-width: 40rem) {
-  .header {
-    margin: 0.0625rem 0;
-  }
+	color: #474e5d;
+	padding: 0.31rem 0.93rem;
 }

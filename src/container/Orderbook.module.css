@@ -1,35 +1,22 @@
 .orderbook {
-  color: white;
-  padding: 0.625rem;
-  margin: auto;
-  width: 85vw;
-  min-width: 600px;
-  max-width: 845px;
-  height: 100%;
+	color: white;
+	padding: 0;
+	margin: 0;
+	width: 100vw;
 }
 
-.orders {
-  margin: 0.0625rem 0;
+.title {
+	width: 100%;
+	display: flex;
+	align-items: center;
 }
 
-@media (max-width: 40rem) {
-  .orderbook {
-    padding: 0;
-    margin: 0;
-    width: 100%;
-    min-width: 100%;
-    max-width: 100%;
-  }
-
-  .orders {
-    width: 100%;
-    padding: 0;
-    margin: 0;
-  }
-
-  .title {
-    width: 100%;
-    display: flex;
-    align-items: center;
-  }
+@media (min-width: 640px) {
+	.orderbook {
+		padding: 0.625rem;
+		margin: auto;
+		width: 85vw;
+		min-width: 600px;
+		max-width: 845px;
+	}
 }

@@ -16,9 +16,9 @@ const Notification:React.FC<NotificationProps> = ({selectedMarket}) => {
   }, [selectedMarket]);
 
   return( 
-    <div className={styles['notification']}>
-      <button onClick={reconnectHandler}className={styles['reconnect-button']}>Orderbook Disconnected: RECONNECT</button>
-    </div>
+      <button onClick={reconnectHandler}className={styles['reconnect-button']}>
+        Orderbook Disconnected: RECONNECT
+      </button>
   );
 }
 
