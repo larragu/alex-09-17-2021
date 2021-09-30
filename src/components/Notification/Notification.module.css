@@ -1,33 +1,18 @@
-.notification {
-  background-color: rgb(141, 7, 7);
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  height: 100%;
-}
-
 .reconnect-button {
-  padding: 0.625rem;
-  border: none;
-  height: 100%;
-  width: 100%;
-  background-color: rgb(141, 7, 7);
-  color: white;
-  font-size: 1rem;
-  font-weight: bold;
-  cursor: pointer;
+	padding: 0.625rem;
+	border: none;
+	width: 100%;
+	background-color: rgb(141, 7, 7);
+	color: white;
+	font-size: 1rem;
+	font-weight: bold;
+	cursor: pointer;
 }
 
 .reconnect-button:hover {
-  background-color: rgb(187, 2, 2);
+	background-color: rgb(187, 2, 2);
 }
 
 .reconnect-button:active {
-  background-color: rgb(184, 71, 71);
-}
-
-@media (max-width: 40rem) {
-  .notification {
-    width: 100%;
-  }
+	background-color: rgb(184, 71, 71);
 }

@@ -1,15 +1,15 @@
 .order {
-  text-align: right;
+	text-align: right;
 }
 
 .cell {
-  padding: 0rem 0.9375rem;
+	padding: 0rem 0.9375rem;
 }
 
 .cell__price--bid {
-  color: #2fc08d;
+	color: #2fc08d;
 }
 
 .cell__price--ask {
-  color: #e64d55;
+	color: #e64d55;
 }
