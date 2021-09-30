@@ -32,55 +32,61 @@ const webSocket = (store:MiddlewareAPI) => {
     return `{"event":"${socketEvent}","feed":"${feed}","product_ids":["${market}"]}`;
   }
 
+  const messageHandler = (messageEvent:MessageEvent) => {
+    const data:SocketEventData = JSON.parse(messageEvent.data);  
+
+    if(data.event === SocketEvent.subscribed) {
+      const NEW_MARKET = 0;
+      const newMarket = data.product_ids[NEW_MARKET];
+      store.dispatch(socketActions.subscribeSuccess())
+      store.dispatch(feedActions.changeMarket({selectedMarket:newMarket}));
+    } else if (data.event === SocketEvent.unsubscribed) {
+      store.dispatch(socketActions.unsubscribeSuccess())
+    }
+
+    if(data.bids?.length > 0) {
+      let filtBids:number[][] = data.bids.filter((el:number[]) => el[SIZE] > 0);
+      if (filtBids.length > 0) { 
+        store.dispatch(feedActions.processSocketData({bids:filtBids}));
+      }
+    }
+
+    if(data.asks?.length > 0) {
+      let filtAsks:number[][] = data.asks.filter((el:number[]) => el[SIZE] > 0);
+      if (filtAsks.length > 0) { 
+        store.dispatch(feedActions.processSocketData({asks:filtAsks}));
+      }
+    }
+  }
+
+  const closeHandler = (event:CloseEvent) => {
+    if(event.code !== NORMAL_CLOSURE) {
+      console.error('WebSocket Client Error Code: ', event.code);
+      store.dispatch(socketActions.unsubscribeSuccess());
+    }
+    store.dispatch(socketActions.disconnectSuccess());
+  }
+
   const initializeSocket = (socket:WebSocket) => {
     socket = new WebSocket(WEB_SOCKET_URL);
 
     socket.onopen = function() {
       store.dispatch(socketActions.connectSuccess());
+      store.dispatch(feedActions.changeMarket({selectedMarket:Markets.NONE}));
     };
 
     socket.onclose = (event:CloseEvent) => {
-      if(event.code !== NORMAL_CLOSURE) {
-        console.error('WebSocket Client Error Code: ', event.code);
-      }
-
-      store.dispatch(socketActions.disconnectSuccess())
+      closeHandler(event);
     };
 
     socket.onmessage = (messageEvent:MessageEvent) => {
-      const data:SocketEventData = JSON.parse(messageEvent.data);  
-
-      if(data.event === SocketEvent.subscribed) {
-        const NEW_MARKET = 0;
-        const newMarket = data.product_ids[NEW_MARKET];
-        store.dispatch(feedActions.clearData());
-        store.dispatch(socketActions.subscribeSuccess({selectedMarket:newMarket}))
-      } else if (data.event === SocketEvent.unsubscribed) {
-        store.dispatch(socketActions.unsubscribeSuccess())
-      }
-
-      if(data.bids?.length > 0) {
-        let filtBids:number[][] = data.bids.filter((el:number[]) => el[SIZE] > 0);
-        if (filtBids.length > 0) { 
-          store.dispatch(feedActions.processSocketData({bids:filtBids}));
-        }
-      }
-
-      if(data.asks?.length > 0) {
-        let filtAsks:number[][] = data.asks.filter((el:number[]) => el[SIZE] > 0);
-        if (filtAsks.length > 0) { 
-          store.dispatch(feedActions.processSocketData({asks:filtAsks}));
-        }
-      }
+      messageHandler(messageEvent);
     };
     return socket;
   }
 
   const susbscribeToMarket = (marketForSubscription:Markets) => {
-    const marketForUnsubscription = marketForSubscription === Markets.ETH_USD ? Markets.XBT_USD : Markets.ETH_USD;
     const sendSubscribeData = createMessage(SocketEvent.subscribe, FEED,marketForSubscription);
-
-    unsuscribeFromMarket(marketForUnsubscription)
     waitForSocket(sendSubscribeData);
   }
 
@@ -98,17 +104,16 @@ const webSocket = (store:MiddlewareAPI) => {
           socket.close(NORMAL_CLOSURE);
           return;
         case SocketActions.SUBSCRIBE:
-          susbscribeToMarket(action.payload.selectedMarket);
+          susbscribeToMarket(action.payload.selectedMarket!);
           return;
         case SocketActions.UNSUSCRIBE:
-          unsuscribeFromMarket(action.payload.selectedMarket);
+          unsuscribeFromMarket(action.payload.selectedMarket!);
           return;
         default:
           break;
       }
     return next(action);
   }
-  
 };
 
 export default webSocket;

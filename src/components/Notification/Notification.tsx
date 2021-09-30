@@ -1,19 +1,15 @@
-import React, { useCallback } from "react";
-import { Markets } from "../../models";
-import store from "../../store";
-import { socketActions } from "../../store/socket";
+import React from "react";
 
 import styles from './Notification.module.css';
 
 interface NotificationProps {
-  selectedMarket: Markets
+  reconnect: ()=>void;
 }
 
-const Notification:React.FC<NotificationProps> = ({selectedMarket}) => {
-  const reconnectHandler = useCallback(() => {
-    store.dispatch(socketActions.connect());
-    store.dispatch(socketActions.subscribe({selectedMarket:selectedMarket}));
-  }, [selectedMarket]);
+const Notification:React.FC<NotificationProps> = ({reconnect}) => {
+  const reconnectHandler = () => {
+    reconnect();
+  }
 
   return( 
       <button onClick={reconnectHandler}className={styles['reconnect-button']}>
@@ -22,4 +18,4 @@ const Notification:React.FC<NotificationProps> = ({selectedMarket}) => {
   );
 }
 
-export default React.memo(Notification);
+export default Notification;
