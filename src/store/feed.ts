@@ -1,8 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { FeedPayload, FeedState, SortOption } from "../models";
+import { FeedPayload, FeedState, Markets, SortOption } from "../models";
 import { transformData } from "./util";
 
 const initialFeedState:FeedState = { 
+  selectedMarket: Markets.NONE,
   feed: {
     bid: { 
       depthArray: [], 
@@ -58,7 +59,7 @@ const feedSlice = createSlice({
         state.feed.ask.lowestAskPrice = askData.lowestAskPrice!;
       }
     },
-    clearData(state:FeedState) {
+    changeMarket(state:FeedState, action: FeedPayload) {
       state.feed.ask.depthArray = [...initialFeedState.feed.ask.depthArray];
       state.feed.ask.list = [...initialFeedState.feed.ask.list];
       state.feed.ask.map = {...initialFeedState.feed.ask.map};
@@ -70,6 +71,8 @@ const feedSlice = createSlice({
       state.feed.bid.map = {...initialFeedState.feed.bid.map};
       state.feed.bid.lowestBidPrice = initialFeedState.feed.bid.lowestBidPrice;
       state.feed.bid.highestBidPrice = initialFeedState.feed.bid.highestBidPrice;
+
+      state.selectedMarket = action.payload.selectedMarket!;
     }
   }
 });

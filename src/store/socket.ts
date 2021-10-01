@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { Markets, SocketPayload, SocketState } from "../models";
-const initialSocketState:SocketState = { isConnected: false, isSubscribed: false, selectedMarket: Markets.XBT_USD};
+import { FeedPayload, SocketState } from "../models";
+const initialSocketState:SocketState = { isConnected: false, isSubscribed: false };
 
 const socketSlice = createSlice({
   name: 'socket',
@@ -14,15 +14,15 @@ const socketSlice = createSlice({
     disconnect() {
     },    
     disconnectSuccess(state:SocketState) {
+      state.isSubscribed = false;
       state.isConnected = false;
     },
-    subscribe(state:SocketState, action:SocketPayload) {
+    subscribe(state:SocketState, action:FeedPayload) {
     },
-    subscribeSuccess(state:SocketState, action:SocketPayload) {
+    subscribeSuccess(state:SocketState) {
       state.isSubscribed = true;
-      state.selectedMarket = action.payload.selectedMarket!;
     },
-    unsubscribe() {
+    unsubscribe(state:SocketState, action:FeedPayload) {
     },
     unsubscribeSuccess(state:SocketState) {
       state.isSubscribed = false;
