@@ -70,7 +70,7 @@ const webSocket = (store:MiddlewareAPI) => {
   const initializeSocket = (socket:WebSocket) => {
     socket = new WebSocket(WEB_SOCKET_URL);
 
-    socket.onopen = function() {
+    socket.onopen = () => {
       store.dispatch(socketActions.connectSuccess());
       store.dispatch(feedActions.changeMarket({selectedMarket:Markets.NONE}));
     };

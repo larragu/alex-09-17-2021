@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect } from "react";
 
 import styles from './Orderbook.module.css';
-import { VisibilityState } from "../models";
+import { Markets, VisibilityState } from "../models";
 import Orders from "../components/Orders/Orders";
 import Notification from "../components/Notification/Notification";
 import Header from "../components/Header/Header";
@@ -15,6 +15,7 @@ const Orderbook = () => {
     isConnected,
     disconnect,
     connect,
+    selectedMarket,
     changeMarket
   } = useSocket();
 
@@ -22,11 +23,11 @@ const Orderbook = () => {
   const VISIBILITY_CHANGE = "visibilitychange";
 
   const reconnectHandler = useCallback(() => {
-    connect();
-  }, [connect]);
+    connect(selectedMarket);
+  }, [connect, selectedMarket]);
 
-  const toggleHandler = useCallback(() => {
-    changeMarket();
+  const toggleHandler = useCallback((selectedMarket) => {
+    changeMarket(selectedMarket);
   },[changeMarket])
 
   const toggleConnectionHandler = useCallback(() => {
@@ -34,6 +35,10 @@ const Orderbook = () => {
       disconnect();
     }
   }, [disconnect])
+
+  useEffect(() => {
+    connect(Markets.XBT_USD);
+  }, [connect]);
 
   useEffect(()=> {
     window.addEventListener(VISIBILITY_CHANGE, toggleConnectionHandler)
@@ -49,7 +54,7 @@ const Orderbook = () => {
       {isLoaded && !isConnected && <Notification reconnect={reconnectHandler} /> }
       <Header isMobile={isMobile}/>
       <Orders/>
-      <Footer toggle={toggleHandler} isConnected={isConnected!} />
+      <Footer toggle={toggleHandler} selectedMarket={selectedMarket} isConnected={isConnected!} />
     </div>
   );
 };

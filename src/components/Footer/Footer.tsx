@@ -1,17 +1,26 @@
 import React, { useEffect } from 'react';
+import { Markets } from '../../models';
 import styles from './Footer.module.css';
 interface FooterProps {
-  toggle: ()=>void,
-  isConnected: boolean
+  toggle: (selectedMarket:Markets)=>void,
+  isConnected: boolean,
+  selectedMarket: Markets
 }
 let isLoaded = false;
-const Footer:React.FC<FooterProps>  = ({toggle, isConnected}) => {
+const Footer:React.FC<FooterProps>  = ({toggle, isConnected, selectedMarket}) => {
   useEffect(() => {
     isLoaded = true;
   }, [])
 
-  const toggleHandler = () => {
-    toggle();
+  const toggleHandler = (selectedMarket:Markets) => {
+    let newMarket;
+      if(selectedMarket === Markets.XBT_USD) {
+        newMarket = Markets.ETH_USD;
+      } else {
+        newMarket = Markets.XBT_USD;
+      }
+
+    toggle(newMarket);
   }
 
   return (
@@ -19,7 +28,7 @@ const Footer:React.FC<FooterProps>  = ({toggle, isConnected}) => {
       <button 
         disabled={(!isLoaded || !isConnected)} 
         className={styles['toggle-button']} 
-        onClick={toggleHandler}>
+        onClick={()=> toggleHandler(selectedMarket)}>
         Toggle Feed
       </button>
     </div>
