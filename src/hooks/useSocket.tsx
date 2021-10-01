@@ -14,15 +14,11 @@ const useSocket = () => {
   const [newMarket, setNewMarket] = useState(Markets.NONE);
   const [newSubscription, setNewSubscription] = useState(false);
 
-  const makeConnection = (selectedMarket:Markets) => {
+  const makeConnection = useCallback((newMarket:Markets) => {
     setNewSubscription(true);
-    setNewMarket(selectedMarket)
+    setNewMarket(newMarket)
     store.dispatch(socketActions.connect());
-  };
-
-  useEffect(() => {
-    makeConnection(Markets.XBT_USD);
-  }, []);
+  },[]);
 
   useEffect(() => {
     if(newSubscription && isConnected) {
@@ -38,20 +34,16 @@ const useSocket = () => {
     }
   }, [isConnected, isSubscribed, newSubscription, selectedMarket, newMarket]);
 
-  const connectHandler = () => {
-    makeConnection(selectedMarket);
-  }
+  const connect = useCallback((newMarket:Markets) => {
+    makeConnection(newMarket);
+  },[makeConnection])
 
-  const changeMarketHandler = useCallback(() => {
-    if(selectedMarket === Markets.XBT_USD) {
-      setNewMarket(Markets.ETH_USD);
-    } else {
-      setNewMarket(Markets.XBT_USD);
-    }
+  const changeMarket = useCallback((selectedMarket:Markets) => {
+    setNewMarket(selectedMarket);
     setNewSubscription(true)
-  },[selectedMarket]);
+  },[]);
 
-  const disconnectHandler = useCallback(() => {
+  const disconnect = useCallback(() => {
     if(isConnected) {
       store.dispatch(socketActions.disconnect());
     }
@@ -59,9 +51,10 @@ const useSocket = () => {
 
   return {
     isConnected,
-    disconnect: disconnectHandler,
-    connect:connectHandler,
-    changeMarket:changeMarketHandler
+    disconnect,
+    connect,
+    selectedMarket,
+    changeMarket
   }
 }
 
