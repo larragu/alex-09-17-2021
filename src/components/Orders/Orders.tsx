@@ -8,18 +8,18 @@ import OrderTable from "./OrderTable/OrderTable";
 
 
 const Orders= () => {
-  let isMobile = useMediaQuery('(max-width: 40rem)')
+  let isDesktop = useMediaQuery('(min-width: 40rem)')
   const {bid, ask} = useSelector((state:ReducersState) => state.feed.feed);
 
   return(
     <div className={styles['orders']}>
-      {!isMobile &&
+      {isDesktop &&
       <React.Fragment>
         <OrderTable feed={bid} orderType={OrderType.BUY} />
         <OrderTable feed={ask} orderType={OrderType.SELL} />
       </React.Fragment>
       }
-        {isMobile && 
+        {!isDesktop && 
         <React.Fragment>
           <OrderTable feed={ask} orderType={OrderType.SELL} />
             <Spread/>

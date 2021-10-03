@@ -1,16 +1,16 @@
 .orderbook {
-  color: white;
-  padding: 0;
-  margin: 0;
-  width: 100vw;
+	color: white;
+	padding: 0;
+	margin: 0;
+	width: 100vw;
 }
 
-@media (min-width: 640px) {
-  .orderbook {
-    padding: 0.625rem;
-    margin: auto;
-    width: 85vw;
-    min-width: 600px;
-    max-width: 900px;
-  }
+@media (min-width: 40rem) {
+	.orderbook {
+		padding: 0.625rem;
+		margin: auto;
+		width: 85vw;
+		min-width: 37.5rem;
+		max-width: 56.25rem;
+	}
 }

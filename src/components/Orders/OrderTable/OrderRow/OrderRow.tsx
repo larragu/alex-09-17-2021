@@ -11,7 +11,7 @@ interface OrderRowProps {
 }
 
 const OrderRow:React.FunctionComponent<OrderRowProps> = ({total, size,price, orderType}) => {
-  const isMobile = useMediaQuery('(max-width: 40rem)');
+  const isDesktop = useMediaQuery('(min-width: 40rem)');
   const priceColor = orderType === OrderType.BUY ? styles['cell__price--bid'] : styles['cell__price--ask'];
   
   const totalCell =  
@@ -33,7 +33,7 @@ const OrderRow:React.FunctionComponent<OrderRowProps> = ({total, size,price, ord
 
   return( 
     <tr key={price} className={styles['order']}>
-      {orderType === OrderType.BUY && !isMobile ? columns : columns.reverse()}
+      {orderType === OrderType.BUY && isDesktop ? columns : columns.reverse()}
     </tr>
   );
 }

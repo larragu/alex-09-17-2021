@@ -10,7 +10,7 @@ interface BarGraphProps {
 }
 
 export const BarGraph:React.FC<BarGraphProps>  = ({depthArray, orderType}) => {
-  let isMobile = useMediaQuery('(max-width: 40rem)');
+  let isDesktop = useMediaQuery('(min-width: 40rem)');
   let barColor = styles['buy-bar'];
   let barGraph = '';
 
@@ -24,7 +24,7 @@ export const BarGraph:React.FC<BarGraphProps>  = ({depthArray, orderType}) => {
   });
 
   let transformBar = "";
-  if(isMobile) {
+  if(!isDesktop) {
     if(orderType === OrderType.SELL) {
       transformBar = styles['bar-lines-container--red'];
     }
