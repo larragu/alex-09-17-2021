@@ -1,21 +1,21 @@
 .order-table {
-  height: 100%;
-  display: block;
-  position: relative;
+	height: 100%;
+	display: block;
+	position: relative;
 }
 
 .order-table > table {
-  position: relative;
-  border-collapse: collapse;
-  width: 100%;
-  table-layout: fixed;
+	position: relative;
+	border-collapse: collapse;
+	width: 100%;
+	table-layout: fixed;
 
-  min-height: 29.713125rem;
+	min-height: 29.713125rem;
 }
 
-@media (min-width: 640px) {
-  .order-table {
-    width: 50%;
-    display: inline-block;
-  }
+@media (min-width: 40rem) {
+	.order-table {
+		width: 50%;
+		display: inline-block;
+	}
 }

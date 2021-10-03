@@ -19,7 +19,7 @@ const Orderbook = () => {
     changeMarket
   } = useSocket();
 
-  let isMobile = useMediaQuery('(max-width: 40rem)')
+  let isDesktop = useMediaQuery('(min-width: 40rem)')
   const VISIBILITY_CHANGE = "visibilitychange";
 
   const reconnectHandler = useCallback(() => {
@@ -52,7 +52,7 @@ const Orderbook = () => {
   return (
     <div className={styles['orderbook']}>
       {isLoaded && !isConnected && <Notification reconnect={reconnectHandler} /> }
-      <Header isMobile={isMobile}/>
+      <Header isMobile={!isDesktop}/>
       <Orders/>
       <Footer toggle={toggleHandler} selectedMarket={selectedMarket} isConnected={isConnected!} />
     </div>

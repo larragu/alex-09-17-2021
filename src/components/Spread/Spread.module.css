@@ -5,7 +5,7 @@
 	color: #474e5d;
 }
 
-@media (min-width: 640px) {
+@media (min-width: 40rem) {
 	.spread {
 		width: 33.3%;
 		display: inline-block;

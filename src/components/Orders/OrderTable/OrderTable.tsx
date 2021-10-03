@@ -13,7 +13,7 @@ interface OrderTableProps {
 }
 
 const OrderTable:React.FC<OrderTableProps> = ({feed, orderType}) => {
-  const isMobile = useMediaQuery('(max-width: 40rem)');
+  const isDesktop = useMediaQuery('(min-width: 40rem)');
 
   const getRows = (totalAsksArray:number[], list:number[], map:OrderMap, type:OrderType) => {
     return list.map((price:number, i:number) => {
@@ -31,9 +31,9 @@ const OrderTable:React.FC<OrderTableProps> = ({feed, orderType}) => {
           depthArray={feed.depthArray}/>
         }
         <table>
-          {!(isMobile && orderType === OrderType.BUY) && <OrderHeader orderType={orderType} /> }
+          {!(!isDesktop && orderType === OrderType.BUY) && <OrderHeader orderType={orderType} /> }
           <tbody>
-            {(feed.list.length > 0 && isMobile && orderType === OrderType.SELL) ? feedRows.reverse() : feedRows}
+            {(feed.list.length > 0 && !isDesktop && orderType === OrderType.SELL) ? feedRows.reverse() : feedRows}
           </tbody>
       </table>
     </div>
