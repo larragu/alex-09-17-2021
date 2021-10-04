@@ -13,19 +13,9 @@ const Orders= () => {
 
   return(
     <div className={styles['orders']}>
-      {isDesktop &&
-      <React.Fragment>
-        <OrderTable feed={bid} orderType={OrderType.BUY} />
-        <OrderTable feed={ask} orderType={OrderType.SELL} />
-      </React.Fragment>
-      }
-        {!isDesktop && 
-        <React.Fragment>
-          <OrderTable feed={ask} orderType={OrderType.SELL} />
-            <Spread/>
-          <OrderTable feed={bid} orderType={OrderType.BUY} />
-        </React.Fragment>
-        }
+      <OrderTable feed={bid} orderType={OrderType.BUY} />
+      {!isDesktop &&  <Spread/> }
+      <OrderTable feed={ask} orderType={OrderType.SELL} />
     </div>
   );
 }

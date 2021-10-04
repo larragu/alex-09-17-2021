@@ -1,14 +1,13 @@
 .spread {
-	margin: 0.0625rem 0;
-	padding: 0.3125rem 0;
-	text-align: center;
-	color: #474e5d;
+  margin: 0.0625rem 0;
+  padding: 0.3125rem 0;
+  text-align: center;
+  color: #474e5d;
 }
 
 @media (min-width: 40rem) {
-	.spread {
-		width: 33.3%;
-		display: inline-block;
-		margin: 0;
-	}
+  .spread {
+    width: 33.3%;
+    margin: 0;
+  }
 }

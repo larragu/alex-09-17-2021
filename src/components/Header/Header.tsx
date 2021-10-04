@@ -3,19 +3,19 @@ import styles from './Header.module.css';
 import Spread from "../Spread/Spread";
 
 interface HeaderProps {
-  isMobile: boolean
+  isDesktop: boolean
 }
 
-const Header:React.FunctionComponent<HeaderProps> = ({isMobile}) => {
+const Header:React.FunctionComponent<HeaderProps> = ({isDesktop}) => {
   return (
   <div className={styles['header-container']}>
     <h4 className={styles['title']}>
       Order Book
     </h4>
-    { !isMobile && <Spread /> }
+    { isDesktop && <Spread /> }
   </div>
   )
 
 }
 
-export default Header;
+export default React.memo(Header);

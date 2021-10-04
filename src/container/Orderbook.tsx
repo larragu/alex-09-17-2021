@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react";
+import { useCallback, useEffect } from "react";
 
 import styles from './Orderbook.module.css';
 import { Markets, VisibilityState } from "../models";
@@ -52,7 +52,7 @@ const Orderbook = () => {
   return (
     <div className={styles['orderbook']}>
       {isLoaded && !isConnected && <Notification reconnect={reconnectHandler} /> }
-      <Header isMobile={!isDesktop}/>
+      <Header isDesktop={isDesktop}/>
       <Orders/>
       <Footer toggle={toggleHandler} selectedMarket={selectedMarket} isConnected={isConnected!} />
     </div>
