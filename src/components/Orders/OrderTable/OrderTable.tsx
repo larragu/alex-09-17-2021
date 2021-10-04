@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { DESKTOP_MEDIA } from '../../../constants';
 import useMediaQuery from '../../../hooks/useMediaQuery';
 import { Ask, Bid, OrderMap, OrderType } from '../../../models';
 import { BarGraph } from '../../BarGraph/BarGraph';
@@ -13,7 +14,7 @@ interface OrderTableProps {
 }
 
 const OrderTable:React.FC<OrderTableProps> = ({feed, orderType}) => {
-  const isDesktop = useMediaQuery('(min-width: 40rem)');
+  const isDesktop = useMediaQuery(DESKTOP_MEDIA);
 
   const getRows = (totalAsksArray:number[], list:number[], map:OrderMap, type:OrderType) => {
     return list.map((price:number, i:number) => {

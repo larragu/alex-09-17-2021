@@ -5,10 +5,11 @@ import { useSelector } from "react-redux";
 import Spread from "../Spread/Spread";
 import useMediaQuery from "../../hooks/useMediaQuery";
 import OrderTable from "./OrderTable/OrderTable";
+import { DESKTOP_MEDIA } from "../../constants";
 
 
 const Orders= () => {
-  let isDesktop = useMediaQuery('(min-width: 40rem)')
+  let isDesktop = useMediaQuery(DESKTOP_MEDIA)
   const {bid, ask} = useSelector((state:ReducersState) => state.feed.feed);
 
   return(

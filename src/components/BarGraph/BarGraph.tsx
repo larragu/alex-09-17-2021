@@ -3,6 +3,7 @@ import styles from './BarGraph.module.css';
 import { OrderType } from '../../models';
 import { Bar } from './Bar/Bar';
 import useMediaQuery from '../../hooks/useMediaQuery';
+import { DESKTOP_MEDIA } from '../../constants';
 
 interface BarGraphProps {
   depthArray: number[],
@@ -10,7 +11,7 @@ interface BarGraphProps {
 }
 
 export const BarGraph:React.FC<BarGraphProps>  = ({depthArray, orderType}) => {
-  let isDesktop = useMediaQuery('(min-width: 40rem)');
+  let isDesktop = useMediaQuery(DESKTOP_MEDIA);
   let barColor = styles['buy-bar'];
   let barGraph = '';
 
