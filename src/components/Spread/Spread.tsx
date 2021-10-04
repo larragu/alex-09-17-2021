@@ -23,4 +23,4 @@ const Spread = () => {
   );
 }
 
-export default Spread;
+export default React.memo(Spread);

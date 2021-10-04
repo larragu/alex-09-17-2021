@@ -1,3 +1,10 @@
 .orders {
-	background-color: #121828;
+  background-color: #121828;
+  display: flex;
+  flex-direction: column-reverse;
+}
+@media (min-width: 40rem) {
+  .orders {
+    flex-direction: row;
+  }
 }
