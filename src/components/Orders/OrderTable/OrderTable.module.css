@@ -1,5 +1,4 @@
 .order-table {
-  height: 100%;
   position: relative;
 }
 
@@ -10,10 +9,4 @@
   table-layout: fixed;
 
   min-height: 29.713125rem;
-}
-
-@media (min-width: 40rem) {
-  .order-table {
-    width: 50%;
-  }
 }
