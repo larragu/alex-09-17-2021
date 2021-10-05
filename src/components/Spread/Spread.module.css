@@ -1,7 +1,8 @@
 .spread {
   margin: 0.0625rem 0;
   padding: 0.3125rem 0;
-  text-align: center;
+  display: flex;
+  justify-content: center;
   color: #474e5d;
 }
 

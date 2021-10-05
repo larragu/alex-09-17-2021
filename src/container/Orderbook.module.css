@@ -5,6 +5,7 @@
   width: 100vw;
   display: flex;
   flex-direction: column;
+  min-width: 17.5rem;
 }
 
 @media (min-width: 40rem) {
