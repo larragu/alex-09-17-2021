@@ -54,7 +54,7 @@ const Orderbook = () => {
     <div className={styles['orderbook']}>
       {isLoaded && !isConnected && <Notification reconnect={reconnectHandler} /> }
       <Header isDesktop={isDesktop}/>
-      <Orders/>
+      <Orders isDesktop={isDesktop}/>
       <Footer toggle={toggleHandler} selectedMarket={selectedMarket} isConnected={isConnected!} />
     </div>
   );

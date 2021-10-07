@@ -1,6 +1,4 @@
 import React from "react";
-import { DESKTOP_MEDIA } from "../../../../constants";
-import useMediaQuery from "../../../../hooks/useMediaQuery";
 import { OrderType } from "../../../../models";
 import styles from './OrderRow.module.css';
 
@@ -8,11 +6,11 @@ interface OrderRowProps {
   total: number,
   size: number,
   price: number,
-  orderType: OrderType
+  orderType: OrderType,
+  isDesktop: boolean
 }
 
-const OrderRow:React.FunctionComponent<OrderRowProps> = ({total, size,price, orderType}) => {
-  const isDesktop = useMediaQuery(DESKTOP_MEDIA);
+const OrderRow:React.FunctionComponent<OrderRowProps> = ({total, size,price, orderType, isDesktop}) => {
   const priceColor = orderType === OrderType.BUY ? styles['cell__price--bid'] : styles['cell__price--ask'];
   
   const totalCell =  

@@ -1,6 +1,7 @@
-.bar {
-  width: 16.666667%;
-  height: 5%;
-  background-color: #121828;
-  z-index: 1;
+.bar--buy {
+  background: #143c3c;
+}
+
+.bar--sell {
+  background: #45212d;
 }

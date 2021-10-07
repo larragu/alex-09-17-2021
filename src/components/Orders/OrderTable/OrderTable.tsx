@@ -14,12 +14,17 @@ interface OrderTableProps {
 }
 
 const OrderTable:React.FC<OrderTableProps> = ({feed, orderType}) => {
-  const isDesktop = useMediaQuery(DESKTOP_MEDIA);
-
+  let isDesktop = useMediaQuery(DESKTOP_MEDIA)
   const getRows = (totalAsksArray:number[], list:number[], map:OrderMap, type:OrderType) => {
     return list.map((price:number, i:number) => {
         let size = map[price]!;
-        return <OrderRow key={`${type}:${price}`} total={totalAsksArray[i]} size={size} price={price} orderType={type}/>
+        return <OrderRow 
+          key={`${type}:${price}`} 
+          total={totalAsksArray[i]} 
+          size={size} 
+          price={price} 
+          orderType={type}
+          isDesktop={isDesktop}/>
       });
   }
 
@@ -28,6 +33,7 @@ const OrderTable:React.FC<OrderTableProps> = ({feed, orderType}) => {
   return (
       <div className={styles['order-table']}>
         {feed.list.length > 0 && <BarGraph 
+          isDesktop={isDesktop}
           orderType={orderType}
           depthArray={feed.depthArray}/>
         }
