@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { ReducersState } from "../../models";
 
-import styles from './Spread.module.css';
+import styles from './Spread.module.scss';
 
 const Spread = () => {
   const highestBidPrice = useSelector((state:ReducersState) => state.feed.feed.bid.highestBidPrice);

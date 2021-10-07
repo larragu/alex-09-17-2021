@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Markets } from '../../models';
-import styles from './Footer.module.css';
+import styles from './Footer.module.scss';
 interface FooterProps {
   toggle: (selectedMarket:Markets)=>void,
   isConnected: boolean,
@@ -27,7 +27,7 @@ const Footer:React.FC<FooterProps>  = ({toggle, isConnected, selectedMarket}) =>
     <div className={styles['footer']}>
       <button 
         disabled={(!isLoaded || !isConnected)} 
-        className={styles['toggle-button']} 
+        className={styles['button-toggle']} 
         onClick={()=> toggleHandler(selectedMarket)}>
         Toggle Feed
       </button>

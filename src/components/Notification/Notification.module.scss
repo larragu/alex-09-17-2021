@@ -1,4 +1,4 @@
-.reconnect-button {
+.button-reconnect {
   padding: 0.625rem;
   border: none;
   background-color: rgb(141, 7, 7);
@@ -6,12 +6,12 @@
   font-size: 1rem;
   font-weight: bold;
   cursor: pointer;
-}
 
-.reconnect-button:hover {
-  background-color: rgb(187, 2, 2);
-}
+  &:hover {
+    background-color: rgb(187, 2, 2);
+  }
 
-.reconnect-button:active {
-  background-color: rgb(184, 71, 71);
+  &:active {
+    background-color: rgb(184, 71, 71);
+  }
 }

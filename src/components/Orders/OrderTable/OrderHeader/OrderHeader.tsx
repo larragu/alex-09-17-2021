@@ -1,7 +1,7 @@
 import React from 'react';
 import { OrderType } from '../../../../models';
 
-import styles from './OrderHeader.module.css';
+import styles from './OrderHeader.module.scss';
 
 interface OrderHeaderProp {
   orderType: OrderType
@@ -14,12 +14,12 @@ const OrderHeader:React.FC<OrderHeaderProp> = ({orderType}) => {
     headerNames.reverse();
   }
 
-  const headerElements = headerNames.map(name => <th key={name} scope="col" className={styles['header-cell']}>{name}</th>);
+  const headerElements = headerNames.map(name => <th key={name} scope="col" className={styles['cell']}>{name}</th>);
 
   return (
     <thead className={styles['header']}>
       <tr 
-        className={styles['header__row']}>
+        className={styles['row']}>
         {headerElements}
       </tr>
     </thead>

@@ -6,10 +6,8 @@
   display: flex;
   flex-direction: column;
   min-width: 17.5rem;
-}
 
-@media (min-width: 40rem) {
-  .orderbook {
+  @media (min-width: 40rem) {
     padding: 0.625rem;
     margin: auto;
     width: 85vw;
