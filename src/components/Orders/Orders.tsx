@@ -1,6 +1,6 @@
 import React from "react";
 import { ReducersState, OrderType } from "../../models";
-import styles from './Orders.module.css';
+import styles from './Orders.module.scss';
 import { useSelector } from "react-redux";
 import Spread from "../Spread/Spread";
 import OrderTable from "./OrderTable/OrderTable";

@@ -1,6 +1,6 @@
 import React from "react";
 import { OrderType } from "../../../../models";
-import styles from './OrderRow.module.css';
+import styles from './OrderRow.module.scss';
 
 interface OrderRowProps {
   total: number,
@@ -11,7 +11,7 @@ interface OrderRowProps {
 }
 
 const OrderRow:React.FunctionComponent<OrderRowProps> = ({total, size,price, orderType, isDesktop}) => {
-  const priceColor = orderType === OrderType.BUY ? styles['cell__price--bid'] : styles['cell__price--ask'];
+  const priceColor = orderType === OrderType.BUY ? styles['price--bid'] : styles['price--ask'];
   
   const totalCell =  
     <td key={`total:${total}`} className={styles['cell']}>

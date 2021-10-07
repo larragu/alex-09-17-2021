@@ -1,0 +1,19 @@
+@import "../../_colors.scss";
+
+.header {
+  background-color: $orderbook-background;
+  padding: 0.525rem 0;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #262e3e;
+
+  @media (min-width: 40rem) {
+    padding: 0.225rem 0;
+  }
+
+  .title {
+    width: 33.3%;
+    padding: 0 0 0 0.9375rem;
+    margin: 0;
+  }
+}

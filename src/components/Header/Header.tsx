@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './Header.module.css';
+import styles from './Header.module.scss';
 import Spread from "../Spread/Spread";
 
 interface HeaderProps {
@@ -8,7 +8,7 @@ interface HeaderProps {
 
 const Header:React.FunctionComponent<HeaderProps> = ({isDesktop}) => {
   return (
-  <div className={styles['header-container']}>
+  <div className={styles['header']}>
     <h4 className={styles['title']}>
       Order Book
     </h4>

@@ -5,17 +5,15 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-}
 
-.graph__sell {
-  height: 93.5%;
-  flex-direction: column-reverse;
-}
-
-@media (min-width: 40rem) {
-  .graph {
+  @media (min-width: 40rem) {
     height: 93.5%;
     flex-direction: row-reverse;
     align-items: flex-end;
+  }
+
+  &.sell {
+    height: 93.5%;
+    flex-direction: column-reverse;
   }
 }

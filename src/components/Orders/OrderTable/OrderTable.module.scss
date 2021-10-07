@@ -1,0 +1,12 @@
+.order-table {
+  position: relative;
+
+  & > table {
+    position: relative;
+    border-collapse: collapse;
+    width: 100%;
+    table-layout: fixed;
+
+    min-height: 29.713125rem;
+  }
+}

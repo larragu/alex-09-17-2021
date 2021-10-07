@@ -1,6 +1,6 @@
 import { useCallback, useEffect } from "react";
 
-import styles from './Orderbook.module.css';
+import styles from './Orderbook.module.scss';
 import { Markets, VisibilityState } from "../models";
 import Orders from "../components/Orders/Orders";
 import Notification from "../components/Notification/Notification";

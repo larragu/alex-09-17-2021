@@ -6,7 +6,7 @@ import { Ask, Bid, OrderMap, OrderType } from '../../../models';
 import { BarGraph } from '../../BarGraph/BarGraph';
 import OrderHeader from './OrderHeader/OrderHeader';
 import OrderRow from './OrderRow/OrderRow';
-import styles from './OrderTable.module.css';
+import styles from './OrderTable.module.scss';
 
 interface OrderTableProps {
   feed: Bid | Ask,

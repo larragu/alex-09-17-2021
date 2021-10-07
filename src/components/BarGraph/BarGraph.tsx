@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from './BarGraph.module.css';
+import styles from './BarGraph.module.scss';
 import { OrderType } from '../../models';
 import { Bar } from './Bar/Bar';
 
@@ -12,11 +12,12 @@ interface BarGraphProps {
 export const BarGraph:React.FC<BarGraphProps>  = ({depthArray, orderType, isDesktop}) => {
   let graphType = '';
 
-  if(orderType === OrderType.SELL) {
-    graphType = styles['graph__sell'];
+  if(!isDesktop && orderType === OrderType.SELL) {
+    graphType = styles['sell'];
   }
   const list = depthArray.map((total:number,i:number)=> {
     const percent = ((total / depthArray[depthArray.length-1])) * 100;
+    
     return <Bar key={i} isDesktop={isDesktop} orderType={orderType} percent={percent} />
   });
 

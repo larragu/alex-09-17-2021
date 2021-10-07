@@ -1,0 +1,11 @@
+@import "../../_colors.scss";
+
+.orders {
+  background-color: $orderbook-background;
+  display: flex;
+  flex-direction: column-reverse;
+
+  @media (min-width: 40rem) {
+    flex-direction: row;
+  }
+}

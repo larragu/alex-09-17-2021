@@ -1,0 +1,14 @@
+@import "../../../../_colors.scss";
+
+.header {
+  border-bottom: 1px solid #262e3e;
+
+  .row {
+    text-align: right;
+
+    .cell {
+      color: $cell-background;
+      padding: 0.31rem 0.93rem;
+    }
+  }
+}

@@ -1,7 +1,7 @@
 import React from 'react';
 import { OrderType } from '../../../models';
 
-import styles from './Bar.module.css';
+import styles from './Bar.module.scss';
 
 interface BarProps {
   percent: number;
@@ -10,14 +10,14 @@ interface BarProps {
 }
 
 export const Bar:React.FC<BarProps> = React.memo(({percent, orderType, isDesktop}) => {
-  let barColor = styles['bar--buy'];
+  let barColor = styles['bar-buy'];
   let style = {
     width: `${percent}%`,
     height: '100%'
   };
 
   if(orderType === OrderType.SELL) {
-    barColor = styles['bar--sell'];
+    barColor = styles['bar-sell'];
   }
 
   if(isDesktop) {
@@ -28,6 +28,6 @@ export const Bar:React.FC<BarProps> = React.memo(({percent, orderType, isDesktop
   }
 
   return (
-    <div className={barColor} key={percent}  style={style} />
+    <div className={barColor} key={percent} style={style} />
   )
 });
