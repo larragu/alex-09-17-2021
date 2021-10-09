@@ -6,6 +6,7 @@ import { socketActions } from '../store/socket';
 
 const webSocket = (store:MiddlewareAPI) => {
   const WEB_SOCKET_URL = "wss://www.cryptofacilities.com/ws/v1";
+  const NEW_MARKET = 0;
   let socket:WebSocket;
   const NORMAL_CLOSURE = 1000;
   const FEED = "book_ui_1";
@@ -36,8 +37,8 @@ const webSocket = (store:MiddlewareAPI) => {
     const data:SocketEventData = JSON.parse(messageEvent.data);  
 
     if(data.event === SocketEvent.subscribed) {
-      const NEW_MARKET = 0;
       const newMarket = data.product_ids[NEW_MARKET];
+
       store.dispatch(socketActions.subscribeSuccess())
       store.dispatch(feedActions.changeMarket({selectedMarket:newMarket}));
     } else if (data.event === SocketEvent.unsubscribed) {

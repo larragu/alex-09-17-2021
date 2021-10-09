@@ -41,7 +41,6 @@ const deleteAndAdd = (
   return arr[arr.length-1];
 }
 
-
 export const transformData = (
   originalFilteredOrders:number[][], 
   originalMap:OrderMap, 

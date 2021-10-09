@@ -16,10 +16,8 @@ export enum SortOption {
 
 export interface FeedState {
   selectedMarket: Markets,
-  feed: {
-    bid: Bid,
-    ask: Ask
-  }
+  bid: Bid,
+  ask: Ask
 }
 
 export interface Bid {
