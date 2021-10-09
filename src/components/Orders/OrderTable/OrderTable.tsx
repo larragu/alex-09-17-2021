@@ -38,9 +38,9 @@ const OrderTable:React.FC<OrderTableProps> = ({feed, orderType}) => {
           depthArray={feed.depthArray}/>
         }
         <table>
-          {!(!isDesktop && orderType === OrderType.BUY) && <OrderHeader orderType={orderType} /> }
+          {!(!isDesktop && orderType === OrderType.BID) && <OrderHeader orderType={orderType} /> }
           <tbody>
-            {(feed.list.length > 0 && !isDesktop && orderType === OrderType.SELL) ? feedRows.reverse() : feedRows}
+            {(feed.list.length > 0 && !isDesktop && orderType === OrderType.ASK) ? feedRows.reverse() : feedRows}
           </tbody>
       </table>
     </div>

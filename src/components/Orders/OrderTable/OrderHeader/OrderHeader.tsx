@@ -10,7 +10,7 @@ interface OrderHeaderProp {
 const OrderHeader:React.FC<OrderHeaderProp> = ({orderType}) => {
   const headerNames = ['TOTAL', 'SIZE', 'PRICE'];
 
-  if (orderType === OrderType.SELL) {
+  if (orderType === OrderType.ASK) {
     headerNames.reverse();
   }
 

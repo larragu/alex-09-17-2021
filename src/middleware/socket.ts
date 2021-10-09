@@ -38,7 +38,7 @@ const webSocket = (store:MiddlewareAPI) => {
 
     if(data.event === SocketEvent.subscribed) {
       const newMarket = data.product_ids[NEW_MARKET];
-
+      
       store.dispatch(socketActions.subscribeSuccess())
       store.dispatch(feedActions.changeMarket({selectedMarket:newMarket}));
     } else if (data.event === SocketEvent.unsubscribed) {

@@ -11,7 +11,7 @@ interface OrderRowProps {
 }
 
 const OrderRow:React.FunctionComponent<OrderRowProps> = ({total, size,price, orderType, isDesktop}) => {
-  const priceColor = orderType === OrderType.BUY ? styles['price--bid'] : styles['price--ask'];
+  const priceColor = orderType === OrderType.BID ? styles['price--bid'] : styles['price--ask'];
   
   const totalCell =  
     <td key={`total:${total}`} className={styles['cell']}>
@@ -32,7 +32,7 @@ const OrderRow:React.FunctionComponent<OrderRowProps> = ({total, size,price, ord
 
   return( 
     <tr key={price} className={styles['order']}>
-      {orderType === OrderType.BUY && isDesktop ? columns : columns.reverse()}
+      {orderType === OrderType.BID && isDesktop ? columns : columns.reverse()}
     </tr>
   );
 }
