@@ -12,8 +12,8 @@ interface BarGraphProps {
 export const BarGraph:React.FC<BarGraphProps>  = ({depthArray, orderType, isDesktop}) => {
   let graphType = '';
 
-  if(!isDesktop && orderType === OrderType.SELL) {
-    graphType = styles['sell'];
+  if(!isDesktop && orderType === OrderType.ASK) {
+    graphType = styles['ask'];
   }
   const list = depthArray.map((total:number,i:number)=> {
     const percent = ((total / depthArray[depthArray.length-1])) * 100;
@@ -22,7 +22,7 @@ export const BarGraph:React.FC<BarGraphProps>  = ({depthArray, orderType, isDesk
   });
 
   if(isDesktop) {
-    if(orderType === OrderType.BUY) {
+    if(orderType === OrderType.BID) {
       list.reverse();
     }
   }

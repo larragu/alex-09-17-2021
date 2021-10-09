@@ -10,14 +10,14 @@ interface BarProps {
 }
 
 export const Bar:React.FC<BarProps> = React.memo(({percent, orderType, isDesktop}) => {
-  let barColor = styles['bar-buy'];
+  let barColor = styles['bar-bid'];
   let style = {
     width: `${percent}%`,
     height: '100%'
   };
 
-  if(orderType === OrderType.SELL) {
-    barColor = styles['bar-sell'];
+  if(orderType === OrderType.ASK) {
+    barColor = styles['bar-ask'];
   }
 
   if(isDesktop) {

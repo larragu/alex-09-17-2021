@@ -15,9 +15,9 @@ const Orders:React.FC<OrdersProps>  = ({isDesktop}) => {
 
   return(
     <div className={styles['orders']}>
-      <OrderTable feed={bid} orderType={OrderType.BUY}/>
+      <OrderTable feed={bid} orderType={OrderType.BID}/>
       {!isDesktop &&  <Spread/> }
-      <OrderTable feed={ask} orderType={OrderType.SELL}/>
+      <OrderTable feed={ask} orderType={OrderType.ASK}/>
     </div>
   );
 }
