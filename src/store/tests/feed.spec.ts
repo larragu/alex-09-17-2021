@@ -1,8 +1,8 @@
 
-import store from './index';
-import {feedActions} from './feed';
+import store from './../index';
+import {feedActions} from './../feed';
 import { initialFeedState, initialFilteredFeed, initialResult } from './mocks';
-import { Markets } from '../models';
+import { Markets } from '../../models';
 
 test('should have initial data when initialized', () => {
    const {bid, ask, selectedMarket} = store.getState().feed;
@@ -28,17 +28,17 @@ test('should output transformed feed', () => {
 
    const {bid, ask} = store.getState().feed;
 
-   expect(bid.highestBidPrice).toBe(initialResult.bids.highestBidPrice)
-   expect(bid.lowestBidPrice).toBe(initialResult.bids.lowestBidPrice)
-   expect(bid.map).toEqual(initialResult.bids.map)
-   expect(bid.depthArray).toEqual(initialResult.bids.depthArray)
-   expect(bid.list).toEqual(initialResult.bids.list)
+   expect(bid.highestBidPrice).toBe(initialResult.bid.highestBidPrice)
+   expect(bid.lowestBidPrice).toBe(initialResult.bid.lowestBidPrice)
+   expect(bid.map).toEqual(initialResult.bid.map)
+   expect(bid.depthArray).toEqual(initialResult.bid.depthArray)
+   expect(bid.list).toEqual(initialResult.bid.list)
 
-   expect(ask.highestAskPrice).toBe(initialResult.asks.highestAskPrice)
-   expect(ask.lowestAskPrice).toBe(initialResult.asks.lowestAskPrice)
-   expect(ask.map).toEqual(initialResult.asks.map)
-   expect(ask.depthArray).toEqual(initialResult.asks.depthArray)
-   expect(ask.list).toEqual(initialResult.asks.list)
+   expect(ask.highestAskPrice).toBe(initialResult.ask.highestAskPrice)
+   expect(ask.lowestAskPrice).toBe(initialResult.ask.lowestAskPrice)
+   expect(ask.map).toEqual(initialResult.ask.map)
+   expect(ask.depthArray).toEqual(initialResult.ask.depthArray)
+   expect(ask.list).toEqual(initialResult.ask.list)
 });
 
 test('should change market to ETHEREUM', () => {

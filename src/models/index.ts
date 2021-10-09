@@ -95,9 +95,9 @@ export enum SocketEvent {
 }
 
 export interface SocketEventData {
-    event: SocketEvent,
-    product_id: Markets,
-    product_ids: Markets[],
+    event?: SocketEvent,
+    product_id?: Markets,
+    product_ids?: Markets[],
     bids: number[][],
     asks: number[][]
 }
