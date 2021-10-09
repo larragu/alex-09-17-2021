@@ -5,8 +5,8 @@ import { ReducersState } from "../../models";
 import styles from './Spread.module.scss';
 
 const Spread = () => {
-  const highestBidPrice = useSelector((state:ReducersState) => state.feed.feed.bid.highestBidPrice);
-  const lowestAskPrice = useSelector((state:ReducersState) => state.feed.feed.ask.lowestAskPrice);
+  const highestBidPrice = useSelector((state:ReducersState) => state.feed.bid.highestBidPrice);
+  const lowestAskPrice = useSelector((state:ReducersState) => state.feed.ask.lowestAskPrice);
 
   let spread = 0;
   let percentage = "";
