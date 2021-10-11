@@ -1,5 +1,5 @@
 import React from 'react';
-import { OrderType } from '../../../models';
+import { OrderType } from '../../../types';
 
 import styles from './Bar.module.scss';
 

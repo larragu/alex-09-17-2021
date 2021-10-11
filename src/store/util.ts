@@ -1,4 +1,4 @@
-import { BidOrAsk, Order, OrderMap, SortOption, TransformedData } from "../models";
+import { BidOrAsk, Order, OrderMap, SortOption, TransformedData } from "../types";
 
 const sort = (a:number,b:number, sortOption:SortOption) => {
   if(a > b) {

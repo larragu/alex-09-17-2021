@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { FeedPayload, FeedState, Markets, SortOption } from "../models";
+import { FeedPayload, FeedState, Markets, SortOption } from "../types";
 import { transformData } from "./util";
 
 const initialFeedState:FeedState = { 

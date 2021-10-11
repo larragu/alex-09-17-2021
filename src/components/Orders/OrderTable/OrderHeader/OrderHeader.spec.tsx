@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import { OrderType } from '../../../../models';
+import { OrderType } from '../../../../types';
 import OrderHeader from './OrderHeader';
 
 test('renders OrderHeader', () => {
