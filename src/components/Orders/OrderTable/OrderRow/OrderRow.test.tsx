@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import OrderRow from './OrderRow';
-import { OrderType } from '../../../../models';
+import { OrderType } from '../../../../types';
 
 const mockData = {
   type: OrderType.BID,

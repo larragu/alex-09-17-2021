@@ -1,5 +1,5 @@
 import React from "react";
-import { ReducersState, OrderType } from "../../models";
+import { ReducersState, OrderType } from "../../types";
 import styles from './Orders.module.scss';
 import { useSelector } from "react-redux";
 import Spread from "../Spread/Spread";

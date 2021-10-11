@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { ReducersState } from "../../models";
+import { ReducersState } from "../../types";
 
 import styles from './Spread.module.scss';
 

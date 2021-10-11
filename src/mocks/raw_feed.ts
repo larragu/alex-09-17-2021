@@ -1,4 +1,4 @@
-import { Markets, SocketEvent, SocketEventData } from "../../../models";
+import { Markets, SocketEvent, SocketEventData } from "../types";
 
 export const initial:SocketEventData =
 {

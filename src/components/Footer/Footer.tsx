@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Markets } from '../../models';
+import { Markets } from '../../types';
 import styles from './Footer.module.scss';
 interface FooterProps {
   toggle: (selectedMarket:Markets)=>void,

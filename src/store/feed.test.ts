@@ -1,8 +1,8 @@
 
-import store from './../index';
-import {feedActions} from './../feed';
-import { initialFeedState, initialFilteredFeed, initialResult } from './mocks';
-import { Markets } from '../../models';
+import store from './index';
+import {feedActions} from './feed';
+import { initialFeedState, initialFilteredFeed, initialResult } from '../mocks';
+import { Markets } from '../types';
 
 test('should have initial data when initialized', () => {
    const {bid, ask, selectedMarket} = store.getState().feed;

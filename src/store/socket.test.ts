@@ -1,6 +1,6 @@
 
-import store from '../index';
-import {socketActions} from '../socket';
+import store from './index';
+import {socketActions} from './socket';
 
 test('should have initial state', () => {
    const {isConnected, isSubscribed} = store.getState().socket;
