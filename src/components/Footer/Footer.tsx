@@ -1,11 +1,14 @@
 import React, { useEffect } from 'react';
+
 import { Markets } from '../../types';
 import styles from './Footer.module.scss';
+
 interface FooterProps {
   toggle: (selectedMarket:Markets)=>void,
   isConnected: boolean,
   selectedMarket: Markets
 }
+
 let isLoaded = false;
 const Footer:React.FC<FooterProps>  = ({toggle, isConnected, selectedMarket}) => {
   useEffect(() => {
@@ -19,7 +22,7 @@ const Footer:React.FC<FooterProps>  = ({toggle, isConnected, selectedMarket}) =>
       } else {
         newMarket = Markets.XBT_USD;
       }
-
+      
     toggle(newMarket);
   }
 
