@@ -3,12 +3,7 @@ import OrderTable from './OrderTable';
 import { OrderType } from '../../../types';
 import { bid as bidMock, ask as askMock } from '../../../mocks';
 
-jest.mock('../../../hooks/useMediaQuery', () => {
-  const useMediaQuery = (query:string) => {
-    return false;
-  }
-  return useMediaQuery;
-});
+jest.mock('../../../hooks/useMediaQuery');
 
 test('renders OrderTable ask feed for mobile', () => {
   const { container, getAllByRole } = render(
