@@ -9,9 +9,8 @@ interface OrdersProps {
   isDesktop: boolean
 }
 
-
 const Orders:React.FC<OrdersProps>  = ({isDesktop}) => {
-  const {bid, ask} = useSelector((state:ReducersState) => state.feed);
+  const { bid, ask } = useSelector((state:ReducersState) => state.feed);
 
   return(
     <div className={styles['orders']}>
