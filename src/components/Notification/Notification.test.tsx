@@ -3,7 +3,7 @@ import userEvent from "@testing-library/user-event";
 
 import Notification from './Notification';
 
-test('renders Notification for mobile', () => {
+test('renders Notification component', () => {
   const reconnectHandlerMock = jest.fn();
 
   const { container, getByText } = render(
