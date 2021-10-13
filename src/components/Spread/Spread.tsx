@@ -1,13 +1,13 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { ReducersState } from "../../types";
 
+import { ReducersState } from "../../types";
 import styles from './Spread.module.scss';
 
 const Spread = () => {
   const highestBidPrice = useSelector((state:ReducersState) => state.feed.bid.highestBidPrice);
   const lowestAskPrice = useSelector((state:ReducersState) => state.feed.ask.lowestAskPrice);
-
+  
   let spread = 0;
   let percentage = "";
 
@@ -15,7 +15,7 @@ const Spread = () => {
     spread = (lowestAskPrice - highestBidPrice);
     percentage = ((spread/lowestAskPrice) * 100).toFixed(2);
   }
-
+  
   return (
     <h4 className={styles['spread']}>
       Spread: {spread && `${spread.toFixed(1)} (${percentage}%)`}
