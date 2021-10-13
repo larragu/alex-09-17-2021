@@ -23,8 +23,8 @@ test('should have initial data when initialized', () => {
 });
 
 test('should output transformed feed', () => {
-   store.dispatch(feedActions.processSocketData({bids:initialFilteredFeed.asks}));
-   store.dispatch(feedActions.processSocketData({asks:initialFilteredFeed.bids}));
+   store.dispatch(feedActions.processSocketData({bids:initialFilteredFeed.bids}));
+   store.dispatch(feedActions.processSocketData({asks:initialFilteredFeed.asks}));
 
    const {bid, ask} = store.getState().feed;
 
