@@ -9,7 +9,7 @@ interface BarGraphProps {
   isDesktop: boolean
 }
 
-export const BarGraph:React.FC<BarGraphProps>  = ({depthArray, orderType, isDesktop}) => {
+const BarGraph:React.FC<BarGraphProps>  = ({depthArray, orderType, isDesktop}) => {
   let graphType = '';
 
   if(!isDesktop && orderType === OrderType.ASK) {
@@ -33,3 +33,5 @@ export const BarGraph:React.FC<BarGraphProps>  = ({depthArray, orderType, isDesk
     </div>
   );
 }
+
+export default BarGraph;

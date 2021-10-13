@@ -3,7 +3,7 @@ import React from 'react';
 import { DESKTOP_MEDIA } from '../../../constants';
 import useMediaQuery from '../../../hooks/useMediaQuery';
 import { Ask, Bid, OrderMap, OrderType } from '../../../types';
-import { BarGraph } from '../../BarGraph/BarGraph';
+import BarGraph from '../../BarGraph/BarGraph';
 import OrderHeader from './OrderHeader/OrderHeader';
 import OrderRow from './OrderRow/OrderRow';
 import styles from './OrderTable.module.scss';
