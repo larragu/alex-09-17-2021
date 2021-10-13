@@ -10,6 +10,7 @@ import Footer from "../components/Footer/Footer";
 import useSocket from '../hooks/useSocket';
 import { DESKTOP_MEDIA } from "../constants";
 
+const VISIBILITY_CHANGE = "visibilitychange";
 let isLoaded = false;
 const Orderbook = () => {
   const {
@@ -19,9 +20,8 @@ const Orderbook = () => {
     selectedMarket,
     changeMarket
   } = useSocket();
-
+  
   let isDesktop = useMediaQuery(DESKTOP_MEDIA)
-  const VISIBILITY_CHANGE = "visibilitychange";
 
   const reconnectHandler = useCallback(() => {
     connect(selectedMarket);
