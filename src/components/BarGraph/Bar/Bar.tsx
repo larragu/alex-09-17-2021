@@ -1,6 +1,6 @@
 import React from 'react';
-import { OrderType } from '../../../types';
 
+import { OrderType } from '../../../types';
 import styles from './Bar.module.scss';
 
 interface BarProps {
@@ -9,7 +9,7 @@ interface BarProps {
   isDesktop: boolean
 }
 
-export const Bar:React.FC<BarProps> = React.memo(({percent, orderType, isDesktop}) => {
+const Bar:React.FC<BarProps> = React.memo(({percent, orderType, isDesktop}) => {
   let barColor = styles['bar-bid'];
   let style = {
     width: `${percent}%`,
@@ -31,3 +31,5 @@ export const Bar:React.FC<BarProps> = React.memo(({percent, orderType, isDesktop
     <div className={barColor} key={percent} style={style} />
   )
 });
+
+export default Bar;
