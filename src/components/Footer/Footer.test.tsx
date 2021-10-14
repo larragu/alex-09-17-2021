@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react';
 import userEvent from "@testing-library/user-event";
-import { Markets } from '../../types';
 
+import { Markets } from '../../types';
 import Footer from './Footer';
 
 describe('Footer component', () => {

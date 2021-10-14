@@ -1,4 +1,5 @@
 import React from 'react'
+
 import styles from './BarGraph.module.scss';
 import { OrderType } from '../../types';
 import Bar from './Bar/Bar';

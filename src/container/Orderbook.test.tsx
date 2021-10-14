@@ -9,23 +9,26 @@ import { Markets } from '../types';
 jest.mock('../hooks/useMediaQuery');
 jest.mock('../hooks/useSocket');
 
-test('should render Orderbook', () => {
+describe('Orderbook component', () => {
 
-(useSocket as jest.Mock)
-  .mockReturnValue({
-    isConnected: false,
-    disconnect: false,
-    connect: jest.fn(),
-    selectedMarket: Markets.NONE,
-    changeMarket: jest.fn()
+  test('should render Orderbook', () => {
+
+  (useSocket as jest.Mock)
+    .mockReturnValue({
+      isConnected: false,
+      disconnect: false,
+      connect: jest.fn(),
+      selectedMarket: Markets.NONE,
+      changeMarket: jest.fn()
+    });
+
+    const useSelectorMock = jest.spyOn(redux, 'useSelector');
+    useSelectorMock.mockReturnValue(initialResult);
+
+    const { container } = render(
+      <Orderbook />
+    );
+
+    expect(container).toBeTruthy();
   });
-
-  const useSelectorMock = jest.spyOn(redux, 'useSelector');
-  useSelectorMock.mockReturnValue(initialResult);
-
-  const { container } = render(
-    <Orderbook />
-  );
-
-  expect(container).toBeTruthy();
 });
