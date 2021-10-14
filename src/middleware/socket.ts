@@ -1,5 +1,6 @@
 import { Dispatch } from 'react';
 import { Action, MiddlewareAPI } from 'redux';
+
 import { Markets, SocketAction, SocketActions, SocketEvent, SocketEventData } from '../types';
 import { feedActions } from '../store/feed';
 import { socketActions } from '../store/socket';

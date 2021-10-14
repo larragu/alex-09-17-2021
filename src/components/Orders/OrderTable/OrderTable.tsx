@@ -1,5 +1,6 @@
 
 import React from 'react';
+
 import { DESKTOP_MEDIA } from '../../../constants';
 import useMediaQuery from '../../../hooks/useMediaQuery';
 import { Ask, Bid, OrderMap, OrderType } from '../../../types';

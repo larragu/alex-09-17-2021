@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react';
+
 import OrderRow from './OrderRow';
 import { OrderType } from '../../../../types';
 
@@ -12,69 +13,71 @@ const mockData = {
   sizeFormatted: "5,033"
 };
 
-test('renders OrderRow bid for mobile', () => {
+describe('Footer component', () => {
+  test('should render OrderRow bid for mobile', () => {
 
-  const isDesktop = false;
-  const ordered = [mockData.priceFormatted, mockData.sizeFormatted, mockData.totalFormatted];
-  const tableRow = document.createElement('tbody');
-  
-  const { container } = render(
-    <OrderRow 
-      key={`${mockData.type}:${mockData.price}`} 
-      total={mockData.total} 
-      size={mockData.size} 
-      price={mockData.price} 
-      orderType={mockData.type} 
-      isDesktop={isDesktop}
-    />, {
-      container: document.body.appendChild(tableRow)
-    }
-  );
+    const isDesktop = false;
+    const ordered = [mockData.priceFormatted, mockData.sizeFormatted, mockData.totalFormatted];
+    const tableRow = document.createElement('tbody');
+    
+    const { container } = render(
+      <OrderRow 
+        key={`${mockData.type}:${mockData.price}`} 
+        total={mockData.total} 
+        size={mockData.size} 
+        price={mockData.price} 
+        orderType={mockData.type} 
+        isDesktop={isDesktop}
+      />, {
+        container: document.body.appendChild(tableRow)
+      }
+    );
 
-  const cells = screen.getAllByRole('cell');
+    const cells = screen.getAllByRole('cell');
 
-  expect(container).toBeTruthy();
+    expect(container).toBeTruthy();
 
-  const totalElement = screen.getByText(mockData.totalFormatted);
-  expect(totalElement).toBeInTheDocument();
+    const totalElement = screen.getByText(mockData.totalFormatted);
+    expect(totalElement).toBeInTheDocument();
 
-  const priceElement = screen.getByText(mockData.priceFormatted);
-  expect(priceElement).toBeInTheDocument();
+    const priceElement = screen.getByText(mockData.priceFormatted);
+    expect(priceElement).toBeInTheDocument();
 
-  const sizeElement = screen.getByText(mockData.sizeFormatted);
-  expect(sizeElement).toBeInTheDocument();
+    const sizeElement = screen.getByText(mockData.sizeFormatted);
+    expect(sizeElement).toBeInTheDocument();
 
-  cells.forEach((cell,i) => {
-    const { innerHTML } = (cell)
-    expect(innerHTML).toBe(ordered[i]);
-  })
+    cells.forEach((cell,i) => {
+      const { innerHTML } = (cell)
+      expect(innerHTML).toBe(ordered[i]);
+    })
 
-});
+  });
 
-test('renders OrderRow bid for desktop', () => {
-  const isDesktop = true;
+  test('should render OrderRow bid for desktop', () => {
+    const isDesktop = true;
 
-  const ordered = [mockData.totalFormatted, mockData.sizeFormatted, mockData.priceFormatted];
+    const ordered = [mockData.totalFormatted, mockData.sizeFormatted, mockData.priceFormatted];
 
-  const tableRow = document.createElement('tbody');
-  
-  render(
-    <OrderRow 
-      key={`${mockData.type}:${mockData.price}`} 
-      total={mockData.total} 
-      size={mockData.size} 
-      price={mockData.price} 
-      orderType={mockData.type} 
-      isDesktop={isDesktop}
-    />, {
-      container: document.body.appendChild(tableRow)
-    }
-  );
+    const tableRow = document.createElement('tbody');
+    
+    render(
+      <OrderRow 
+        key={`${mockData.type}:${mockData.price}`} 
+        total={mockData.total} 
+        size={mockData.size} 
+        price={mockData.price} 
+        orderType={mockData.type} 
+        isDesktop={isDesktop}
+      />, {
+        container: document.body.appendChild(tableRow)
+      }
+    );
 
-  const cells = screen.getAllByRole('cell');
+    const cells = screen.getAllByRole('cell');
 
-  cells.forEach((cell,i) => {
-    const { innerHTML } = (cell)
-    expect(innerHTML).toBe(ordered[i]);
-  })
+    cells.forEach((cell,i) => {
+      const { innerHTML } = (cell)
+      expect(innerHTML).toBe(ordered[i]);
+    })
+  });
 });

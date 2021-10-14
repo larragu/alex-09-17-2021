@@ -1,5 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
+
 import { FeedPayload, SocketState } from "../types";
+
 const initialSocketState:SocketState = { isConnected: false, isSubscribed: false };
 
 const socketSlice = createSlice({

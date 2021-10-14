@@ -1,6 +1,6 @@
 import React from 'react';
-import { OrderType } from '../../../../types';
 
+import { OrderType } from '../../../../types';
 import styles from './OrderHeader.module.scss';
 
 interface OrderHeaderProp {
