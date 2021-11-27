@@ -1,7 +1,7 @@
 import { useCallback, useEffect } from "react";
 
 import styles from './Orderbook.module.scss';
-import { Markets, VisibilityState } from "../types";
+import { Market, VisibilityState } from "../types";
 import Orders from "../components/Orders/Orders";
 import Notification from "../components/Notification/Notification";
 import Header from "../components/Header/Header";
@@ -38,7 +38,7 @@ const Orderbook = () => {
   }, [disconnect])
 
   useEffect(() => {
-    connect(Markets.XBT_USD);
+    connect(Market.XBT_USD);
   }, [connect]);
 
   useEffect(()=> {

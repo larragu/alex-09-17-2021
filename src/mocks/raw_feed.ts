@@ -1,4 +1,4 @@
-import { Markets, SocketEvent, SocketEventData } from "../types";
+import { Market, SocketEvent, SocketEventData } from "../types";
 
 export const initial:SocketEventData =
 {
@@ -57,11 +57,11 @@ export const initial:SocketEventData =
     [43438.0,113390.0],
     [43440.0,2967.0]
   ],
-  product_ids: [Markets.XBT_USD]
+  product_ids: [Market.XBT_USD]
 };
 
 export const sequence_1:SocketEventData = {
-  product_id: Markets.XBT_USD,
+  product_id: Market.XBT_USD,
   bids: [
     [41634.5, 0.0],
     [41641.0, 600000.0],

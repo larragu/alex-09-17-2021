@@ -1,10 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { FeedPayload, FeedState, Markets, SortOption } from "../types";
+import { FeedPayload, FeedState, Market, SortOption } from "../types";
 import { transformData } from "./util";
 
 const initialFeedState:FeedState = { 
-  selectedMarket: Markets.NONE,
+  selectedMarket: Market.NONE,
   bid: { 
     depthArray: [], 
     list: [], 

@@ -1,7 +1,7 @@
 import { Dispatch } from 'react';
 import { Action, MiddlewareAPI } from 'redux';
 
-import { Markets, SocketAction, SocketActions, SocketEvent, SocketEventData } from '../types';
+import { Market, WebSocketAction, SocketAction, SocketEvent, SocketEventData } from '../types';
 import { feedActions } from '../store/feed';
 import { socketActions } from '../store/socket';
 
@@ -30,7 +30,7 @@ const webSocket = (store:MiddlewareAPI) => {
     }, 10);
   }
   
-  const createMessage = (socketEvent:SocketEvent, feed:string, market: Markets) => {
+  const createMessage = (socketEvent:SocketEvent, feed:string, market: Market) => {
     return `{"event":"${socketEvent}","feed":"${feed}","product_ids":["${market}"]}`;
   }
 
@@ -47,7 +47,7 @@ const webSocket = (store:MiddlewareAPI) => {
     }
 
     if(data.bids?.length > 0) {
-      let filtBids:number[][] = data.bids.filter((el:number[]) => el[SIZE] > 0);
+      let filtBids:[number,number][] = data.bids.filter((el:[number, number]) => el[SIZE] > 0);
       if (filtBids.length > 0) { 
         store.dispatch(feedActions.processSocketData({bids:filtBids}));
       }
@@ -74,7 +74,7 @@ const webSocket = (store:MiddlewareAPI) => {
 
     socket.onopen = () => {
       store.dispatch(socketActions.connectSuccess());
-      store.dispatch(feedActions.changeMarket({selectedMarket:Markets.NONE}));
+      store.dispatch(feedActions.changeMarket({selectedMarket:Market.NONE}));
     };
 
     socket.onclose = (event:CloseEvent) => {
@@ -87,28 +87,28 @@ const webSocket = (store:MiddlewareAPI) => {
     return socket;
   }
 
-  const susbscribeToMarket = (marketForSubscription:Markets) => {
+  const susbscribeToMarket = (marketForSubscription:Market) => {
     const sendSubscribeData = createMessage(SocketEvent.subscribe, FEED,marketForSubscription);
     waitForSocket(sendSubscribeData);
   }
 
-  const unsuscribeFromMarket = (selectedMarket:Markets) => {
+  const unsuscribeFromMarket = (selectedMarket:Market) => {
     const sendUnsubscribeData = createMessage(SocketEvent.unsubscribe, FEED,selectedMarket);
     waitForSocket(sendUnsubscribeData);
   }
 
-  return (next:Dispatch<Action>) => (action:SocketAction) => {
+  return (next:Dispatch<Action>) => (action:WebSocketAction) => {
       switch(action.type) {
-        case SocketActions.CONNECT:
+        case SocketAction.CONNECT:
           socket = initializeSocket(socket);
           return;
-        case SocketActions.DISCONNECT:
+        case SocketAction.DISCONNECT:
           socket.close(NORMAL_CLOSURE);
           return;
-        case SocketActions.SUBSCRIBE:
+        case SocketAction.SUBSCRIBE:
           susbscribeToMarket(action.payload.selectedMarket!);
           return;
-        case SocketActions.UNSUSCRIBE:
+        case SocketAction.UNSUSCRIBE:
           unsuscribeFromMarket(action.payload.selectedMarket!);
           return;
         default:

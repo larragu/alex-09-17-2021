@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { useSelector } from "react-redux";
 
-import { ReducersState, Markets } from "../types";
+import { ReducersState, Market } from "../types";
 import store from "../store";
 import { socketActions } from "../store/socket";
 
@@ -12,10 +12,10 @@ const useSocket = () => {
   } = useSelector((state:ReducersState) => state.socket);
 
   const selectedMarket = useSelector((state:ReducersState) => state.feed.selectedMarket);
-  const [newMarket, setNewMarket] = useState(Markets.NONE);
+  const [newMarket, setNewMarket] = useState(Market.NONE);
   const [newSubscription, setNewSubscription] = useState(false);
 
-  const makeConnection = useCallback((newMarket:Markets) => {
+  const makeConnection = useCallback((newMarket:Market) => {
     setNewSubscription(true);
     setNewMarket(newMarket)
     store.dispatch(socketActions.connect());
@@ -26,7 +26,7 @@ const useSocket = () => {
       if(selectedMarket !== newMarket) {
         if(!isSubscribed) {
           store.dispatch(socketActions.subscribe({selectedMarket: newMarket}));    
-          setNewMarket(Markets.NONE);  
+          setNewMarket(Market.NONE);  
           setNewSubscription(false);
         }else if(isSubscribed) {
           store.dispatch(socketActions.unsubscribe({selectedMarket: selectedMarket}));
@@ -35,11 +35,11 @@ const useSocket = () => {
     }
   }, [isConnected, isSubscribed, newSubscription, selectedMarket, newMarket]);
 
-  const connect = useCallback((newMarket:Markets) => {
+  const connect = useCallback((newMarket:Market) => {
     makeConnection(newMarket);
   },[makeConnection])
 
-  const changeMarket = useCallback((selectedMarket:Markets) => {
+  const changeMarket = useCallback((selectedMarket:Market) => {
     setNewMarket(selectedMarket);
     setNewSubscription(true)
   },[]);

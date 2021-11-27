@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
 
-import { Markets } from '../../types';
+import { Market } from '../../types';
 import styles from './Footer.module.scss';
 
 interface FooterProps {
-  toggle: (selectedMarket:Markets)=>void,
+  toggle: (selectedMarket:Market)=>void,
   isConnected: boolean,
-  selectedMarket: Markets
+  selectedMarket: Market
 }
 
 let isLoaded = false;
@@ -15,12 +15,12 @@ const Footer:React.FC<FooterProps>  = ({toggle, isConnected, selectedMarket}) =>
     isLoaded = true;
   }, [])
 
-  const toggleHandler = (selectedMarket:Markets) => {
+  const toggleHandler = (selectedMarket:Market) => {
     let newMarket;
-      if(selectedMarket === Markets.XBT_USD) {
-        newMarket = Markets.ETH_USD;
+      if(selectedMarket === Market.XBT_USD) {
+        newMarket = Market.ETH_USD;
       } else {
-        newMarket = Markets.XBT_USD;
+        newMarket = Market.XBT_USD;
       }
       
     toggle(newMarket);
