@@ -15,7 +15,7 @@ export enum SortOption {
 }
 
 export interface FeedState {
-  selectedMarket: Markets,
+  selectedMarket: Market,
   bid: Bid,
   ask: Ask
 }
@@ -41,7 +41,7 @@ export interface FeedPayload {
   payload: {
     bids?: number[][],
     asks?: number[][],
-    selectedMarket?: Markets
+    selectedMarket?: Market
   }
 }
 
@@ -73,14 +73,14 @@ export interface ReducersState {
   socket: SocketState
 }
 
-export enum Markets {
+export enum Market {
   XBT_USD = 'PI_XBTUSD',
   ETH_USD = 'PI_ETHUSD',
   NONE = 'NONE'
 }
 
 
-export enum SocketActions {
+export enum SocketAction {
   CONNECT = 'socket/connect',
   DISCONNECT = 'socket/disconnect',
   SUBSCRIBE = 'socket/subscribe',
@@ -96,10 +96,10 @@ export enum SocketEvent {
 
 export interface SocketEventData {
     event?: SocketEvent,
-    product_id?: Markets,
-    product_ids?: Markets[],
-    bids: number[][],
-    asks: number[][]
+    product_id?: Market,
+    product_ids?: Market[],
+    bids: [number,number][],
+    asks: [number, number][]
 }
 
 export interface SocketState {
@@ -110,11 +110,11 @@ export interface SocketState {
 export interface SocketPayload {
     isConnected?: boolean, 
     isSubscribed?: boolean,
-    selectedMarket?: Markets
+    selectedMarket?: Market
 }
 
-export interface SocketAction {
-  type:SocketActions,
+export interface WebSocketAction {
+  type:SocketAction,
   payload: SocketPayload
 }
 

@@ -1,4 +1,4 @@
-import { FeedState, Markets } from "../types";
+import { FeedState, Market } from "../types";
 
 export const bid = {
   depthArray: [
@@ -81,11 +81,11 @@ export const ask = {
 export const initialResult: FeedState = {
   ask: ask,
   bid: bid,
-  selectedMarket: Markets.XBT_USD
+  selectedMarket: Market.XBT_USD
 }
 
 export const initialFeedState:FeedState = { 
-  selectedMarket: Markets.NONE,
+  selectedMarket: Market.NONE,
   bid: { 
     depthArray: [], 
     list: [], 
