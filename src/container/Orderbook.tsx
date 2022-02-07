@@ -14,18 +14,18 @@ const VISIBILITY_CHANGE = "visibilitychange";
 let isLoaded = false;
 const Orderbook = () => {
   const {
-    isConnected,
-    disconnect,
-    connect,
+    isSocketConnected,
+    disconnectSocket,
+    connectSocket,
     selectedMarket,
     changeMarket
   } = useSocket();
   
   let isDesktop = useMediaQuery(DESKTOP_MEDIA)
 
-  const reconnectHandler = useCallback(() => {
-    connect(selectedMarket);
-  }, [connect, selectedMarket]);
+  const reconnectSocketHandler = useCallback(() => {
+    connectSocket(selectedMarket);
+  }, [connectSocket, selectedMarket]);
 
   const toggleHandler = useCallback((selectedMarket) => {
     changeMarket(selectedMarket);
@@ -33,29 +33,29 @@ const Orderbook = () => {
 
   const toggleConnectionHandler = useCallback(() => {
     if(document.visibilityState === VisibilityState.HIDDEN) {
-      disconnect();
+      disconnectSocket();
     }
-  }, [disconnect])
+  }, [disconnectSocket])
 
   useEffect(() => {
-    connect(Market.XBT_USD);
-  }, [connect]);
+    connectSocket(Market.XBT_USD);
+  }, [connectSocket]);
 
   useEffect(()=> {
     window.addEventListener(VISIBILITY_CHANGE, toggleConnectionHandler)
     return () => window.removeEventListener(VISIBILITY_CHANGE, toggleConnectionHandler);
   },[toggleConnectionHandler]);
 
-  if(isConnected) {
+  if(isSocketConnected) {
     isLoaded = true;
   }
 
   return (
     <div className={styles['orderbook']}>
-      {isLoaded && !isConnected && <Notification reconnect={reconnectHandler} /> }
+      {isLoaded && !isSocketConnected && <Notification reconnectSocket={reconnectSocketHandler} /> }
       <Header isDesktop={isDesktop}/>
       <Orders isDesktop={isDesktop}/>
-      <Footer toggle={toggleHandler} selectedMarket={selectedMarket} isConnected={isConnected!} />
+      <Footer toggle={toggleHandler} selectedMarket={selectedMarket} isSocketConnected={isSocketConnected!} />
     </div>
   );
 };

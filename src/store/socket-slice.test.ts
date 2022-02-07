@@ -1,6 +1,6 @@
 
 import store from './index';
-import {socketActions} from './socket';
+import {socketActions} from './socket-slice';
 
 describe('Socket slice', () => {
    test('should have initial state', () => {

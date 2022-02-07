@@ -3,16 +3,16 @@ import React from "react";
 import styles from './Notification.module.scss';
 
 interface NotificationProps {
-  reconnect: ()=>void;
+  reconnectSocket: ()=>void;
 }
 
-const Notification:React.FC<NotificationProps> = ({reconnect}) => {
-  const reconnectHandler = () => {
-    reconnect();
+const Notification:React.FC<NotificationProps> = ({reconnectSocket}) => {
+  const reconnectSocketHandler = () => {
+    reconnectSocket();
   }
 
   return( 
-      <button onClick={reconnectHandler}className={styles['button-reconnect']}>
+      <button onClick={reconnectSocketHandler}className={styles['button-reconnect']}>
         Orderbook Disconnected: RECONNECT
       </button>
   );
