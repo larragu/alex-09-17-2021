@@ -1,18 +1,18 @@
 import { render } from '@testing-library/react';
 import userEvent from "@testing-library/user-event";
 
-import { Markets } from '../../types';
+import { Market } from '../../types';
 import Footer from './Footer';
 
 describe('Footer component', () => {
   const isConnected = true;
-  const selectedMarket = Markets.XBT_USD;
+  const selectedMarket = Market.XBT_USD;
   const toggleHandlerMock = jest.fn();
 
   const { container, getByText } = render(
     <Footer 
       toggle={toggleHandlerMock}
-      isConnected={isConnected}
+      isSocketConnected={isConnected}
       selectedMarket={selectedMarket}
     />
   );
@@ -24,15 +24,15 @@ describe('Footer component', () => {
   }); 
 
   test('should toggle market button', () => {
-    let newMarket = Markets.NONE;
-    const toggleHandlerMock = jest.fn((selectedMarket:Markets)=> {
+    let newMarket = Market.NONE;
+    const toggleHandlerMock = jest.fn((selectedMarket:Market)=> {
       newMarket = selectedMarket
     });
 
     const { container, getByText } = render(
       <Footer 
         toggle={toggleHandlerMock}
-        isConnected={isConnected}
+        isSocketConnected={isConnected}
         selectedMarket={selectedMarket}
       />
     );
@@ -43,14 +43,14 @@ describe('Footer component', () => {
     
     expect(container).toBeTruthy();
     expect(toggleHandlerMock.mock.calls.length).toEqual(1);
-    expect(newMarket).toEqual(Markets.ETH_USD);
+    expect(newMarket).toEqual(Market.ETH_USD);
   }); 
 
   test('should disable button on disconnection', () => {
     const { container, getByText } = render(
       <Footer 
         toggle={toggleHandlerMock}
-        isConnected={!isConnected}
+        isSocketConnected={!isConnected}
         selectedMarket={selectedMarket}
       />
     );

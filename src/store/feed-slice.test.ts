@@ -1,9 +1,9 @@
 
 import store from './index';
 
-import {feedActions} from './feed';
+import {feedActions} from './feed-slice';
 import { initialFeedState, initialFilteredFeed, initialResult } from '../mocks';
-import { Markets } from '../types';
+import { Market } from '../types';
 
 describe('Feed slice', () => {
    test('should have initial data when initialized', () => {
@@ -44,7 +44,7 @@ describe('Feed slice', () => {
    });
 
    test('should change market to ETHEREUM', () => {
-      store.dispatch(feedActions.changeMarket({selectedMarket:Markets.ETH_USD}));
+      store.dispatch(feedActions.changeMarket({selectedMarket:Market.ETH_USD}));
 
       const {bid, ask, selectedMarket} = store.getState().feed;
       
@@ -60,6 +60,6 @@ describe('Feed slice', () => {
       expect(ask.depthArray).toEqual(initialFeedState.ask.depthArray)
       expect(ask.list).toEqual(initialFeedState.ask.list)
 
-      expect(selectedMarket).toBe(Markets.ETH_USD);
+      expect(selectedMarket).toBe(Market.ETH_USD);
    });
 });

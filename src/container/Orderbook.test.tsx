@@ -4,7 +4,7 @@ import * as redux from 'react-redux'
 import { initialResult } from '../mocks'
 import useSocket from '../hooks/useSocket';
 import Orderbook from './Orderbook';
-import { Markets } from '../types';
+import { Market } from '../types';
 
 jest.mock('../hooks/useMediaQuery');
 jest.mock('../hooks/useSocket');
@@ -15,10 +15,10 @@ describe('Orderbook component', () => {
 
   (useSocket as jest.Mock)
     .mockReturnValue({
-      isConnected: false,
-      disconnect: false,
-      connect: jest.fn(),
-      selectedMarket: Markets.NONE,
+      isSocketConnected: false,
+      disconnectSocket: false,
+      connectSocket: jest.fn(),
+      selectedMarket: Market.NONE,
       changeMarket: jest.fn()
     });
 

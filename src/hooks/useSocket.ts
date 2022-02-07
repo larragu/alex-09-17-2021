@@ -1,39 +1,40 @@
 import { useState, useEffect, useCallback } from "react";
-import { useSelector } from "react-redux";
+import { useSelector,useDispatch } from "react-redux";
 
 import { ReducersState, Market } from "../types";
-import store from "../store";
-import { socketActions } from "../store/socket";
+import { connectToSocket, unsuscribeFromMarket, subscribeToMarket, closeSocket } from "../store/socket-actions";
 
 const useSocket = () => {
+  const dispatch = useDispatch();
+
   const { 
     isConnected, 
     isSubscribed
   } = useSelector((state:ReducersState) => state.socket);
-
   const selectedMarket = useSelector((state:ReducersState) => state.feed.selectedMarket);
+  
   const [newMarket, setNewMarket] = useState(Market.NONE);
   const [newSubscription, setNewSubscription] = useState(false);
 
   const makeConnection = useCallback((newMarket:Market) => {
     setNewSubscription(true);
     setNewMarket(newMarket)
-    store.dispatch(socketActions.connect());
-  },[]);
+    dispatch(connectToSocket());
+  },[dispatch]);
 
   useEffect(() => {
     if(newSubscription && isConnected) {
       if(selectedMarket !== newMarket) {
         if(!isSubscribed) {
-          store.dispatch(socketActions.subscribe({selectedMarket: newMarket}));    
+          dispatch(subscribeToMarket(newMarket));    
           setNewMarket(Market.NONE);  
           setNewSubscription(false);
         }else if(isSubscribed) {
-          store.dispatch(socketActions.unsubscribe({selectedMarket: selectedMarket}));
+          dispatch(unsuscribeFromMarket(selectedMarket));
         }
       }
     }
-  }, [isConnected, isSubscribed, newSubscription, selectedMarket, newMarket]);
+  }, [isConnected, isSubscribed, newSubscription, selectedMarket, newMarket, dispatch]);
 
   const connect = useCallback((newMarket:Market) => {
     makeConnection(newMarket);
@@ -46,14 +47,14 @@ const useSocket = () => {
 
   const disconnect = useCallback(() => {
     if(isConnected) {
-      store.dispatch(socketActions.disconnect());
+      dispatch(closeSocket());
     }
-  },[isConnected]);
+  },[dispatch, isConnected]);
 
   return {
-    isConnected,
-    disconnect,
-    connect,
+    isSocketConnected: isConnected,
+    disconnectSocket: disconnect,
+    connectSocket: connect,
     selectedMarket,
     changeMarket
   }

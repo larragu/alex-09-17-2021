@@ -1,33 +1,37 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { FeedPayload, SocketState } from "../types";
+import { SocketState } from "../types";
 
-const initialSocketState:SocketState = { isConnected: false, isSubscribed: false };
+const initialSocketState:SocketState = { isConnected: false, isSubscribed: false, sendingMessage: false };
 
 const socketSlice = createSlice({
   name: 'socket',
   initialState: initialSocketState,
   reducers: {
-    connect() {
-    },  
+    sendMessage(state:SocketState) {
+      state.sendingMessage = true;
+    },
     connectSuccess(state:SocketState) {
+      state.sendingMessage = false;
       state.isConnected = true;
-    },    
-    disconnect() {
-    },    
+    },   
     disconnectSuccess(state:SocketState) {
+      state.sendingMessage = false;
       state.isSubscribed = false;
       state.isConnected = false;
     },
-    subscribe(state:SocketState, action:FeedPayload) {
-    },
     subscribeSuccess(state:SocketState) {
+      state.sendingMessage = false;
       state.isSubscribed = true;
     },
-    unsubscribe(state:SocketState, action:FeedPayload) {
-    },
     unsubscribeSuccess(state:SocketState) {
+      state.sendingMessage = false;
       state.isSubscribed = false;
+    },
+    connectError(state:SocketState) {
+      state.sendingMessage = false;
+      state.isSubscribed = false;
+      state.isConnected = false;
     }
   }
 });

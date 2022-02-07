@@ -9,7 +9,7 @@ describe('Notification component', () => {
 
     const { container, getByText } = render(
       <Notification 
-        reconnect={reconnectHandlerMock}
+        reconnectSocket={reconnectHandlerMock}
       />
     );
 

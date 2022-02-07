@@ -104,7 +104,8 @@ export interface SocketEventData {
 
 export interface SocketState {
   isConnected?: boolean, 
-  isSubscribed?: boolean
+  isSubscribed?: boolean,
+  sendingMessage: boolean
 }
 
 export interface SocketPayload {
