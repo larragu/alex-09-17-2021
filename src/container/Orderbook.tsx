@@ -52,10 +52,10 @@ const Orderbook = () => {
 
   return (
     <div className={styles['orderbook']}>
-      {isLoaded && !isSocketConnected && <Notification reconnectSocket={reconnectSocketHandler} /> }
+      {isLoaded && !isSocketConnected && <Notification onReconnectSocket={reconnectSocketHandler} /> }
       <Header isDesktop={isDesktop}/>
       <Orders isDesktop={isDesktop}/>
-      <Footer toggle={toggleHandler} selectedMarket={selectedMarket} isSocketConnected={isSocketConnected!} />
+      <Footer onToggle={toggleHandler} selectedMarket={selectedMarket} isSocketConnected={isSocketConnected!} />
     </div>
   );
 };
