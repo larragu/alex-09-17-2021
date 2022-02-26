@@ -4,13 +4,13 @@ import { Market } from '../../types';
 import styles from './Footer.module.scss';
 
 interface FooterProps {
-  toggle: (selectedMarket:Market)=>void,
+  onToggle: (selectedMarket:Market)=>void,
   isSocketConnected: boolean,
   selectedMarket: Market
 }
 
 let isLoaded = false;
-const Footer:React.FC<FooterProps>  = ({toggle, isSocketConnected, selectedMarket}) => {
+const Footer:React.FC<FooterProps>  = ({onToggle, isSocketConnected, selectedMarket}) => {
   useEffect(() => {
     isLoaded = true;
   }, [])
@@ -23,7 +23,7 @@ const Footer:React.FC<FooterProps>  = ({toggle, isSocketConnected, selectedMarke
         newMarket = Market.XBT_USD;
       }
       
-    toggle(newMarket);
+    onToggle(newMarket);
   }
 
   return (
