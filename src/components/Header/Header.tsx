@@ -10,9 +10,9 @@ interface HeaderProps {
 const Header:React.FunctionComponent<HeaderProps> = ({isDesktop}) => {
   return (
   <div className={styles['header']}>
-    <h4 className={styles['title']}>
+    <h3 className={styles['title']}>
       Order Book
-    </h4>
+    </h3>
     { isDesktop && <Spread /> }
   </div>
   )
