@@ -10,35 +10,36 @@ export class OrderbookSocket {
   private readonly FEED = "book_ui_1";
   private readonly SIZE = 1;
   private readonly TIMEOUT = 5000;
+  private readonly WAIT_TIME = 10;
   private timeoutCounter = 0;
-  private socket?: WebSocket;
+  private socket: WebSocket;
 
-  initializeSocket = (dispatch: Dispatch<any>) => {
+  constructor (private readonly dispatch: Dispatch<any>) {
     this.socket = new WebSocket(this.WEB_SOCKET_URL);
 
     this.socket.onopen = () => {
-      dispatch(connectSuccess());
-      dispatch(feedActions.changeMarket({selectedMarket:Market.NONE}));
+      this.dispatch(connectSuccess());
+      this.dispatch(feedActions.changeMarket({selectedMarket:Market.NONE}));
     };
 
-    this.socket.onclose = (event:CloseEvent) => this.closeHandler(event, dispatch);
+    this.socket.onclose = (event:CloseEvent) => this.closeHandler(event, this.dispatch);
 
-    this.socket.onmessage = (messageEvent:MessageEvent) => this.messageHandler(messageEvent, dispatch);
+    this.socket.onmessage = (messageEvent:MessageEvent) => this.messageHandler(messageEvent, this.dispatch);
   }
 
-  subscribeToMarket = (marketForSubscription:Market) => {
+  subscribeToMarket(marketForSubscription:Market) {
     const sendSubscribeData = this.createMessage(SocketEvent.subscribe, this.FEED,marketForSubscription);
     this.waitForSocket(sendSubscribeData);
   }
 
-  unsuscribeFromMarket = (selectedMarket:Market) => {
+  unsuscribeFromMarket(selectedMarket:Market) {
     const sendUnsubscribeData = this.createMessage(SocketEvent.unsubscribe, this.FEED,selectedMarket);
     this.waitForSocket(sendUnsubscribeData);
   }
 
-  closeSocket = () => this.socket!.close(this.NORMAL_CLOSURE);
+  closeSocket() { this.socket!.close(this.NORMAL_CLOSURE); }
 
-  private waitForSocket = (message:string) => {
+  private waitForSocket(message:string) {
     setTimeout(() => {
       if (this.socket && this.socket.readyState === 1) {
         this.socket.send(message)
@@ -50,14 +51,14 @@ export class OrderbookSocket {
           console.error('Socket connection error');
         }
        }
-    }, 10);
+    }, this.WAIT_TIME);
   }
   
-  private createMessage = (socketEvent:SocketEvent, feed:string, market: Market) => {
+  private createMessage(socketEvent:SocketEvent, feed:string, market: Market) {
     return `{"event":"${socketEvent}","feed":"${feed}","product_ids":["${market}"]}`;
   }
 
-  private messageHandler = (messageEvent:MessageEvent,dispatch:Dispatch<any>) => {
+  private messageHandler(messageEvent:MessageEvent,dispatch:Dispatch<any>) {
     const data:SocketEventData = JSON.parse(messageEvent.data);  
 
     if(data.event === SocketEvent.subscribed) {
@@ -84,7 +85,7 @@ export class OrderbookSocket {
     }
   }
 
-  private closeHandler = (event:CloseEvent, dispatch:Dispatch<any>) => {
+  private closeHandler(event:CloseEvent, dispatch:Dispatch<any>) {
     if(event.code === this.NORMAL_CLOSURE) {
       dispatch(disconnectSuccess());
     } else {
@@ -92,9 +93,5 @@ export class OrderbookSocket {
       dispatch(connectError());
     }
   }
-
 };
-
-export const orderbookSocket = new OrderbookSocket();
-
 
