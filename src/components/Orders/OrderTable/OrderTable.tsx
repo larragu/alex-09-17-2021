@@ -4,9 +4,9 @@ import React from 'react';
 import { DESKTOP_MEDIA } from '../../../constants';
 import useMediaQuery from '../../../hooks/useMediaQuery';
 import { Ask, Bid, OrderMap, OrderType } from '../../../types';
-import BarGraph from '../../BarGraph/BarGraph';
-import OrderHeader from './OrderHeader/OrderHeader';
-import OrderRow from './OrderRow/OrderRow';
+import BarGraph from '../../BarGraph';
+import OrderHeader from './OrderHeader';
+import OrderRow from './OrderRow';
 import styles from './OrderTable.module.scss';
 
 interface OrderTableProps {
