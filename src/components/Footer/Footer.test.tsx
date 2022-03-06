@@ -11,7 +11,7 @@ describe('Footer component', () => {
 
   const { container, getByText } = render(
     <Footer 
-      toggle={toggleHandlerMock}
+      onToggle={toggleHandlerMock}
       isSocketConnected={isConnected}
       selectedMarket={selectedMarket}
     />
@@ -31,7 +31,7 @@ describe('Footer component', () => {
 
     const { container, getByText } = render(
       <Footer 
-        toggle={toggleHandlerMock}
+        onToggle={toggleHandlerMock}
         isSocketConnected={isConnected}
         selectedMarket={selectedMarket}
       />
@@ -49,7 +49,7 @@ describe('Footer component', () => {
   test('should disable button on disconnection', () => {
     const { container, getByText } = render(
       <Footer 
-        toggle={toggleHandlerMock}
+        onToggle={toggleHandlerMock}
         isSocketConnected={!isConnected}
         selectedMarket={selectedMarket}
       />
