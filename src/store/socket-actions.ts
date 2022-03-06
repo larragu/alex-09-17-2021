@@ -1,12 +1,14 @@
 import { AnyAction, Dispatch } from "@reduxjs/toolkit";
 import {socketActions} from './socket-slice'
-import {orderbookSocket} from '../OrderbookSocket';
+import {OrderbookSocket} from '../OrderbookSocket';
 import { Market } from '../types';
+
+let orderbookSocket:OrderbookSocket;
 
 export const connectToSocket = () => {
   return (dispatch:Dispatch<AnyAction>) => {
     dispatch(socketActions.sendMessage());
-    orderbookSocket.initializeSocket(dispatch);
+    orderbookSocket = new OrderbookSocket(dispatch);
   }
 }
 
