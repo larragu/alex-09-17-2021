@@ -13,7 +13,7 @@ interface OrderTableProps {
   orderType: OrderType;
 }
 
-const OrderTable: React.FC<OrderTableProps> = ({ feed, orderType }) => {
+const OrderTable = ({ feed, orderType }: OrderTableProps) => {
   let isDesktop = useMediaQuery(DESKTOP_MEDIA);
 
   const getRows = (

@@ -10,11 +10,11 @@ interface FooterProps {
 }
 
 let isLoaded = false;
-const Footer: React.FC<FooterProps> = ({
+const Footer = ({
   onToggle,
   isSocketConnected,
   selectedMarket,
-}) => {
+}: FooterProps) => {
   useEffect(() => {
     isLoaded = true;
   }, []);
