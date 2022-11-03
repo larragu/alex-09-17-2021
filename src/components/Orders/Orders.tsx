@@ -1,25 +1,25 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React from 'react';
+import { useSelector } from 'react-redux';
 
-import { ReducersState, OrderType } from "../../types";
+import { ReducersState, OrderType } from '../../types';
 import styles from './Orders.module.scss';
-import Spread from "../Spread";
-import OrderTable from "./OrderTable";
+import Spread from '../Spread';
+import OrderTable from './OrderTable';
 
 interface OrdersProps {
-  isDesktop: boolean
+  isDesktop: boolean;
 }
 
-const Orders:React.FC<OrdersProps>  = ({isDesktop}) => {
-  const { bid, ask } = useSelector((state:ReducersState) => state.feed);
+const Orders: React.FC<OrdersProps> = ({ isDesktop }) => {
+  const { bid, ask } = useSelector((state: ReducersState) => state.feed);
 
-  return(
+  return (
     <div className={styles['orders']}>
-      <OrderTable feed={bid} orderType={OrderType.BID}/>
-      {!isDesktop &&  <Spread/> }
-      <OrderTable feed={ask} orderType={OrderType.ASK}/>
+      <OrderTable feed={bid} orderType={OrderType.BID} />
+      {!isDesktop && <Spread />}
+      <OrderTable feed={ask} orderType={OrderType.ASK} />
     </div>
   );
-}
+};
 
-export default React.memo(Orders)
+export default React.memo(Orders);
