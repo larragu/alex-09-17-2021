@@ -10,7 +10,7 @@ interface OrdersProps {
   isDesktop: boolean;
 }
 
-const Orders: React.FC<OrdersProps> = ({ isDesktop }) => {
+const Orders = ({ isDesktop }: OrdersProps) => {
   const { bid, ask } = useSelector((state: ReducersState) => state.feed);
 
   return (

@@ -9,7 +9,7 @@ interface BarProps {
   isDesktop: boolean;
 }
 
-const Bar: React.FC<BarProps> = ({ percent, orderType, isDesktop }) => {
+const Bar = ({ percent, orderType, isDesktop }: BarProps) => {
   let barColor = styles['bar-bid'];
   let style = {
     width: `${percent}%`,
