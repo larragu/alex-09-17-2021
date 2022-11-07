@@ -1,2 +1,1 @@
-export { default } from "./OrderTable";
-
+export { default } from './OrderTable';

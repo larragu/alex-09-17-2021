@@ -1,84 +1,81 @@
-
 export enum OrderType {
   BID = 'BID',
-  ASK = 'ASK'
+  ASK = 'ASK',
 }
 
 export enum VisibilityState {
   VISIBLE = 'visible',
-  HIDDEN = 'hidden'
+  HIDDEN = 'hidden',
 }
 
 export enum SortOption {
-  ASCENDING = "ASCENDING",
-  DESCENDING = "DESCENDNG"
+  ASCENDING = 'ASCENDING',
+  DESCENDING = 'DESCENDNG',
 }
 
 export interface FeedState {
-  selectedMarket: Market,
-  bid: Bid,
-  ask: Ask
+  selectedMarket: Market;
+  bid: Bid;
+  ask: Ask;
 }
 
 export interface Bid {
-  list: number[],
-  map: OrderMap,
-  depthArray: number[],
-  lowestBidPrice: number, 
-  highestBidPrice: number
+  list: number[];
+  map: OrderMap;
+  depthArray: number[];
+  lowestBidPrice: number;
+  highestBidPrice: number;
 }
 
 export interface Ask {
-  list: number[],
-  map: OrderMap,
-  depthArray: number[],
-  highestAskPrice: number, 
-  lowestAskPrice: number 
+  list: number[];
+  map: OrderMap;
+  depthArray: number[];
+  highestAskPrice: number;
+  lowestAskPrice: number;
 }
-
 
 export interface FeedPayload {
   payload: {
-    bids?: number[][],
-    asks?: number[][],
-    selectedMarket?: Market
-  }
+    bids?: number[][];
+    asks?: number[][];
+    selectedMarket?: Market;
+  };
 }
 
 export interface Order {
-  size: number,
-  price: number
+  size: number;
+  price: number;
 }
 
 export interface Feed {
-  list: number[],
-  map: OrderMap,
-  depthArray: number[]
+  list: number[];
+  map: OrderMap;
+  depthArray: number[];
 }
 
 export interface OrderMap {
-  [key: number]: number
+  [key: number]: number;
 }
 
 export interface TransformedData {
-  feed:Feed,
-  lowestBidPrice?: number,
-  highestBidPrice?: number,
-  highestAskPrice?: number, 
-  lowestAskPrice?: number 
+  feed: Feed;
+  lowestBidPrice?: number;
+  highestBidPrice?: number;
+  highestAskPrice?: number;
+  lowestAskPrice?: number;
 }
 
 export interface ReducersState {
-  feed:FeedState
-  socket: SocketState
+  feed: FeedState;
+  socket: SocketState;
 }
 
 export enum Market {
   XBT_USD = 'PI_XBTUSD',
   ETH_USD = 'PI_ETHUSD',
-  NONE = 'NONE'
+  NONE = 'NONE',
 }
-
 
 export enum SocketAction {
   CONNECT = 'socket/connect',
@@ -88,40 +85,40 @@ export enum SocketAction {
 }
 
 export enum SocketEvent {
-  subscribed = "subscribed",
-  unsubscribed = "unsubscribed",
-  subscribe = "subscribe",
-  unsubscribe = "unsubscribe"
+  subscribed = 'subscribed',
+  unsubscribed = 'unsubscribed',
+  subscribe = 'subscribe',
+  unsubscribe = 'unsubscribe',
 }
 
 export interface SocketEventData {
-    event?: SocketEvent,
-    product_id?: Market,
-    product_ids?: Market[],
-    bids: [number,number][],
-    asks: [number, number][]
+  event?: SocketEvent;
+  product_id?: Market;
+  product_ids?: Market[];
+  bids: [number, number][];
+  asks: [number, number][];
 }
 
 export interface SocketState {
-  isConnected?: boolean, 
-  isSubscribed?: boolean,
-  sendingMessage: boolean
+  isConnected?: boolean;
+  isSubscribed?: boolean;
+  sendingMessage: boolean;
 }
 
 export interface SocketPayload {
-    isConnected?: boolean, 
-    isSubscribed?: boolean,
-    selectedMarket?: Market
+  isConnected?: boolean;
+  isSubscribed?: boolean;
+  selectedMarket?: Market;
 }
 
 export interface WebSocketAction {
-  type:SocketAction,
-  payload: SocketPayload
+  type: SocketAction;
+  payload: SocketPayload;
 }
 
 export enum BidOrAsk {
   LOWEST_ASK = 'lowestAskPrice',
   HIGHEST_ASK = 'highestAskPrice',
-  LOWEST_BID =  'lowestBidPrice',
+  LOWEST_BID = 'lowestBidPrice',
   HIGHEST_BID = 'highestBidPrice',
 }
