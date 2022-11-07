@@ -1,7 +1,6 @@
 import React from 'react';
+import cn from 'classnames';
 
-import { DESKTOP_MEDIA } from '../../../constants';
-import useMediaQuery from '../../../hooks/useMediaQuery';
 import { Ask, Bid, OrderMap, OrderType } from '../../../types';
 import BarGraph from '../../BarGraph';
 import OrderHeader from './OrderHeader';
@@ -14,8 +13,6 @@ interface OrderTableProps {
 }
 
 const OrderTable = ({ feed, orderType }: OrderTableProps) => {
-  let isDesktop = useMediaQuery(DESKTOP_MEDIA);
-
   const getRows = (
     totalAsksArray: number[],
     list: number[],
@@ -31,7 +28,6 @@ const OrderTable = ({ feed, orderType }: OrderTableProps) => {
           size={size}
           price={price}
           orderType={type}
-          isDesktop={isDesktop}
         />
       );
     });
@@ -40,22 +36,19 @@ const OrderTable = ({ feed, orderType }: OrderTableProps) => {
   const feedRows = getRows(feed.depthArray, feed.list, feed.map, orderType);
 
   return (
-    <div className={styles['order-table']}>
+    <div className={styles.orderTableContainer}>
       {feed.list.length > 0 && (
-        <BarGraph
-          isDesktop={isDesktop}
-          orderType={orderType}
-          depthArray={feed.depthArray}
-        />
+        <BarGraph orderType={orderType} depthArray={feed.depthArray} />
       )}
-      <table>
-        {!(!isDesktop && orderType === OrderType.BID) && (
-          <OrderHeader orderType={orderType} />
-        )}
-        <tbody>
-          {feed.list.length > 0 && !isDesktop && orderType === OrderType.ASK
-            ? feedRows.reverse()
-            : feedRows}
+      <table className={styles.orderTable}>
+        <OrderHeader orderType={orderType} />
+        <tbody
+          className={cn(styles.orderTableBody, {
+            [styles.ask]: feed.list.length > 0 && orderType === OrderType.ASK,
+            [styles.bid]: feed.list.length > 0 && orderType === OrderType.BID,
+          })}
+        >
+          {feedRows}
         </tbody>
       </table>
     </div>

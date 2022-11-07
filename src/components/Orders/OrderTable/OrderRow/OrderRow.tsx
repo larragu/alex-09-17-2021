@@ -1,4 +1,5 @@
 import React from 'react';
+import cn from 'classnames';
 
 import { OrderType } from '../../../../types';
 import styles from './OrderRow.module.scss';
@@ -8,7 +9,6 @@ interface OrderRowProps {
   size: number;
   price: number;
   orderType: OrderType;
-  isDesktop: boolean;
 }
 
 const OrderRow: React.FunctionComponent<OrderRowProps> = ({
@@ -16,7 +16,6 @@ const OrderRow: React.FunctionComponent<OrderRowProps> = ({
   size,
   price,
   orderType,
-  isDesktop,
 }) => {
   const priceColor =
     orderType === OrderType.BID ? styles['price--bid'] : styles['price--ask'];
@@ -42,8 +41,14 @@ const OrderRow: React.FunctionComponent<OrderRowProps> = ({
   const columns = [totalCell, sizeCell, priceCell];
 
   return (
-    <tr key={price} className={styles['order']}>
-      {orderType === OrderType.BID && isDesktop ? columns : columns.reverse()}
+    <tr
+      key={price}
+      className={cn(styles['order'], {
+        [styles.bidColumn]: orderType === OrderType.BID,
+        [styles.askColumn]: orderType === OrderType.ASK,
+      })}
+    >
+      {columns}
     </tr>
   );
 };

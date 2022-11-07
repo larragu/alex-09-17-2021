@@ -4,8 +4,6 @@ import * as redux from 'react-redux';
 import Orders from './Orders';
 import { initialResult } from '../../mocks';
 
-jest.mock('../../hooks/useMediaQuery');
-
 describe('Orders component', () => {
   test('should render Orders for mobile', () => {
     const useSelectorMock = jest.spyOn(redux, 'useSelector');
@@ -14,7 +12,7 @@ describe('Orders component', () => {
       ask: initialResult.ask,
     });
 
-    const { container, getByText } = render(<Orders isDesktop={false} />);
+    const { container, getByText } = render(<Orders />);
 
     const spreadElement = getByText(/Spread/i);
 

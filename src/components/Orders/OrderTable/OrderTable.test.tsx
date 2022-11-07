@@ -1,13 +1,13 @@
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 
 import OrderTable from './OrderTable';
 import { OrderType } from '../../../types';
 import { bid as bidMock, ask as askMock } from '../../../mocks';
 
-jest.mock('../../../hooks/useMediaQuery');
-
 describe('OrderTable component', () => {
-  test('should render OrderTable ask feed for mobile', () => {
+  console.log(global.screen.width);
+
+  test('should render OrderTable ask feed', () => {
     const { container, getAllByRole } = render(
       <OrderTable feed={bidMock} orderType={OrderType.ASK} />
     );
@@ -18,13 +18,14 @@ describe('OrderTable component', () => {
     expect(columnHeaders.length).toEqual(3);
   });
 
-  test('should render OrderTable bid feed for mobile', () => {
-    const { container } = render(
+  test('should render OrderTable bid feed', () => {
+    const { container, getAllByRole } = render(
       <OrderTable feed={askMock} orderType={OrderType.BID} />
     );
-    const columnHeader = screen.queryByText('SIZE');
+
+    const columnHeaders = getAllByRole('columnheader');
 
     expect(container).toBeTruthy();
-    expect(columnHeader).not.toBeInTheDocument();
+    expect(columnHeaders.length).toEqual(3);
   });
 });

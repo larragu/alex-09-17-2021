@@ -1,3 +1,5 @@
+@import '../_media.scss';
+
 .orderbook {
   color: white;
   padding: 0;
@@ -7,7 +9,7 @@
   flex-direction: column;
   min-width: 17.5rem;
 
-  @media (min-width: 40rem) {
+  @include not-mobile {
     padding: 0.625rem;
     margin: auto;
     width: 85vw;

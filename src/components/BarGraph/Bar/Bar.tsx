@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { CSSProperties } from 'react';
+import cn from 'classnames';
 
 import { OrderType } from '../../../types';
 import styles from './Bar.module.scss';
@@ -6,28 +7,20 @@ import styles from './Bar.module.scss';
 interface BarProps {
   percent: number;
   orderType: OrderType;
-  isDesktop: boolean;
 }
 
-const Bar = ({ percent, orderType, isDesktop }: BarProps) => {
+const Bar = ({ percent, orderType }: BarProps) => {
   let barColor = styles['bar-bid'];
-  let style = {
-    width: `${percent}%`,
-    height: '100%',
-  };
 
   if (orderType === OrderType.ASK) {
     barColor = styles['bar-ask'];
   }
 
-  if (isDesktop) {
-    style = {
-      width: '100%',
-      height: `${percent}%`,
-    };
-  }
+  const style = { '--percent': `${percent}%` } as CSSProperties;
 
-  return <div className={barColor} key={percent} style={style} />;
+  return (
+    <div className={cn(styles.bar, barColor)} key={percent} style={style} />
+  );
 };
 
 export default React.memo(Bar);

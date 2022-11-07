@@ -1,4 +1,5 @@
 import React from 'react';
+import cn from 'classnames';
 
 import { OrderType } from '../../../../types';
 import styles from './OrderHeader.module.scss';
@@ -21,7 +22,11 @@ const OrderHeader = ({ orderType }: OrderHeaderProp) => {
   ));
 
   return (
-    <thead className={styles['header']}>
+    <thead
+      className={cn(styles['header'], {
+        [styles.hideOnMobile]: orderType === OrderType.BID,
+      })}
+    >
       <tr className={styles['row']}>{headerElements}</tr>
     </thead>
   );

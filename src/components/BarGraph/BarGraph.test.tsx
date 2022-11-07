@@ -7,11 +7,7 @@ import { bid } from '../../mocks';
 describe('BarGraph component', () => {
   test('should render BarGraph', () => {
     const { container } = render(
-      <BarGraph
-        depthArray={bid.depthArray}
-        isDesktop={false}
-        orderType={OrderType.BID}
-      />
+      <BarGraph depthArray={bid.depthArray} orderType={OrderType.BID} />
     );
 
     expect(container).toBeTruthy();
