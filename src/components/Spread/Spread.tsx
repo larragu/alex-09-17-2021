@@ -24,9 +24,9 @@ const Spread = () => {
   }
 
   return (
-    <h4 className={styles['spread']}>
+    <h2 className={styles['spread']}>
       Spread: {spread && `${spread.toFixed(1)} (${percentage}%)`}
-    </h4>
+    </h2>
   );
 };
 

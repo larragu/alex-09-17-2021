@@ -19,7 +19,7 @@ const Bar = ({ percent, orderType }: BarProps) => {
   const style = { '--percent': `${percent}%` } as CSSProperties;
 
   return (
-    <div className={cn(styles.bar, barColor)} key={percent} style={style} />
+    <rect className={cn(styles.bar, barColor)} key={percent} style={style} />
   );
 };
 
