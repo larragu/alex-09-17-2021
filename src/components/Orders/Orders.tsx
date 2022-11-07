@@ -6,17 +6,15 @@ import styles from './Orders.module.scss';
 import Spread from '../Spread';
 import OrderTable from './OrderTable';
 
-interface OrdersProps {
-  isDesktop: boolean;
-}
-
-const Orders = ({ isDesktop }: OrdersProps) => {
+const Orders = () => {
   const { bid, ask } = useSelector((state: ReducersState) => state.feed);
 
   return (
     <div className={styles['orders']}>
       <OrderTable feed={bid} orderType={OrderType.BID} />
-      {!isDesktop && <Spread />}
+      <div className={styles.spread}>
+        <Spread />
+      </div>
       <OrderTable feed={ask} orderType={OrderType.ASK} />
     </div>
   );

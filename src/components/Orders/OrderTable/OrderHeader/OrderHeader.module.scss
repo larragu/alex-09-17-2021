@@ -1,14 +1,31 @@
 @import '../../../../_colors.scss';
+@import '../../../../_media.scss';
 
 .header {
   border-bottom: 1px solid #262e3e;
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
 
   .row {
-    text-align: right;
+    display: flex;
+    width: 100%;
+    padding: 0.25rem;
+    padding-right: 2rem;
 
     .cell {
       color: $header-color;
-      padding: 0.31rem 0.93rem;
+      display: flex;
+      justify-content: flex-end;
+      width: 33.3%;
     }
+  }
+}
+
+.hideOnMobile {
+  display: none;
+
+  @include not-mobile {
+    display: flex;
   }
 }

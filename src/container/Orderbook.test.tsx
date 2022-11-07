@@ -6,7 +6,6 @@ import useSocket from '../hooks/useSocket';
 import Orderbook from './Orderbook';
 import { Market } from '../types';
 
-jest.mock('../hooks/useMediaQuery');
 jest.mock('../hooks/useSocket');
 
 describe('Orderbook component', () => {

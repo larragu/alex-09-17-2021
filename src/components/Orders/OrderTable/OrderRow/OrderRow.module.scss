@@ -1,8 +1,15 @@
+@import '../../../../_media.scss';
+
 .order {
-  text-align: right;
+  display: flex;
+  justify-content: flex-end;
+  padding: 5px;
+  padding-right: 2rem;
 
   .cell {
-    padding: 0rem 0.9375rem;
+    width: 33.3%;
+    display: flex;
+    justify-content: flex-end;
 
     &.price--bid {
       color: #2fc08d;
@@ -12,4 +19,15 @@
       color: #e64d55;
     }
   }
+}
+
+.bidColumn {
+  flex-direction: row-reverse;
+  @include not-mobile {
+    flex-direction: row;
+  }
+}
+
+.askColumn {
+  flex-direction: row-reverse;
 }

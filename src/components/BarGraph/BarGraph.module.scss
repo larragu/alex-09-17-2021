@@ -1,19 +1,28 @@
+@import '../../_media.scss';
+
+.ask {
+  height: 93.5%;
+  flex-direction: column-reverse;
+}
+
+.bid {
+  flex-direction: column;
+  height: 100%;
+}
+
 .graph {
   position: absolute;
   width: 100%;
   bottom: 0;
   display: flex;
-  flex-direction: column;
-  height: 100%;
 
-  @media (min-width: 40rem) {
+  @include not-mobile {
     height: 93.5%;
     flex-direction: row-reverse;
     align-items: flex-end;
-  }
 
-  &.ask {
-    height: 93.5%;
-    flex-direction: column-reverse;
+    &.bid {
+      flex-direction: row;
+    }
   }
 }

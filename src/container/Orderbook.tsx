@@ -5,10 +5,8 @@ import { Market, VisibilityState } from '../types';
 import Orders from '../components/Orders';
 import Notification from '../components/Notification';
 import Header from '../components/Header';
-import useMediaQuery from '../hooks/useMediaQuery';
 import Footer from '../components/Footer';
 import useSocket from '../hooks/useSocket';
-import { DESKTOP_MEDIA } from '../constants';
 
 const VISIBILITY_CHANGE = 'visibilitychange';
 let isLoaded = false;
@@ -20,8 +18,6 @@ const Orderbook = () => {
     selectedMarket,
     changeMarket,
   } = useSocket();
-
-  let isDesktop = useMediaQuery(DESKTOP_MEDIA);
 
   const reconnectSocketHandler = useCallback(() => {
     connectSocket(selectedMarket);
@@ -59,8 +55,8 @@ const Orderbook = () => {
       {isLoaded && !isSocketConnected && (
         <Notification onReconnectSocket={reconnectSocketHandler} />
       )}
-      <Header isDesktop={isDesktop} />
-      <Orders isDesktop={isDesktop} />
+      <Header />
+      <Orders />
       <Footer
         onToggle={toggleHandler}
         selectedMarket={selectedMarket}

@@ -1,4 +1,5 @@
 @import '../../_colors.scss';
+@import '../../_media.scss';
 
 .header {
   background-color: $orderbook-background;
@@ -7,13 +8,27 @@
   align-items: center;
   border-bottom: 1px solid #262e3e;
 
-  @media (min-width: 40rem) {
+  @include not-mobile {
     padding: 0.225rem 0;
+    position: relative;
+    justify-content: center;
   }
 
   .title {
     width: 33.3%;
     padding: 0 0 0 0.9375rem;
     margin: 0;
+
+    @include not-mobile {
+      position: absolute;
+      left: 0;
+    }
+  }
+}
+
+.spread {
+  display: none;
+  @include not-mobile {
+    display: inline-flex;
   }
 }

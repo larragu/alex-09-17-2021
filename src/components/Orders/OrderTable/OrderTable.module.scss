@@ -1,12 +1,31 @@
-.order-table {
+@import '../../../_media.scss';
+
+.orderTableContainer {
   position: relative;
+  width: 100%;
+}
 
-  & > table {
-    position: relative;
-    border-collapse: collapse;
-    width: 100%;
-    table-layout: fixed;
+.orderTable {
+  position: relative;
+  border-collapse: collapse;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 
-    min-height: 29.713125rem;
+  min-height: 29.713125rem;
+}
+
+.orderTableBody {
+  display: flex;
+}
+
+.ask {
+  flex-direction: column-reverse;
+  @include not-mobile {
+    flex-direction: column;
   }
+}
+
+.bid {
+  flex-direction: column;
 }
