@@ -6,29 +6,20 @@ jest.mock('react-redux');
 
 describe('Header component', () => {
   test('should render Header for mobile', () => {
-    const { container } = render(
-      <Header 
-        isDesktop={false}
-      />
-    );
-  
+    const { container } = render(<Header isDesktop={false} />);
+
     const spreadElement = screen.queryByText(/Spread/i);
 
     expect(container).toBeTruthy();
     expect(spreadElement).not.toBeInTheDocument();
-  }); 
+  });
 
   test('should render Header for desktop', () => {
+    const { container, getByText } = render(<Header isDesktop={true} />);
 
-    const { container, getByText } = render(
-      <Header 
-        isDesktop={true}
-      />
-    );
-  
     const spreadElement = getByText(/Spread/i);
 
     expect(container).toBeTruthy();
     expect(spreadElement).toBeInTheDocument();
-  }); 
+  });
 });

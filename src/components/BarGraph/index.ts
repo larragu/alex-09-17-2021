@@ -1,2 +1,1 @@
-export { default } from "./BarGraph";
-
+export { default } from './BarGraph';

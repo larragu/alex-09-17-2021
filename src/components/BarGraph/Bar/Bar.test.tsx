@@ -6,13 +6,9 @@ import Bar from './Bar';
 describe('Bar component', () => {
   test('should render Bar', () => {
     const { container } = render(
-      <Bar 
-        percent={59.4587}
-        isDesktop={false}
-        orderType={OrderType.BID}
-      />
+      <Bar percent={59.4587} isDesktop={false} orderType={OrderType.BID} />
     );
 
     expect(container).toBeTruthy();
-  }); 
+  });
 });

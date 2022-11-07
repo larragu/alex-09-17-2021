@@ -9,28 +9,22 @@ jest.mock('../../../hooks/useMediaQuery');
 describe('OrderTable component', () => {
   test('should render OrderTable ask feed for mobile', () => {
     const { container, getAllByRole } = render(
-      <OrderTable 
-        feed={bidMock}
-        orderType={OrderType.ASK}
-      />
+      <OrderTable feed={bidMock} orderType={OrderType.ASK} />
     );
-    
+
     const columnHeaders = getAllByRole('columnheader');
 
     expect(container).toBeTruthy();
     expect(columnHeaders.length).toEqual(3);
-  }); 
+  });
 
   test('should render OrderTable bid feed for mobile', () => {
     const { container } = render(
-      <OrderTable 
-        feed={askMock}
-        orderType={OrderType.BID}
-      />
+      <OrderTable feed={askMock} orderType={OrderType.BID} />
     );
-    const columnHeader = screen.queryByText('SIZE')
+    const columnHeader = screen.queryByText('SIZE');
 
     expect(container).toBeTruthy();
     expect(columnHeader).not.toBeInTheDocument();
-  }); 
+  });
 });
