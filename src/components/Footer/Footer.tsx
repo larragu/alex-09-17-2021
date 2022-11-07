@@ -31,7 +31,7 @@ const Footer = ({
   };
 
   return (
-    <div className={styles['footer']}>
+    <footer className={styles['footer']}>
       <button
         disabled={!isLoaded || !isSocketConnected}
         className={styles['button-toggle']}
@@ -39,7 +39,7 @@ const Footer = ({
       >
         Toggle Feed
       </button>
-    </div>
+    </footer>
   );
 };
 

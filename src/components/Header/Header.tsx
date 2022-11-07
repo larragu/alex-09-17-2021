@@ -5,12 +5,12 @@ import Spread from '../Spread';
 
 const Header = () => {
   return (
-    <div className={styles['header']}>
-      <h3 className={styles['title']}>Order Book</h3>
+    <header className={styles['header']}>
+      <h1 className={styles['title']}>Order Book</h1>
       <div className={styles.spread}>
         <Spread />
       </div>
-    </div>
+    </header>
   );
 };
 

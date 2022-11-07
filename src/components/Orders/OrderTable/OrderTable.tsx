@@ -36,7 +36,7 @@ const OrderTable = ({ feed, orderType }: OrderTableProps) => {
   const feedRows = getRows(feed.depthArray, feed.list, feed.map, orderType);
 
   return (
-    <div className={styles.orderTableContainer}>
+    <section className={styles.orderTableContainer}>
       {feed.list.length > 0 && (
         <BarGraph orderType={orderType} depthArray={feed.depthArray} />
       )}
@@ -51,7 +51,7 @@ const OrderTable = ({ feed, orderType }: OrderTableProps) => {
           {feedRows}
         </tbody>
       </table>
-    </div>
+    </section>
   );
 };
 
