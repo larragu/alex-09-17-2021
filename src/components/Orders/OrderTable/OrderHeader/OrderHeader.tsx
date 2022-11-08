@@ -1,4 +1,3 @@
-import React from 'react';
 import cn from 'classnames';
 
 import { OrderType } from '../../../../types';
@@ -16,18 +15,18 @@ const OrderHeader = ({ orderType }: OrderHeaderProp) => {
   }
 
   const headerElements = headerNames.map((name) => (
-    <th key={name} scope="col" className={styles['cell']}>
+    <th key={name} scope="col" className={styles.cell}>
       {name}
     </th>
   ));
 
   return (
     <thead
-      className={cn(styles['header'], {
+      className={cn(styles.header, {
         [styles.hideOnMobile]: orderType === OrderType.BID,
       })}
     >
-      <tr className={styles['row']}>{headerElements}</tr>
+      <tr className={styles.row}>{headerElements}</tr>
     </thead>
   );
 };

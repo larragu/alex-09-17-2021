@@ -6,29 +6,29 @@
   background-color: $orderbook-background;
   padding: 0.9375rem;
   border-top: 1px solid #262e3e;
+}
 
-  .button-toggle {
-    border: none;
-    width: 6.25rem;
-    height: 1.875rem;
-    border-radius: 0.375rem;
-    background-color: #614ee2;
-    color: white;
-    font-weight: bold;
-    font-size: 0.8rem;
-    cursor: pointer;
+.buttonToggle {
+  border: none;
+  width: 6.25rem;
+  height: 1.875rem;
+  border-radius: 0.375rem;
+  background-color: #614ee2;
+  color: white;
+  font-weight: bold;
+  font-size: 0.8rem;
+  cursor: pointer;
 
-    &:hover {
-      background-color: #211b53;
-    }
+  &:hover {
+    background-color: #211b53;
+  }
 
-    &:active {
-      background-color: #6c63c4;
-    }
+  &:active {
+    background-color: #6c63c4;
+  }
 
-    &:disabled {
-      background-color: #38373b;
-      color: darkgray;
-    }
+  &:disabled {
+    background-color: #38373b;
+    color: darkgray;
   }
 }

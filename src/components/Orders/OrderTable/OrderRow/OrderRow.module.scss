@@ -5,20 +5,20 @@
   justify-content: flex-end;
   padding: 5px;
   padding-right: 2rem;
+}
 
-  .cell {
-    width: 33.3%;
-    display: flex;
-    justify-content: flex-end;
+.cell {
+  width: 33.3%;
+  display: flex;
+  justify-content: flex-end;
+}
 
-    &.price--bid {
-      color: #2fc08d;
-    }
+.priceBid {
+  color: #2fc08d;
+}
 
-    &.price--ask {
-      color: #e64d55;
-    }
-  }
+.priceAsk {
+  color: #e64d55;
 }
 
 .bidColumn {

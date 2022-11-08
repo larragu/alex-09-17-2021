@@ -1,5 +1,3 @@
-import React from 'react';
-
 import styles from './Notification.module.scss';
 
 interface NotificationProps {
@@ -8,7 +6,7 @@ interface NotificationProps {
 
 const Notification = ({ onReconnectSocket }: NotificationProps) => {
   return (
-    <button onClick={onReconnectSocket} className={styles['button-reconnect']}>
+    <button onClick={onReconnectSocket} className={styles.buttonReconnect}>
       Orderbook Disconnected: RECONNECT
     </button>
   );

@@ -1,14 +1,6 @@
 @import '../../../_media.scss';
 
 .bar {
-  &-bid {
-    background: #143c3c;
-  }
-
-  &-ask {
-    background: #45212d;
-  }
-
   width: var(--percent);
   height: 100%;
 
@@ -16,4 +8,12 @@
     width: 100%;
     height: var(--percent);
   }
+}
+
+.bid {
+  background: #143c3c;
+}
+
+.ask {
+  background: #45212d;
 }
