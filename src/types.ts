@@ -1,6 +1,6 @@
 export enum OrderType {
-  BID = 'BID',
-  ASK = 'ASK',
+  BID = 'BID', //Buy Side (green)
+  ASK = 'ASK', //Sell Side (red)
 }
 
 export enum VisibilityState {

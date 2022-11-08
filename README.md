@@ -1,5 +1,15 @@
 # Getting Started with Orderbook
 
+## Introduction
+
+An orderbook is a real time pro trading interface that tracks the buying and selling of cryptocurrency.
+
+### Features
+
+- Contract switching between the Ethereum and Bitcoin markets
+- Disconnects from the live feed when the orderbook is not in focus (user switches tabs on a web browser)
+- Supports all device types
+
 ## Demo
 
 ### `https://larragu-orderbook.vercel.app/`
