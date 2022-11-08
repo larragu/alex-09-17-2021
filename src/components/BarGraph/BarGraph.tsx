@@ -1,4 +1,3 @@
-import React from 'react';
 import cn from 'classnames';
 
 import styles from './BarGraph.module.scss';
@@ -19,10 +18,10 @@ const BarGraph = ({ depthArray, orderType }: BarGraphProps) => {
 
   return (
     <div
-      className={cn(styles.graph, {
-        [styles.ask]: orderType === OrderType.ASK,
-        [styles.bid]: orderType === OrderType.BID,
-      })}
+      className={cn(
+        styles.graph,
+        orderType === OrderType.ASK ? styles.ask : styles.bid
+      )}
     >
       {list}
     </div>

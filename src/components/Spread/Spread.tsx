@@ -1,4 +1,3 @@
-import React from 'react';
 import { useSelector } from 'react-redux';
 
 import { ReducersState } from '../../types';
@@ -24,7 +23,7 @@ const Spread = () => {
   }
 
   return (
-    <h2 className={styles['spread']}>
+    <h2 className={styles.spread}>
       Spread: {spread && `${spread.toFixed(1)} (${percentage}%)`}
     </h2>
   );

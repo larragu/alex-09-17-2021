@@ -10,16 +10,17 @@ interface BarProps {
 }
 
 const Bar = ({ percent, orderType }: BarProps) => {
-  let barColor = styles['bar-bid'];
-
-  if (orderType === OrderType.ASK) {
-    barColor = styles['bar-ask'];
-  }
-
   const style = { '--percent': `${percent}%` } as CSSProperties;
 
   return (
-    <rect className={cn(styles.bar, barColor)} key={percent} style={style} />
+    <rect
+      className={cn(
+        styles.bar,
+        orderType === OrderType.BID ? styles.bid : styles.ask
+      )}
+      key={percent}
+      style={style}
+    />
   );
 };
 

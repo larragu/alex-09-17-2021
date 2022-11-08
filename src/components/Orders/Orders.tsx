@@ -10,7 +10,7 @@ const Orders = () => {
   const { bid, ask } = useSelector((state: ReducersState) => state.feed);
 
   return (
-    <main className={styles['orders']}>
+    <main className={styles.orders}>
       <OrderTable feed={bid} orderType={OrderType.BID} />
       <div className={styles.spread}>
         <Spread />

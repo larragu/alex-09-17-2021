@@ -43,10 +43,11 @@ const OrderTable = ({ feed, orderType }: OrderTableProps) => {
       <table className={styles.orderTable}>
         <OrderHeader orderType={orderType} />
         <tbody
-          className={cn(styles.orderTableBody, {
-            [styles.ask]: feed.list.length > 0 && orderType === OrderType.ASK,
-            [styles.bid]: feed.list.length > 0 && orderType === OrderType.BID,
-          })}
+          className={cn(
+            styles.orderTableBody,
+            feed.list.length > 0 &&
+              (orderType === OrderType.ASK ? styles.ask : styles.bid)
+          )}
         >
           {feedRows}
         </tbody>

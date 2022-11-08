@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 
 import { Market } from '../../types';
 import styles from './Footer.module.scss';
@@ -31,10 +31,10 @@ const Footer = ({
   };
 
   return (
-    <footer className={styles['footer']}>
+    <footer className={styles.footer}>
       <button
         disabled={!isLoaded || !isSocketConnected}
-        className={styles['button-toggle']}
+        className={styles.buttonToggle}
         onClick={() => toggleHandler(selectedMarket)}
       >
         Toggle Feed

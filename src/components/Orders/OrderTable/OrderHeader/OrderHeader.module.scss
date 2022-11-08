@@ -6,20 +6,20 @@
   display: flex;
   justify-content: flex-end;
   width: 100%;
+}
 
-  .row {
-    display: flex;
-    width: 100%;
-    padding: 0.25rem;
-    padding-right: 2rem;
+.row {
+  display: flex;
+  width: 100%;
+  padding: 0.25rem;
+  padding-right: 2rem;
+}
 
-    .cell {
-      color: $header-color;
-      display: flex;
-      justify-content: flex-end;
-      width: 33.3%;
-    }
-  }
+.cell {
+  color: $header-color;
+  display: flex;
+  justify-content: flex-end;
+  width: 33.3%;
 }
 
 .hideOnMobile {

@@ -51,7 +51,7 @@ const Orderbook = () => {
   }
 
   return (
-    <div className={styles['orderbook']}>
+    <div className={styles.orderbook}>
       {isLoaded && !isSocketConnected && (
         <Notification onReconnectSocket={reconnectSocketHandler} />
       )}
