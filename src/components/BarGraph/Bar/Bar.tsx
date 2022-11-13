@@ -13,7 +13,7 @@ const Bar = ({ percent, orderType }: BarProps) => {
   const style = { '--percent': `${percent}%` } as CSSProperties;
 
   return (
-    <rect
+    <div
       className={cn(
         styles.bar,
         orderType === OrderType.BID ? styles.bid : styles.ask

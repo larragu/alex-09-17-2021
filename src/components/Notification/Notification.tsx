@@ -1,3 +1,4 @@
+import Modal from '../Modal/Modal';
 import styles from './Notification.module.scss';
 
 interface NotificationProps {
@@ -5,10 +6,25 @@ interface NotificationProps {
 }
 
 const Notification = ({ onReconnectSocket }: NotificationProps) => {
-  return (
-    <button onClick={onReconnectSocket} className={styles.buttonReconnect}>
-      Orderbook Disconnected: RECONNECT
+  const body = <h4>Orderbook Disconnected</h4>;
+  const footer = (
+    <button
+      onClick={onReconnectSocket}
+      className={styles.buttonReconnect}
+      aria-label="Close"
+    >
+      RECONNECT
     </button>
+  );
+  return (
+    <Modal
+      onClose={onReconnectSocket}
+      headerText={'Error!'}
+      headerClassName={styles.title}
+      body={body}
+      footer={footer}
+      className={styles.notification}
+    />
   );
 };
 

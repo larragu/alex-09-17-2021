@@ -2,7 +2,7 @@
 @import '../../../../_media.scss';
 
 .header {
-  border-bottom: 1px solid #262e3e;
+  border-bottom: 1px solid $matrix-black;
   display: flex;
   justify-content: flex-end;
   width: 100%;
@@ -16,7 +16,7 @@
 }
 
 .cell {
-  color: $header-color;
+  color: $smooth-gray;
   display: flex;
   justify-content: flex-end;
   width: 33.3%;
