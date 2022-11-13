@@ -5,6 +5,7 @@ import { initialResult } from '../mocks';
 import useSocket from '../hooks/useSocket';
 import Orderbook from './Orderbook';
 import { Market } from '../types';
+import * as hooks from '../hooks';
 
 jest.mock('../hooks/useSocket');
 
@@ -18,8 +19,8 @@ describe('Orderbook component', () => {
       changeMarket: jest.fn(),
     });
 
-    const useSelectorMock = jest.spyOn(redux, 'useSelector');
-    useSelectorMock.mockReturnValue(initialResult);
+    const useAppSelectorMock = jest.spyOn(hooks, 'useAppSelector');
+    useAppSelectorMock.mockReturnValue(initialResult);
 
     const { container } = render(<Orderbook />);
 

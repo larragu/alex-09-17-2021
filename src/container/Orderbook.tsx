@@ -27,7 +27,7 @@ const Orderbook = () => {
   }, [connectSocket, selectedMarket]);
 
   const toggleHandler = useCallback(
-    (selectedMarket) => {
+    (selectedMarket: Market) => {
       changeMarket(selectedMarket);
     },
     [changeMarket]
