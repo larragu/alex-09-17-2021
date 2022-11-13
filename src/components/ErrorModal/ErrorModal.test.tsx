@@ -10,7 +10,7 @@ describe('ErrorModal component', () => {
     document.body.appendChild(div);
   });
 
-  test('should render ErrorModal component', () => {
+  test('should render ErrorModal component', async () => {
     const reconnectHandlerMock = jest.fn();
 
     const { container, getByText } = render(
@@ -22,7 +22,7 @@ describe('ErrorModal component', () => {
     );
 
     const buttonEl = getByText('RETRY');
-    userEvent.click(buttonEl);
+    await userEvent.click(buttonEl);
 
     expect(container).toBeTruthy();
     expect(reconnectHandlerMock.mock.calls.length).toEqual(1);

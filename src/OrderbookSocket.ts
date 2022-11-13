@@ -1,4 +1,3 @@
-import { Dispatch } from '@reduxjs/toolkit';
 import { Market, SocketEvent, SocketEventData } from './types';
 import { feedActions } from './store/feed-slice';
 import {
@@ -8,6 +7,7 @@ import {
   disconnectSuccess,
   connectError,
 } from './store/socket-actions';
+import { AppDispatch } from './store';
 
 export class OrderbookSocket {
   private readonly WEB_SOCKET_URL = 'wss://www.cryptofacilities.com/ws/v1';
@@ -20,7 +20,7 @@ export class OrderbookSocket {
   private timeoutCounter = 0;
   private socket: WebSocket;
 
-  constructor(private readonly dispatch: Dispatch<any>) {
+  constructor(private readonly dispatch: AppDispatch) {
     this.socket = new WebSocket(this.WEB_SOCKET_URL);
 
     this.socket.onopen = () => {
@@ -80,7 +80,7 @@ export class OrderbookSocket {
     return `{"event":"${socketEvent}","feed":"${feed}","product_ids":["${market}"]}`;
   }
 
-  private messageHandler(messageEvent: MessageEvent, dispatch: Dispatch<any>) {
+  private messageHandler(messageEvent: MessageEvent, dispatch: AppDispatch) {
     const data: SocketEventData = JSON.parse(messageEvent.data);
 
     if (data.event === SocketEvent.subscribed) {
@@ -111,7 +111,7 @@ export class OrderbookSocket {
     }
   }
 
-  private closeHandler(event: CloseEvent, dispatch: Dispatch<any>) {
+  private closeHandler(event: CloseEvent, dispatch: AppDispatch) {
     if (event.code === this.NORMAL_CLOSURE) {
       dispatch(disconnectSuccess());
     } else {

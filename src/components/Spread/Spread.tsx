@@ -1,13 +1,13 @@
-import { useSelector } from 'react-redux';
+import { useAppSelector } from '../../hooks';
 
 import { ReducersState } from '../../types';
 import styles from './Spread.module.scss';
 
 const Spread = () => {
-  const highestBidPrice = useSelector(
+  const highestBidPrice = useAppSelector(
     (state: ReducersState) => state.feed.bid.highestBidPrice
   );
-  const lowestAskPrice = useSelector(
+  const lowestAskPrice = useAppSelector(
     (state: ReducersState) => state.feed.ask.lowestAskPrice
   );
 

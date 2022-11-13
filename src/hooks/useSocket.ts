@@ -1,21 +1,21 @@
 import { useState, useEffect, useCallback } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
 
-import { ReducersState, Market } from '../types';
+import { Market, ReducersState } from '../types';
 import {
   connectToSocket,
   unsuscribeFromMarket,
   subscribeToMarket,
   closeSocket,
 } from '../store/socket-actions';
+import { useAppDispatch, useAppSelector } from '.';
 
 const useSocket = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const { isConnected, isSubscribed, connectionError } = useSelector(
-    (state: ReducersState) => state.socket
+  const { isConnected, isSubscribed, connectionError } = useAppSelector(
+    (state) => state.socket
   );
-  const selectedMarket = useSelector(
+  const selectedMarket = useAppSelector(
     (state: ReducersState) => state.feed.selectedMarket
   );
 

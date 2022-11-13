@@ -23,7 +23,7 @@ describe('Footer component', () => {
     expect(buttonEl).toBeInTheDocument();
   });
 
-  test('should toggle market button', () => {
+  test('should toggle market button', async () => {
     let newMarket = Market.NONE;
     const toggleHandlerMock = jest.fn((selectedMarket: Market) => {
       newMarket = selectedMarket;
@@ -39,7 +39,7 @@ describe('Footer component', () => {
 
     const buttonEl = getByText('Toggle Feed');
 
-    userEvent.click(buttonEl);
+    await userEvent.click(buttonEl);
 
     expect(container).toBeTruthy();
     expect(toggleHandlerMock.mock.calls.length).toEqual(1);

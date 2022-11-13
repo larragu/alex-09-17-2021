@@ -1,13 +1,13 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 
 import { ReducersState, OrderType } from '../../types';
 import styles from './Orders.module.scss';
 import Spread from '../Spread';
 import OrderTable from './OrderTable';
+import { useAppSelector } from '../../hooks';
 
 const Orders = () => {
-  const { bid, ask } = useSelector((state: ReducersState) => state.feed);
+  const { bid, ask } = useAppSelector((state: ReducersState) => state.feed);
 
   return (
     <main className={styles.orders}>

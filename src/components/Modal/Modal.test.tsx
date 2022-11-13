@@ -26,7 +26,7 @@ describe('Modal component', () => {
     expect(container).toBeTruthy();
   });
 
-  test('should click button in modal', () => {
+  test('should click button in modal', async () => {
     const onClose = jest.fn();
 
     const body = <h4>Orderbook Disconnected</h4>;
@@ -49,7 +49,8 @@ describe('Modal component', () => {
 
     expect(container).toBeTruthy();
     const buttonEl = getByText('RECONNECT');
-    userEvent.click(buttonEl);
+
+    await userEvent.click(buttonEl);
 
     expect(onClose.mock.calls.length).toEqual(1);
   });
