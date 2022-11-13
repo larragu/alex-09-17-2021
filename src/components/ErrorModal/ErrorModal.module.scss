@@ -2,7 +2,7 @@
 @import '../../_colors.scss';
 @import '../../_library.scss';
 
-.notification {
+.errorModal {
   display: flex;
   flex-direction: column;
   width: 75%;
@@ -19,7 +19,7 @@
   background-color: $smooth-red;
 }
 
-.buttonReconnect {
+.button {
   @include button;
 
   background-color: $smooth-red;

@@ -12,7 +12,7 @@ import {
 const useSocket = () => {
   const dispatch = useDispatch();
 
-  const { isConnected, isSubscribed } = useSelector(
+  const { isConnected, isSubscribed, connectionError } = useSelector(
     (state: ReducersState) => state.socket
   );
   const selectedMarket = useSelector(
@@ -76,6 +76,7 @@ const useSocket = () => {
     connectSocket: connect,
     selectedMarket,
     changeMarket,
+    connectionError,
   };
 };
 
