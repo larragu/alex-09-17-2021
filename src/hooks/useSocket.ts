@@ -77,6 +77,7 @@ const useSocket = () => {
     selectedMarket,
     changeMarket,
     connectionError,
+    isSubscribed,
   };
 };
 
