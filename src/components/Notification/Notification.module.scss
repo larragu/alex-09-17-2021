@@ -1,17 +1,33 @@
-.buttonReconnect {
-  padding: 0.625rem;
-  border: none;
-  background-color: rgb(141, 7, 7);
-  color: white;
-  font-size: 1rem;
-  font-weight: bold;
-  cursor: pointer;
+@import '../../_media.scss';
+@import '../../_colors.scss';
+@import '../../_library.scss';
 
+.notification {
+  display: flex;
+  flex-direction: column;
+  width: 75%;
+  align-items: center;
+
+  padding-bottom: 1rem;
+
+  @include not-mobile {
+    width: 25%;
+  }
+}
+
+.title {
+  background-color: $smooth-red;
+}
+
+.buttonReconnect {
+  @include button;
+
+  background-color: $smooth-red;
   &:hover {
-    background-color: rgb(187, 2, 2);
+    background-color: #8d0707;
   }
 
   &:active {
-    background-color: rgb(184, 71, 71);
+    background-color: #b84747;
   }
 }
