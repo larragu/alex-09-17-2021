@@ -32,7 +32,6 @@ const OrderTable = ({ feed, orderType }: OrderTableProps) => {
       );
     });
   };
-
   const feedRows = getRows(feed.depthArray, feed.list, feed.map, orderType);
 
   return (

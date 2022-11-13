@@ -1,4 +1,5 @@
 import { useCallback, useEffect } from 'react';
+import cn from 'classnames';
 
 import styles from './Orderbook.module.scss';
 import { Market, VisibilityState } from '../types';
@@ -18,6 +19,7 @@ const Orderbook = () => {
     selectedMarket,
     changeMarket,
     connectionError,
+    isSubscribed,
   } = useSocket();
 
   const reconnectSocketHandler = useCallback(() => {
@@ -52,7 +54,7 @@ const Orderbook = () => {
   }
 
   return (
-    <div className={styles.orderbook}>
+    <div className={cn(styles.orderbook, { [styles.blur]: !isSubscribed })}>
       {connectionError && (
         <ErrorModal
           message="Connection Failed"
@@ -72,7 +74,7 @@ const Orderbook = () => {
       <Footer
         onToggle={toggleHandler}
         selectedMarket={selectedMarket}
-        isSocketConnected={isSocketConnected!}
+        isDisabled={!isSocketConnected || !isSubscribed}
       />
     </div>
   );

@@ -5,16 +5,12 @@ import styles from './Footer.module.scss';
 
 interface FooterProps {
   onToggle: (selectedMarket: Market) => void;
-  isSocketConnected: boolean;
+  isDisabled: boolean;
   selectedMarket: Market;
 }
 
 let isLoaded = false;
-const Footer = ({
-  onToggle,
-  isSocketConnected,
-  selectedMarket,
-}: FooterProps) => {
+const Footer = ({ onToggle, isDisabled, selectedMarket }: FooterProps) => {
   useEffect(() => {
     isLoaded = true;
   }, []);
@@ -33,7 +29,7 @@ const Footer = ({
   return (
     <footer className={styles.footer}>
       <button
-        disabled={!isLoaded || !isSocketConnected}
+        disabled={!isLoaded || isDisabled}
         className={styles.buttonToggle}
         onClick={() => toggleHandler(selectedMarket)}
       >

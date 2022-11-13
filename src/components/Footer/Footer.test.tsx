@@ -5,14 +5,14 @@ import { Market } from '../../types';
 import Footer from './Footer';
 
 describe('Footer component', () => {
-  const isConnected = true;
+  const isConnected = false;
   const selectedMarket = Market.XBT_USD;
   const toggleHandlerMock = jest.fn();
 
   const { container, getByText } = render(
     <Footer
       onToggle={toggleHandlerMock}
-      isSocketConnected={isConnected}
+      isDisabled={isConnected}
       selectedMarket={selectedMarket}
     />
   );
@@ -32,7 +32,7 @@ describe('Footer component', () => {
     const { container, getByText } = render(
       <Footer
         onToggle={toggleHandlerMock}
-        isSocketConnected={isConnected}
+        isDisabled={isConnected}
         selectedMarket={selectedMarket}
       />
     );
@@ -50,7 +50,7 @@ describe('Footer component', () => {
     const { container, getByText } = render(
       <Footer
         onToggle={toggleHandlerMock}
-        isSocketConnected={!isConnected}
+        isDisabled={!isConnected}
         selectedMarket={selectedMarket}
       />
     );
