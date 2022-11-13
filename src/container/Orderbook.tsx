@@ -3,10 +3,10 @@ import { useCallback, useEffect } from 'react';
 import styles from './Orderbook.module.scss';
 import { Market, VisibilityState } from '../types';
 import Orders from '../components/Orders';
-import Notification from '../components/Notification';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import useSocket from '../hooks/useSocket';
+import ErrorModal from '../components/ErrorModal';
 
 const VISIBILITY_CHANGE = 'visibilitychange';
 let isLoaded = false;
@@ -17,6 +17,7 @@ const Orderbook = () => {
     connectSocket,
     selectedMarket,
     changeMarket,
+    connectionError,
   } = useSocket();
 
   const reconnectSocketHandler = useCallback(() => {
@@ -52,8 +53,19 @@ const Orderbook = () => {
 
   return (
     <div className={styles.orderbook}>
+      {connectionError && (
+        <ErrorModal
+          message="Connection Failed"
+          buttonText="RETRY"
+          onClose={reconnectSocketHandler}
+        />
+      )}
       {isLoaded && !isSocketConnected && (
-        <Notification onReconnectSocket={reconnectSocketHandler} />
+        <ErrorModal
+          message="Orderbook Disconnected"
+          buttonText="RECONNECT"
+          onClose={reconnectSocketHandler}
+        />
       )}
       <Header />
       <Orders />

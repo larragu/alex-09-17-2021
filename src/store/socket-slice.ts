@@ -6,6 +6,7 @@ const initialSocketState: SocketState = {
   isConnected: false,
   isSubscribed: false,
   sendingMessage: false,
+  connectionError: false,
 };
 
 const socketSlice = createSlice({
@@ -13,6 +14,7 @@ const socketSlice = createSlice({
   initialState: initialSocketState,
   reducers: {
     sendMessage(state: SocketState) {
+      state.connectionError = false;
       state.sendingMessage = true;
     },
     connectSuccess(state: SocketState) {
@@ -36,6 +38,7 @@ const socketSlice = createSlice({
       state.sendingMessage = false;
       state.isSubscribed = false;
       state.isConnected = false;
+      state.connectionError = true;
     },
   },
 });

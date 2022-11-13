@@ -103,6 +103,7 @@ export interface SocketState {
   isConnected?: boolean;
   isSubscribed?: boolean;
   sendingMessage: boolean;
+  connectionError: boolean;
 }
 
 export interface SocketPayload {
