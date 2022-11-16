@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { FeedPayload, FeedState, Market, SortOption } from '../types';
 import { transformData } from './util';
 
-const initialFeedState: FeedState = {
+export const initialFeedState: FeedState = {
   selectedMarket: Market.NONE,
   bid: {
     depthArray: [],

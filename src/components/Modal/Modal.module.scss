@@ -1,5 +1,6 @@
 @import '../../_colors.scss';
 @import '../../_media.scss';
+@import '../../_library.scss';
 
 .backdrop {
   position: fixed;
@@ -18,15 +19,30 @@
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: 100%;
+  min-width: 15%;
   display: flex;
   justify-content: center;
   color: white;
   border-radius: 10px;
+  flex-direction: column;
+  width: 75%;
+  padding-bottom: 1rem;
 
   @include not-mobile {
-    width: auto;
+    width: 25%;
   }
+}
+
+.body {
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+}
+
+.footer {
+  padding: 5px;
+  display: flex;
+  justify-content: center;
 }
 
 .title {
@@ -38,4 +54,28 @@
   padding: 10px 0;
   border-top-left-radius: inherit;
   border-top-right-radius: inherit;
+
+  &.error {
+    background-color: $smooth-red;
+  }
+}
+
+.button {
+  @include button;
+  text-transform: capitalize;
+
+  &.error {
+    color: white;
+    background-color: $smooth-red;
+    &:hover {
+      background-color: #8d0707;
+    }
+
+    &:active {
+      background-color: #b84747;
+    }
+  }
+}
+
+.title {
 }

@@ -1,6 +1,7 @@
 import userEvent from '@testing-library/user-event';
 import { render } from '@testing-library/react';
 import Modal from './Modal';
+import { ModalStatus } from '../../types';
 
 describe('Modal component', () => {
   beforeAll(() => {
@@ -13,37 +14,39 @@ describe('Modal component', () => {
     const onClose = jest.fn();
 
     const { container } = render(
-      <Modal
-        onClose={onClose}
-        className={''}
-        headerText={''}
-        headerClassName={''}
-        body={undefined}
-        footer={undefined}
-      />
+      <Modal onClose={onClose} message={''} buttonText={''} />
     );
 
     expect(container).toBeTruthy();
   });
 
+  test('should render ErrorModal component', async () => {
+    const reconnectHandlerMock = jest.fn();
+
+    const { container, getByText } = render(
+      <Modal
+        message="Connection Failed"
+        buttonText="RETRY"
+        onClose={reconnectHandlerMock}
+      />
+    );
+
+    const buttonEl = getByText('RETRY');
+    await userEvent.click(buttonEl);
+
+    expect(container).toBeTruthy();
+    expect(reconnectHandlerMock.mock.calls.length).toEqual(1);
+  });
+
   test('should click button in modal', async () => {
     const onClose = jest.fn();
-
-    const body = <h4>Orderbook Disconnected</h4>;
-    const footer = (
-      <button onClick={onClose} aria-label="Close">
-        RECONNECT
-      </button>
-    );
 
     const { container, getByText } = render(
       <Modal
         onClose={onClose}
-        headerText={'Error!'}
-        body={body}
-        footer={footer}
-        className={''}
-        headerClassName={''}
+        message="Orderbook Disconnected"
+        buttonText="RECONNECT"
+        status={ModalStatus.ERROR}
       />
     );
 

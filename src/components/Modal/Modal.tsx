@@ -1,27 +1,19 @@
-import { ReactNode, useEffect } from 'react';
+import { useEffect } from 'react';
 import FocusLock from 'react-focus-lock';
 import cn from 'classnames';
 import { createPortal } from 'react-dom';
 
 import styles from './Modal.module.scss';
+import { ModalStatus } from '../../types';
 
 interface ModalProps {
   onClose: () => void;
-  className: string;
-  headerText: string;
-  headerClassName: string;
-  body: ReactNode;
-  footer: ReactNode;
+  message: string;
+  buttonText: string;
+  status?: ModalStatus;
 }
 
-const Modal = ({
-  onClose,
-  className,
-  headerText,
-  headerClassName,
-  body,
-  footer,
-}: ModalProps) => {
+const Modal = ({ onClose, message, buttonText, status }: ModalProps) => {
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
@@ -37,19 +29,38 @@ const Modal = ({
       document.removeEventListener('keydown', onKeyDown);
     };
   }, [onClose]);
+
+  const headerText = status === ModalStatus.ERROR ? 'Error!' : '';
+
   return createPortal(
     <>
       <div className={styles.backdrop} onClick={onClose}></div>
       <FocusLock>
         <div
-          className={cn(styles.modal, className)}
+          className={styles.modal}
           aria-modal={true}
           aria-labelledby={headerText}
           role={'dialog'}
         >
-          <h3 className={cn(styles.title, headerClassName)}>{headerText}</h3>
-          {body}
-          {footer}
+          <h3
+            className={cn(styles.title, {
+              [styles.error]: status === ModalStatus.ERROR,
+            })}
+          >
+            {headerText}
+          </h3>
+          <h4 className={styles.body}>{message}</h4>
+          <div className={styles.footer}>
+            <button
+              onClick={onClose}
+              className={cn(styles.button, {
+                [styles.error]: status === ModalStatus.ERROR,
+              })}
+              aria-label="Close"
+            >
+              {buttonText}
+            </button>
+          </div>
         </div>
       </FocusLock>
     </>,

@@ -2,12 +2,12 @@ import { useCallback, useEffect } from 'react';
 import cn from 'classnames';
 
 import styles from './Orderbook.module.scss';
-import { Market, VisibilityState } from '../types';
+import { Market, ModalStatus, VisibilityState } from '../types';
 import Orders from '../components/Orders';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import useSocket from '../hooks/useSocket';
-import ErrorModal from '../components/ErrorModal';
+import Modal from '../components/Modal';
 
 const VISIBILITY_CHANGE = 'visibilitychange';
 let isLoaded = false;
@@ -56,17 +56,19 @@ const Orderbook = () => {
   return (
     <div className={cn(styles.orderbook, { [styles.blur]: !isSubscribed })}>
       {connectionError && (
-        <ErrorModal
+        <Modal
           message="Connection Failed"
-          buttonText="RETRY"
+          buttonText="retry"
           onClose={reconnectSocketHandler}
+          status={ModalStatus.ERROR}
         />
       )}
       {isLoaded && !isSocketConnected && (
-        <ErrorModal
+        <Modal
           message="Orderbook Disconnected"
-          buttonText="RECONNECT"
+          buttonText="reconnect"
           onClose={reconnectSocketHandler}
+          status={ModalStatus.ERROR}
         />
       )}
       <Header />
