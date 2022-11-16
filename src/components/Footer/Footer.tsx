@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import { Market } from '../../types';
 import styles from './Footer.module.scss';
@@ -9,27 +9,26 @@ interface FooterProps {
   selectedMarket: Market;
 }
 
-let isLoaded = false;
 const Footer = ({ onToggle, isDisabled, selectedMarket }: FooterProps) => {
+  const [tempDisabled, setTempDisabled] = useState(true);
   useEffect(() => {
-    isLoaded = true;
-  }, []);
+    if (selectedMarket !== Market.NONE) {
+      setTempDisabled(false);
+    }
+  }, [selectedMarket]);
 
   const toggleHandler = (selectedMarket: Market) => {
-    let newMarket;
-    if (selectedMarket === Market.XBT_USD) {
-      newMarket = Market.ETH_USD;
-    } else {
-      newMarket = Market.XBT_USD;
-    }
+    const newMarket =
+      selectedMarket === Market.XBT_USD ? Market.ETH_USD : Market.XBT_USD;
 
+    setTempDisabled(true);
     onToggle(newMarket);
   };
 
   return (
     <footer className={styles.footer}>
       <button
-        disabled={!isLoaded || isDisabled}
+        disabled={isDisabled || tempDisabled}
         className={styles.buttonToggle}
         onClick={() => toggleHandler(selectedMarket)}
       >
