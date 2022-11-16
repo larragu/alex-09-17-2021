@@ -76,7 +76,7 @@ const Orderbook = () => {
       <Footer
         onToggle={toggleHandler}
         selectedMarket={selectedMarket}
-        isDisabled={!isSocketConnected || !isSubscribed}
+        isDisabled={!isSocketConnected}
       />
     </div>
   );
