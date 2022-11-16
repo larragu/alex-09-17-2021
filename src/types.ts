@@ -123,3 +123,7 @@ export enum BidOrAsk {
   LOWEST_BID = 'lowestBidPrice',
   HIGHEST_BID = 'highestBidPrice',
 }
+
+export enum ModalStatus {
+  ERROR = 'ERROR',
+}

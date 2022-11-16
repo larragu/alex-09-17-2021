@@ -11,7 +11,7 @@
 
 .buttonToggle {
   @include button;
-
+  color: white;
   background-color: #614ee2;
 
   &:hover {

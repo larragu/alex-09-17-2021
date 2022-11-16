@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import { SocketState } from '../types';
 
-const initialSocketState: SocketState = {
+export const initialSocketState: SocketState = {
   isConnected: false,
   isSubscribed: false,
   sendingMessage: false,
