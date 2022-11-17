@@ -5,7 +5,7 @@ import { OrderType } from '../../../../types';
 export default {
   title: 'Components/Orders/OrderTable/OrderRow',
   parameters: {
-    layout: 'centered',
+    layout: 'fullscreen',
   },
   component: OrderRow,
 } as ComponentMeta<typeof OrderRow>;

@@ -30,7 +30,12 @@ const Modal = ({ onClose, message, buttonText, status }: ModalProps) => {
     };
   }, [onClose]);
 
-  const headerText = status === ModalStatus.ERROR ? 'Error!' : '';
+  const headerText =
+    status === ModalStatus.ERROR
+      ? 'Error!'
+      : status === ModalStatus.WARNING
+      ? 'Warning!'
+      : '';
 
   return createPortal(
     <>
@@ -38,14 +43,17 @@ const Modal = ({ onClose, message, buttonText, status }: ModalProps) => {
       <FocusLock>
         <div
           className={styles.modal}
-          aria-modal={true}
+          aria-modal
           aria-labelledby={headerText}
-          role={'dialog'}
+          role={status === ModalStatus.WARNING ? 'alertdialog' : 'dialog'}
         >
           <h3
-            className={cn(styles.title, {
-              [styles.error]: status === ModalStatus.ERROR,
-            })}
+            className={cn(
+              styles.title,
+              status === ModalStatus.ERROR
+                ? styles.error
+                : status === ModalStatus.WARNING && styles.warning
+            )}
           >
             {headerText}
           </h3>
@@ -53,9 +61,12 @@ const Modal = ({ onClose, message, buttonText, status }: ModalProps) => {
           <div className={styles.footer}>
             <button
               onClick={onClose}
-              className={cn(styles.button, {
-                [styles.error]: status === ModalStatus.ERROR,
-              })}
+              className={cn(
+                styles.button,
+                status === ModalStatus.ERROR
+                  ? styles.error
+                  : status === ModalStatus.WARNING && styles.warning
+              )}
               aria-label="Close"
             >
               {buttonText}

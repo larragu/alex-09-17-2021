@@ -58,6 +58,10 @@
   &.error {
     background-color: $smooth-red;
   }
+
+  &.warning {
+    background-color: #dba606d9;
+  }
 }
 
 .button {
@@ -75,7 +79,16 @@
       background-color: #b84747;
     }
   }
-}
 
-.title {
+  &.warning {
+    color: white;
+    background-color: #dba606d9;
+    &:hover {
+      background-color: #ac8204d9;
+    }
+
+    &:active {
+      background-color: #d4a003d9;
+    }
+  }
 }
