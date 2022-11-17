@@ -126,4 +126,5 @@ export enum BidOrAsk {
 
 export enum ModalStatus {
   ERROR = 'ERROR',
+  WARNING = 'WARNING',
 }

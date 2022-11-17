@@ -55,21 +55,23 @@ const Orderbook = () => {
 
   return (
     <div className={cn(styles.orderbook, { [styles.blur]: !isSubscribed })}>
-      {connectionError && (
+      {connectionError ? (
         <Modal
           message="Connection Failed"
           buttonText="retry"
           onClose={reconnectSocketHandler}
           status={ModalStatus.ERROR}
         />
-      )}
-      {isLoaded && !isSocketConnected && (
-        <Modal
-          message="Orderbook Disconnected"
-          buttonText="reconnect"
-          onClose={reconnectSocketHandler}
-          status={ModalStatus.ERROR}
-        />
+      ) : (
+        isLoaded &&
+        !isSocketConnected && (
+          <Modal
+            message="Orderbook Disconnected"
+            buttonText="reconnect"
+            onClose={reconnectSocketHandler}
+            status={ModalStatus.WARNING}
+          />
+        )
       )}
       <Header />
       <Orders />
