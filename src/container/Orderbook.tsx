@@ -10,7 +10,6 @@ import useSocket from '../hooks/useSocket';
 import Modal from '../components/Modal';
 
 const VISIBILITY_CHANGE = 'visibilitychange';
-let isLoaded = false;
 const Orderbook = () => {
   const {
     isSocketConnected,
@@ -49,10 +48,6 @@ const Orderbook = () => {
       window.removeEventListener(VISIBILITY_CHANGE, toggleConnectionHandler);
   }, [toggleConnectionHandler]);
 
-  if (isSocketConnected) {
-    isLoaded = true;
-  }
-
   return (
     <div className={cn(styles.orderbook, { [styles.blur]: !isSubscribed })}>
       {connectionError ? (
@@ -63,7 +58,7 @@ const Orderbook = () => {
           status={ModalStatus.ERROR}
         />
       ) : (
-        isLoaded &&
+        selectedMarket !== Market.NONE &&
         !isSocketConnected && (
           <Modal
             message="Orderbook Disconnected"

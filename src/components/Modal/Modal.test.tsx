@@ -25,7 +25,7 @@ describe('Modal component', () => {
   test('should render Error Modal', async () => {
     const reconnectHandlerMock = jest.fn();
 
-    const { container, getByText } = render(
+    const { getByText } = render(
       <Modal
         message="Connection Failed"
         buttonText="RETRY"
@@ -35,16 +35,14 @@ describe('Modal component', () => {
     );
 
     const buttonEl = getByText('RETRY');
-    await userEvent.click(buttonEl);
 
-    expect(container).toBeTruthy();
-    expect(reconnectHandlerMock.mock.calls.length).toEqual(1);
+    expect(buttonEl).toBeTruthy();
   });
 
   test('should render Warning Modal', async () => {
     const reconnectHandlerMock = jest.fn();
 
-    const { container, getByText, getByRole } = render(
+    const { container, getByRole } = render(
       <Modal
         message="Orderbook Disconnected"
         buttonText="reconnect"
@@ -54,12 +52,9 @@ describe('Modal component', () => {
     );
 
     const modal = getByRole('alertdialog');
-    const buttonEl = getByText('reconnect');
-    await userEvent.click(buttonEl);
 
     expect(container).toBeTruthy();
     expect(modal).toBeTruthy();
-    expect(reconnectHandlerMock.mock.calls.length).toEqual(1);
   });
 
   test('should click button in modal', async () => {
