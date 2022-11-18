@@ -14,10 +14,10 @@ const socketSlice = createSlice({
   initialState: initialSocketState,
   reducers: {
     sendMessage(state: SocketState) {
-      state.connectionError = false;
       state.sendingMessage = true;
     },
     connectSuccess(state: SocketState) {
+      state.connectionError = false;
       state.sendingMessage = false;
       state.isConnected = true;
     },

@@ -5,8 +5,6 @@ import { OrderType } from '../../../types';
 import { bid as bidMock, ask as askMock } from '../../../mocks';
 
 describe('OrderTable component', () => {
-  console.log(global.screen.width);
-
   test('should render OrderTable ask feed', () => {
     const { container, getAllByRole } = render(
       <OrderTable feed={bidMock} orderType={OrderType.ASK} />
