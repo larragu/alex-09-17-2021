@@ -1,5 +1,6 @@
 import React from 'react';
 import cn from 'classnames';
+import isEqual from 'lodash.isequal';
 
 import { Ask, Bid, OrderMap, OrderType } from '../../../types';
 import BarGraph from '../../BarGraph';
@@ -58,9 +59,8 @@ const OrderTable = ({ feed, orderType }: OrderTableProps) => {
 //Makes HUGE rendering performance boost
 const areEqual = (prevProps: OrderTableProps, nextProps: OrderTableProps) => {
   return (
-    JSON.stringify(prevProps.feed.depthArray) ===
-      JSON.stringify(nextProps.feed.depthArray) &&
-    JSON.stringify(prevProps.feed.map) === JSON.stringify(nextProps.feed.map)
+    isEqual(prevProps.feed.depthArray, nextProps.feed.depthArray) &&
+    isEqual(prevProps.feed.map, nextProps.feed.map)
   );
 };
 
