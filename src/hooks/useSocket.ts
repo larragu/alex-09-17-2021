@@ -1,12 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 
 import { Market, ReducersState } from '../types';
-import {
-  connectToSocket,
-  unsuscribeFromMarket,
-  subscribeToMarket,
-  closeSocket,
-} from '../store/socket-actions';
+import { socketActions } from '../store/socket-slice';
 import { useAppDispatch, useAppSelector } from '.';
 
 const useSocket = () => {
@@ -26,7 +21,7 @@ const useSocket = () => {
     (newMarket: Market) => {
       setNewSubscription(true);
       setNewMarket(newMarket);
-      dispatch(connectToSocket());
+      dispatch(socketActions.connectToSocket());
     },
     [dispatch]
   );
@@ -35,11 +30,11 @@ const useSocket = () => {
     if (newSubscription && isConnected) {
       if (selectedMarket !== newMarket) {
         if (!isSubscribed) {
-          dispatch(subscribeToMarket(newMarket));
+          dispatch(socketActions.subscribeToMarket(newMarket));
           setNewMarket(Market.NONE);
           setNewSubscription(false);
         } else if (isSubscribed) {
-          dispatch(unsuscribeFromMarket(selectedMarket));
+          dispatch(socketActions.unsubscribeFromMarket(selectedMarket));
         }
       }
     }
@@ -52,7 +47,7 @@ const useSocket = () => {
     dispatch,
   ]);
 
-  const connect = useCallback(
+  const connectSocket = useCallback(
     (newMarket: Market) => {
       makeConnection(newMarket);
     },
@@ -64,16 +59,16 @@ const useSocket = () => {
     setNewSubscription(true);
   }, []);
 
-  const disconnect = useCallback(() => {
+  const disconnectSocket = useCallback(() => {
     if (isConnected) {
-      dispatch(closeSocket());
+      dispatch(socketActions.disconnectFromSocket());
     }
   }, [dispatch, isConnected]);
 
   return {
     isSocketConnected: isConnected,
-    disconnectSocket: disconnect,
-    connectSocket: connect,
+    disconnectSocket,
+    connectSocket,
     selectedMarket,
     changeMarket,
     connectionError,

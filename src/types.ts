@@ -1,3 +1,5 @@
+import { socketActions } from './store/socket-slice';
+
 export enum OrderType {
   BID = 'BID', //Buy Side (green)
   ASK = 'ASK', //Sell Side (red)
@@ -77,13 +79,6 @@ export enum Market {
   NONE = 'NONE',
 }
 
-export enum SocketAction {
-  CONNECT = 'socket/connect',
-  DISCONNECT = 'socket/disconnect',
-  SUBSCRIBE = 'socket/subscribe',
-  UNSUSCRIBE = 'socket/unsubscribe',
-}
-
 export enum SocketEvent {
   subscribed = 'subscribed',
   unsubscribed = 'unsubscribed',
@@ -102,19 +97,9 @@ export interface SocketEventData {
 export interface SocketState {
   isConnected?: boolean;
   isSubscribed?: boolean;
-  sendingMessage: boolean;
+  isConnecting: boolean;
+  subscribing: boolean;
   connectionError: boolean;
-}
-
-export interface SocketPayload {
-  isConnected?: boolean;
-  isSubscribed?: boolean;
-  selectedMarket?: Market;
-}
-
-export interface WebSocketAction {
-  type: SocketAction;
-  payload: SocketPayload;
 }
 
 export enum BidOrAsk {
@@ -128,3 +113,24 @@ export enum ModalStatus {
   ERROR = 'ERROR',
   WARNING = 'WARNING',
 }
+
+type ConnectErrorAction = typeof socketActions.connectError;
+type ConnectSuccessAction = typeof socketActions.connectSuccess;
+type ConnectToSocketAction = typeof socketActions.connectToSocket;
+type DisconnectToSocketAction = typeof socketActions.disconnectFromSocket;
+type DisconnectSuccessAction = typeof socketActions.disconnectSuccess;
+type SubscribeSuccessAction = typeof socketActions.subscribeSuccess;
+type SubscribeToMarketAction = typeof socketActions.subscribeToMarket;
+type UnsubscribeFromMarketAction = typeof socketActions.unsubscribeFromMarket;
+type UnsubscribeSuccess = typeof socketActions.unsubscribeSuccess;
+
+export type SocketActions =
+  | ConnectErrorAction
+  | ConnectSuccessAction
+  | ConnectToSocketAction
+  | DisconnectToSocketAction
+  | DisconnectSuccessAction
+  | SubscribeSuccessAction
+  | SubscribeToMarketAction
+  | UnsubscribeFromMarketAction
+  | UnsubscribeSuccess;
