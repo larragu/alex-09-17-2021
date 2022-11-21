@@ -16,6 +16,8 @@ const socketMock = {
   isSubscribed: true,
   sendingMessage: false,
   connectionError: false,
+  subscribing: false,
+  isConnecting: false,
 };
 
 const Template: ComponentStory<typeof Orderbook> = () => <Orderbook />;

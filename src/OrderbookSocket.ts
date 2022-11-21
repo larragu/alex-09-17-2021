@@ -1,12 +1,6 @@
 import { Market, SocketEvent, SocketEventData } from './types';
 import { feedActions } from './store/feed-slice';
-import {
-  subscribeSuccess,
-  unsubscribeSuccess,
-  connectSuccess,
-  disconnectSuccess,
-  connectError,
-} from './store/socket-actions';
+import { socketActions } from './store/socket-slice';
 import { AppDispatch } from './store';
 
 export class OrderbookSocket {
@@ -18,13 +12,13 @@ export class OrderbookSocket {
   private readonly TIMEOUT = 5000;
   private readonly WAIT_TIME = 10;
   private timeoutCounter = 0;
-  private socket: WebSocket;
+  private socket: WebSocket | null;
 
   constructor(private readonly dispatch: AppDispatch) {
     this.socket = new WebSocket(this.WEB_SOCKET_URL);
 
     this.socket.onopen = () => {
-      this.dispatch(connectSuccess());
+      this.dispatch(socketActions.connectSuccess());
       this.dispatch(feedActions.changeMarket({ selectedMarket: Market.NONE }));
     };
 
@@ -86,10 +80,10 @@ export class OrderbookSocket {
     if (data.event === SocketEvent.subscribed) {
       const newMarket = data.product_ids![this.NEW_MARKET];
 
-      dispatch(subscribeSuccess());
+      dispatch(socketActions.subscribeSuccess());
       dispatch(feedActions.changeMarket({ selectedMarket: newMarket }));
     } else if (data.event === SocketEvent.unsubscribed) {
-      dispatch(unsubscribeSuccess());
+      dispatch(socketActions.unsubscribeSuccess());
     }
 
     if (data.bids?.length > 0) {
@@ -113,10 +107,12 @@ export class OrderbookSocket {
 
   private closeHandler(event: CloseEvent, dispatch: AppDispatch) {
     if (event.code === this.NORMAL_CLOSURE) {
-      dispatch(disconnectSuccess());
+      dispatch(socketActions.disconnectSuccess());
     } else {
       console.error(`WebSocket Client Error Code: ${event.code}`);
-      dispatch(connectError());
+      dispatch(socketActions.connectError());
     }
+
+    this.socket = null;
   }
 }

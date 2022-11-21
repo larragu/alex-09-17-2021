@@ -5,37 +5,47 @@ import { SocketState } from '../types';
 export const initialSocketState: SocketState = {
   isConnected: false,
   isSubscribed: false,
-  sendingMessage: false,
+  isConnecting: false,
   connectionError: false,
+  subscribing: false,
 };
 
 const socketSlice = createSlice({
   name: 'socket',
   initialState: initialSocketState,
   reducers: {
-    sendMessage(state: SocketState) {
-      state.sendingMessage = true;
+    connectToSocket(state: SocketState) {
+      state.isConnecting = true;
+    },
+    disconnectFromSocket(state: SocketState) {
+      state.isConnecting = false;
     },
     connectSuccess(state: SocketState) {
       state.connectionError = false;
-      state.sendingMessage = false;
+      state.isConnecting = false;
       state.isConnected = true;
     },
     disconnectSuccess(state: SocketState) {
-      state.sendingMessage = false;
+      state.isConnecting = false;
       state.isSubscribed = false;
       state.isConnected = false;
     },
+    subscribeToMarket(state: SocketState, _action) {
+      state.subscribing = true;
+    },
+    unsubscribeFromMarket(state: SocketState, _action) {
+      state.subscribing = false;
+    },
     subscribeSuccess(state: SocketState) {
-      state.sendingMessage = false;
+      state.subscribing = false;
       state.isSubscribed = true;
     },
     unsubscribeSuccess(state: SocketState) {
-      state.sendingMessage = false;
+      state.subscribing = false;
       state.isSubscribed = false;
     },
     connectError(state: SocketState) {
-      state.sendingMessage = false;
+      state.isConnecting = false;
       state.isSubscribed = false;
       state.isConnected = false;
       state.connectionError = true;
