@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 
 import { OrderType } from '../../../../types';
 import OrderHeader from './OrderHeader';
@@ -8,13 +8,11 @@ describe('OrderHeader component', () => {
     const ordered = ['TOTAL', 'SIZE', 'PRICE'];
     const tableRow = document.createElement('table');
 
-    const { container } = render(<OrderHeader orderType={OrderType.BID} />, {
+    const { getAllByRole } = render(<OrderHeader orderType={OrderType.BID} />, {
       container: document.body.appendChild(tableRow),
     });
 
-    expect(container).toBeTruthy();
-
-    const cells = screen.getAllByRole('columnheader');
+    const cells = getAllByRole('columnheader');
 
     cells.forEach((cell, i) => {
       const { innerHTML } = cell;

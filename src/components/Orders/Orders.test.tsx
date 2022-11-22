@@ -12,11 +12,8 @@ describe('Orders component', () => {
       ask: initialResult.ask,
     });
 
-    const { container, getByText } = render(<Orders />);
+    const { getByRole } = render(<Orders />);
 
-    const spreadElement = getByText(/Spread/i);
-
-    expect(container).toBeTruthy();
-    expect(spreadElement).toBeInTheDocument();
+    expect(getByRole('heading', { level: 2 })).toHaveTextContent(/Spread/i);
   });
 });

@@ -10,11 +10,10 @@ describe('Spread component', () => {
     useAppSelectorMock.mockReturnValueOnce(initialResult.bid.highestBidPrice);
     useAppSelectorMock.mockReturnValueOnce(initialResult.ask.lowestAskPrice);
 
-    const { container, getByText } = render(<Spread />);
+    const { getByRole } = render(<Spread />);
 
-    const headerElement = getByText('Spread: 13.0 (0.03%)');
-
-    expect(container).toBeTruthy();
-    expect(headerElement).toBeInTheDocument();
+    expect(getByRole('heading', { level: 2 })).toHaveTextContent(
+      'Spread: 13.0 (0.03%)'
+    );
   });
 });

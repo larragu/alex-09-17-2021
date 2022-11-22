@@ -1,7 +1,12 @@
 import { useState, useEffect, useCallback } from 'react';
 
 import { Market, ReducersState } from '../types';
-import { socketActions } from '../store/socket-slice';
+import {
+  connectToSocket,
+  disconnectFromSocket,
+  subscribeToMarket,
+  unsubscribeFromMarket,
+} from '../store/socket-slice';
 import { useAppDispatch, useAppSelector } from '.';
 
 const useSocket = () => {
@@ -21,7 +26,7 @@ const useSocket = () => {
     (newMarket: Market) => {
       setNewSubscription(true);
       setNewMarket(newMarket);
-      dispatch(socketActions.connectToSocket());
+      dispatch(connectToSocket());
     },
     [dispatch]
   );
@@ -30,11 +35,11 @@ const useSocket = () => {
     if (newSubscription && isConnected) {
       if (selectedMarket !== newMarket) {
         if (!isSubscribed) {
-          dispatch(socketActions.subscribeToMarket(newMarket));
+          dispatch(subscribeToMarket(newMarket));
           setNewMarket(Market.NONE);
           setNewSubscription(false);
         } else if (isSubscribed) {
-          dispatch(socketActions.unsubscribeFromMarket(selectedMarket));
+          dispatch(unsubscribeFromMarket(selectedMarket));
         }
       }
     }
@@ -61,7 +66,7 @@ const useSocket = () => {
 
   const disconnectSocket = useCallback(() => {
     if (isConnected) {
-      dispatch(socketActions.disconnectFromSocket());
+      dispatch(disconnectFromSocket());
     }
   }, [dispatch, isConnected]);
 

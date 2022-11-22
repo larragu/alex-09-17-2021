@@ -1,56 +1,116 @@
-import store from './index';
-import { socketActions } from './socket-slice';
+import { Market } from '../types';
+import socketSlice, {
+  initialSocketState,
+  connectToSocket,
+  connectSuccess,
+  disconnectFromSocket,
+  subscribeToMarket,
+  subscribeSuccess,
+  unsubscribeFromMarket,
+  unsubscribeSuccess,
+  connectError,
+  disconnectSuccess,
+} from './socket-slice';
+import * as socketMiddleware from './socketMiddleware';
+import * as OrderbookSocket from '../OrderbookSocket';
 
 describe('Socket slice', () => {
   test('should have initial state', () => {
-    const { isConnected, isSubscribed } = store.getState().socket;
+    expect(socketSlice(undefined, { type: undefined })).toEqual(
+      initialSocketState
+    );
 
-    expect(isConnected).toBe(false);
-    expect(isSubscribed).toBe(false);
+    expect(socketSlice(undefined, { type: undefined })).toEqual(
+      initialSocketState
+    );
   });
 
   test('should change state to connect', () => {
-    store.dispatch(socketActions.connectSuccess());
+    expect(socketSlice(initialSocketState, connectToSocket())).toEqual({
+      ...initialSocketState,
+      isConnecting: true,
+    });
+  });
 
-    const { isConnected } = store.getState().socket;
+  test('should change state to connected', () => {
+    expect(socketSlice(initialSocketState, connectSuccess())).toEqual({
+      ...initialSocketState,
+      isConnected: true,
+    });
+  });
 
-    expect(isConnected).toBe(true);
+  test('should change state to disconnecting', () => {
+    expect(socketSlice(initialSocketState, disconnectFromSocket())).toEqual({
+      ...initialSocketState,
+      isConnecting: false,
+    });
+  });
+
+  test('should change state to subscribing', () => {
+    const mockState = { ...initialSocketState, isConnected: true };
+
+    expect(socketSlice(mockState, subscribeToMarket(Market.ETH_USD))).toEqual({
+      ...mockState,
+      isSubscribing: true,
+    });
   });
 
   test('should change state to subscribed', () => {
-    store.dispatch(socketActions.subscribeSuccess());
+    const mockState = {
+      ...initialSocketState,
+      isConnected: true,
+      isSubscribing: true,
+      isSubscribed: false,
+    };
 
-    const { isConnected, isSubscribed } = store.getState().socket;
-
-    expect(isConnected).toBe(true);
-    expect(isSubscribed).toBe(true);
+    expect(socketSlice(mockState, subscribeSuccess())).toEqual({
+      ...mockState,
+      isSubscribing: false,
+      isSubscribed: true,
+    });
   });
 
-  test('should change state to unsuscribed', () => {
-    store.dispatch(socketActions.unsubscribeSuccess());
-
-    const { isConnected, isSubscribed } = store.getState().socket;
-
-    expect(isConnected).toBe(true);
-    expect(isSubscribed).toBe(false);
+  test('should change state to unsubscribing', () => {
+    const mockState = {
+      ...initialSocketState,
+      isConnected: true,
+      isSubscribed: true,
+    };
+    expect(
+      socketSlice(mockState, unsubscribeFromMarket(Market.ETH_USD))
+    ).toEqual({
+      ...mockState,
+    });
   });
 
   test('should change state to unsubscribed', () => {
-    store.dispatch(socketActions.unsubscribeSuccess());
-
-    const { isConnected, isSubscribed } = store.getState().socket;
-
-    expect(isConnected).toBe(true);
-    expect(isSubscribed).toBe(false);
+    const mockState = { ...initialSocketState, isConnected: true };
+    expect(socketSlice(mockState, unsubscribeSuccess())).toEqual({
+      ...mockState,
+      isSubscribed: false,
+    });
   });
 
   test('should change state to disconnected and unsubscribed on disconnect', () => {
-    store.dispatch(socketActions.subscribeSuccess());
-    store.dispatch(socketActions.disconnectSuccess());
+    const mockState = {
+      ...initialSocketState,
+      isConnected: true,
+      isSubscribed: true,
+    };
 
-    const { isConnected, isSubscribed } = store.getState().socket;
+    expect(socketSlice(mockState, disconnectSuccess())).toEqual({
+      ...mockState,
+      isConnected: false,
+      isSubscribed: false,
+    });
+  });
 
-    expect(isSubscribed).toBe(false);
-    expect(isConnected).toBe(false);
+  test('should change state to connection error', () => {
+    expect(socketSlice(initialSocketState, connectError())).toEqual({
+      ...initialSocketState,
+      isConnected: false,
+      isSubscribed: false,
+      connectionError: true,
+    });
   });
 });

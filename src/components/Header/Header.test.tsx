@@ -6,11 +6,10 @@ jest.mock('react-redux');
 
 describe('Header component', () => {
   test('should render Header', () => {
-    const { container, getByText } = render(<Header />);
+    const { getByRole } = render(<Header />);
 
-    const spreadElement = getByText(/Spread/i);
+    expect(getByRole('heading', { level: 1 })).toHaveTextContent('Order Book');
 
-    expect(container).toBeTruthy();
-    expect(spreadElement).toBeInTheDocument();
+    expect(getByRole('heading', { level: 2 })).toHaveTextContent(/Spread/i);
   });
 });
