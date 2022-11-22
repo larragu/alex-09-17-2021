@@ -16,7 +16,7 @@ const socketMock = {
   isSubscribed: true,
   sendingMessage: false,
   connectionError: false,
-  subscribing: false,
+  isSubscribing: false,
   isConnecting: false,
 };
 

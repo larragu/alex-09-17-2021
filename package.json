@@ -39,7 +39,7 @@
   "jest": {
     "collectCoverageFrom": [
       "src/**/*.{ts,tsx}",
-      "!src/**/mocks",
+      "!src/mocks/**",
       "!src/*.{ts,tsx}",
       "src/**/OrderbookSocket.ts",
       "!src/**/*.stories.tsx",

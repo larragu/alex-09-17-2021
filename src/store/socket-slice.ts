@@ -7,7 +7,7 @@ export const initialSocketState: SocketState = {
   isSubscribed: false,
   isConnecting: false,
   connectionError: false,
-  subscribing: false,
+  isSubscribing: false,
 };
 
 const socketSlice = createSlice({
@@ -31,17 +31,17 @@ const socketSlice = createSlice({
       state.isConnected = false;
     },
     subscribeToMarket(state: SocketState, _action) {
-      state.subscribing = true;
+      state.isSubscribing = true;
     },
     unsubscribeFromMarket(state: SocketState, _action) {
-      state.subscribing = false;
+      state.isSubscribing = false;
     },
     subscribeSuccess(state: SocketState) {
-      state.subscribing = false;
+      state.isSubscribing = false;
       state.isSubscribed = true;
     },
     unsubscribeSuccess(state: SocketState) {
-      state.subscribing = false;
+      state.isSubscribing = false;
       state.isSubscribed = false;
     },
     connectError(state: SocketState) {
@@ -53,6 +53,16 @@ const socketSlice = createSlice({
   },
 });
 
-export const socketActions = socketSlice.actions;
+export const {
+  connectToSocket,
+  disconnectFromSocket,
+  connectSuccess,
+  disconnectSuccess,
+  subscribeToMarket,
+  unsubscribeFromMarket,
+  subscribeSuccess,
+  unsubscribeSuccess,
+  connectError,
+} = socketSlice.actions;
 
 export default socketSlice.reducer;

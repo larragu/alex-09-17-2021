@@ -1,22 +1,27 @@
 import { Middleware } from '@reduxjs/toolkit';
 import { OrderbookSocket } from '../OrderbookSocket';
-import { SocketActions } from '../types';
-import { socketActions } from './socket-slice';
+import { SocketAction } from '../types';
+import {
+  connectToSocket,
+  disconnectFromSocket,
+  subscribeToMarket,
+  unsubscribeFromMarket,
+} from './socket-slice';
 
 const socketMiddleware: Middleware = (store) => {
   let orderbookSocket: OrderbookSocket | null;
 
-  return (next) => (action: SocketActions) => {
-    if (socketActions.connectToSocket.match(action)) {
+  return (next) => (action: SocketAction) => {
+    if (connectToSocket.match(action)) {
       if (!orderbookSocket) {
         orderbookSocket = new OrderbookSocket(store.dispatch);
       }
-    } else if (socketActions.disconnectFromSocket.match(action)) {
+    } else if (disconnectFromSocket.match(action)) {
       orderbookSocket?.closeSocket();
       orderbookSocket = null;
-    } else if (socketActions.subscribeToMarket.match(action)) {
+    } else if (subscribeToMarket.match(action)) {
       orderbookSocket?.subscribeToMarket(action.payload);
-    } else if (socketActions.unsubscribeFromMarket.match(action)) {
+    } else if (unsubscribeFromMarket.match(action)) {
       orderbookSocket?.unsuscribeFromMarket(action.payload);
     }
 

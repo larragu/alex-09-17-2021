@@ -9,18 +9,15 @@ describe('Footer component', () => {
   const selectedMarket = Market.XBT_USD;
   const toggleHandlerMock = jest.fn();
 
-  const { container, getByText } = render(
+  const { getByRole } = render(
     <Footer
       onToggle={toggleHandlerMock}
       isDisabled={isConnected}
       selectedMarket={selectedMarket}
     />
   );
-  const buttonEl = getByText('Toggle Feed');
-
   test('should render', () => {
-    expect(container).toBeTruthy();
-    expect(buttonEl).toBeInTheDocument();
+    expect(getByRole('button')).toHaveTextContent('Toggle Feed');
   });
 
   test('should toggle market button', async () => {
@@ -29,7 +26,7 @@ describe('Footer component', () => {
       newMarket = selectedMarket;
     });
 
-    const { container, getByText } = render(
+    const { getByRole } = render(
       <Footer
         onToggle={toggleHandlerMock}
         isDisabled={isConnected}
@@ -37,17 +34,16 @@ describe('Footer component', () => {
       />
     );
 
-    const buttonEl = getByText('Toggle Feed');
+    const buttonEl = getByRole('button');
 
     await userEvent.click(buttonEl);
 
-    expect(container).toBeTruthy();
     expect(toggleHandlerMock.mock.calls.length).toEqual(1);
     expect(newMarket).toEqual(Market.ETH_USD);
   });
 
   test('should disable button on disconnection', () => {
-    const { container, getByText } = render(
+    const { getByRole } = render(
       <Footer
         onToggle={toggleHandlerMock}
         isDisabled={!isConnected}
@@ -55,11 +51,10 @@ describe('Footer component', () => {
       />
     );
 
-    const buttonEl = getByText('Toggle Feed');
+    const buttonEl = getByRole('button');
 
     userEvent.click(buttonEl);
 
-    expect(container).toBeTruthy();
     expect(toggleHandlerMock.mock.calls.length).toEqual(0);
   });
 });

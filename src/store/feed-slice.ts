@@ -76,6 +76,6 @@ const feedSlice = createSlice({
   },
 });
 
-export const feedActions = feedSlice.actions;
+export const { processSocketData, changeMarket } = feedSlice.actions;
 
 export default feedSlice.reducer;

@@ -1,6 +1,12 @@
 import { Market, SocketEvent, SocketEventData } from './types';
-import { feedActions } from './store/feed-slice';
-import { socketActions } from './store/socket-slice';
+import { changeMarket, processSocketData } from './store/feed-slice';
+import {
+  connectError,
+  connectSuccess,
+  disconnectSuccess,
+  subscribeSuccess,
+  unsubscribeSuccess,
+} from './store/socket-slice';
 import { AppDispatch } from './store';
 
 export class OrderbookSocket {
@@ -18,8 +24,8 @@ export class OrderbookSocket {
     this.socket = new WebSocket(this.WEB_SOCKET_URL);
 
     this.socket.onopen = () => {
-      this.dispatch(socketActions.connectSuccess());
-      this.dispatch(feedActions.changeMarket({ selectedMarket: Market.NONE }));
+      this.dispatch(connectSuccess());
+      this.dispatch(changeMarket({ selectedMarket: Market.NONE }));
     };
 
     this.socket.onclose = (event: CloseEvent) =>
@@ -80,10 +86,10 @@ export class OrderbookSocket {
     if (data.event === SocketEvent.subscribed) {
       const newMarket = data.product_ids![this.NEW_MARKET];
 
-      dispatch(socketActions.subscribeSuccess());
-      dispatch(feedActions.changeMarket({ selectedMarket: newMarket }));
+      dispatch(subscribeSuccess());
+      dispatch(changeMarket({ selectedMarket: newMarket }));
     } else if (data.event === SocketEvent.unsubscribed) {
-      dispatch(socketActions.unsubscribeSuccess());
+      dispatch(unsubscribeSuccess());
     }
 
     if (data.bids?.length > 0) {
@@ -91,7 +97,7 @@ export class OrderbookSocket {
         (el: [number, number]) => el[this.SIZE] > 0
       );
       if (filtBids.length > 0) {
-        dispatch(feedActions.processSocketData({ bids: filtBids }));
+        dispatch(processSocketData({ bids: filtBids }));
       }
     }
 
@@ -100,17 +106,17 @@ export class OrderbookSocket {
         (el: number[]) => el[this.SIZE] > 0
       );
       if (filtAsks.length > 0) {
-        dispatch(feedActions.processSocketData({ asks: filtAsks }));
+        dispatch(processSocketData({ asks: filtAsks }));
       }
     }
   }
 
   private closeHandler(event: CloseEvent, dispatch: AppDispatch) {
     if (event.code === this.NORMAL_CLOSURE) {
-      dispatch(socketActions.disconnectSuccess());
+      dispatch(disconnectSuccess());
     } else {
       console.error(`WebSocket Client Error Code: ${event.code}`);
-      dispatch(socketActions.connectError());
+      dispatch(connectError());
     }
 
     this.socket = null;
