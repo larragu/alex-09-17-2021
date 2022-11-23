@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 
 import Spread from './Spread';
 import { initialResult } from '../../mocks';
@@ -10,9 +10,9 @@ describe('Spread component', () => {
     useAppSelectorMock.mockReturnValueOnce(initialResult.bid.highestBidPrice);
     useAppSelectorMock.mockReturnValueOnce(initialResult.ask.lowestAskPrice);
 
-    const { getByRole } = render(<Spread />);
+    render(<Spread />);
 
-    expect(getByRole('heading', { level: 2 })).toHaveTextContent(
+    expect(screen.getByRole('heading', { level: 2 })).toHaveTextContent(
       'Spread: 13.0 (0.03%)'
     );
   });

@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { Market } from '../../types';
@@ -9,7 +9,7 @@ describe('Footer component', () => {
   const selectedMarket = Market.XBT_USD;
   const toggleHandlerMock = jest.fn();
 
-  const { getByRole } = render(
+  render(
     <Footer
       onToggle={toggleHandlerMock}
       isDisabled={isConnected}
@@ -17,7 +17,7 @@ describe('Footer component', () => {
     />
   );
   test('should render', () => {
-    expect(getByRole('button')).toHaveTextContent('Toggle Feed');
+    expect(screen.getByRole('button')).toHaveTextContent('Toggle Feed');
   });
 
   test('should toggle market button', async () => {
@@ -26,7 +26,7 @@ describe('Footer component', () => {
       newMarket = selectedMarket;
     });
 
-    const { getByRole } = render(
+    render(
       <Footer
         onToggle={toggleHandlerMock}
         isDisabled={isConnected}
@@ -34,7 +34,7 @@ describe('Footer component', () => {
       />
     );
 
-    const buttonEl = getByRole('button');
+    const buttonEl = screen.getByRole('button');
 
     await userEvent.click(buttonEl);
 
@@ -43,7 +43,7 @@ describe('Footer component', () => {
   });
 
   test('should disable button on disconnection', () => {
-    const { getByRole } = render(
+    render(
       <Footer
         onToggle={toggleHandlerMock}
         isDisabled={!isConnected}
@@ -51,7 +51,7 @@ describe('Footer component', () => {
       />
     );
 
-    const buttonEl = getByRole('button');
+    const buttonEl = screen.getByRole('button');
 
     userEvent.click(buttonEl);
 

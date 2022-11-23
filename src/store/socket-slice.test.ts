@@ -11,8 +11,6 @@ import socketSlice, {
   connectError,
   disconnectSuccess,
 } from './socket-slice';
-import * as socketMiddleware from './socketMiddleware';
-import * as OrderbookSocket from '../OrderbookSocket';
 
 describe('Socket slice', () => {
   test('should have initial state', () => {

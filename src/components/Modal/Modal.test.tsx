@@ -1,5 +1,5 @@
 import userEvent from '@testing-library/user-event';
-import { fireEvent, render } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import Modal from './Modal';
 import { ModalStatus } from '../../types';
 
@@ -9,15 +9,12 @@ describe('Modal component', () => {
     div.setAttribute('id', 'modal-root');
     document.body.appendChild(div);
   });
-
   test('should render Modal component', () => {
     const onClose = jest.fn();
 
-    const { getByRole } = render(
-      <Modal onClose={onClose} message={''} buttonText={''} />
-    );
+    render(<Modal onClose={onClose} message={''} buttonText={''} />);
 
-    const modal = getByRole('dialog');
+    const modal = screen.getByRole('dialog');
 
     expect(modal).toBeTruthy();
   });
@@ -25,7 +22,7 @@ describe('Modal component', () => {
   test('should render Error Modal', async () => {
     const reconnectHandlerMock = jest.fn();
 
-    const { getByText } = render(
+    render(
       <Modal
         message="Connection Failed"
         buttonText="RETRY"
@@ -34,7 +31,7 @@ describe('Modal component', () => {
       />
     );
 
-    const buttonEl = getByText('RETRY');
+    const buttonEl = screen.getByText('RETRY');
 
     expect(buttonEl).toBeTruthy();
   });
@@ -42,7 +39,7 @@ describe('Modal component', () => {
   test('should render Warning Modal', async () => {
     const reconnectHandlerMock = jest.fn();
 
-    const { container, getByRole } = render(
+    render(
       <Modal
         message="Orderbook Disconnected"
         buttonText="reconnect"
@@ -51,16 +48,15 @@ describe('Modal component', () => {
       />
     );
 
-    const modal = getByRole('alertdialog');
+    const modal = screen.getByRole('alertdialog');
 
-    expect(container).toBeTruthy();
     expect(modal).toBeTruthy();
   });
 
   test('should click button in modal', async () => {
     const onClose = jest.fn();
 
-    const { getByRole } = render(
+    render(
       <Modal
         onClose={onClose}
         message="Orderbook Disconnected"
@@ -69,7 +65,7 @@ describe('Modal component', () => {
       />
     );
 
-    const buttonEl = getByRole('button');
+    const buttonEl = screen.getByRole('button');
 
     expect(buttonEl).toHaveTextContent('RECONNECT');
 
@@ -81,7 +77,7 @@ describe('Modal component', () => {
   test('should press escape key and close modal', async () => {
     const onClose = jest.fn();
 
-    const { getByRole } = render(
+    render(
       <Modal
         onClose={onClose}
         message="Orderbook Disconnected"
@@ -90,7 +86,7 @@ describe('Modal component', () => {
       />
     );
 
-    await fireEvent.keyDown(getByRole('dialog'), {
+    await fireEvent.keyDown(screen.getByRole('dialog'), {
       key: 'Escape',
       code: 'Escape',
       keyCode: 27,
@@ -103,7 +99,7 @@ describe('Modal component', () => {
   test('should press other key and not close modal', async () => {
     const onClose = jest.fn();
 
-    const { getByRole } = render(
+    render(
       <Modal
         onClose={onClose}
         message="Orderbook Disconnected"
@@ -112,7 +108,7 @@ describe('Modal component', () => {
       />
     );
 
-    await fireEvent.keyDown(getByRole('dialog'), {
+    await fireEvent.keyDown(screen.getByRole('dialog'), {
       key: 'enter',
       keyCode: 13,
     });
