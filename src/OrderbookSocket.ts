@@ -9,8 +9,7 @@ import {
 } from './store/socket-slice';
 import { AppDispatch } from './store';
 
-export class OrderbookSocket {
-  private readonly WEB_SOCKET_URL = 'wss://www.cryptofacilities.com/ws/v1';
+export default class OrderbookSocket {
   private readonly NEW_MARKET = 0;
   private readonly NORMAL_CLOSURE = 1000;
   private readonly FEED = 'book_ui_1';
@@ -18,21 +17,21 @@ export class OrderbookSocket {
   private readonly TIMEOUT = 5000;
   private readonly WAIT_TIME = 10;
   private timeoutCounter = 0;
-  private socket: WebSocket | null;
 
-  constructor(private readonly dispatch: AppDispatch) {
-    this.socket = new WebSocket(this.WEB_SOCKET_URL);
-
-    this.socket.onopen = () => {
-      this.dispatch(connectSuccess());
-      this.dispatch(changeMarket({ selectedMarket: Market.NONE }));
+  constructor(
+    private socket: WebSocket | null,
+    private readonly dispatch: AppDispatch
+  ) {
+    socket!.onopen = () => {
+      dispatch(connectSuccess());
+      dispatch(changeMarket({ selectedMarket: Market.NONE }));
     };
 
-    this.socket.onclose = (event: CloseEvent) =>
-      this.closeHandler(event, this.dispatch);
+    socket!.onclose = (event: CloseEvent) => this.closeHandler(event);
 
-    this.socket.onmessage = (messageEvent: MessageEvent) =>
-      this.messageHandler(messageEvent, this.dispatch);
+    socket!.onmessage = (messageEvent: MessageEvent) => {
+      this.messageHandler(messageEvent);
+    };
   }
 
   subscribeToMarket(marketForSubscription: Market) {
@@ -80,16 +79,16 @@ export class OrderbookSocket {
     return `{"event":"${socketEvent}","feed":"${feed}","product_ids":["${market}"]}`;
   }
 
-  private messageHandler(messageEvent: MessageEvent, dispatch: AppDispatch) {
+  private messageHandler(messageEvent: MessageEvent) {
     const data: SocketEventData = JSON.parse(messageEvent.data);
 
     if (data.event === SocketEvent.subscribed) {
       const newMarket = data.product_ids![this.NEW_MARKET];
 
-      dispatch(subscribeSuccess());
-      dispatch(changeMarket({ selectedMarket: newMarket }));
+      this.dispatch(subscribeSuccess());
+      this.dispatch(changeMarket({ selectedMarket: newMarket }));
     } else if (data.event === SocketEvent.unsubscribed) {
-      dispatch(unsubscribeSuccess());
+      this.dispatch(unsubscribeSuccess());
     }
 
     if (data.bids?.length > 0) {
@@ -97,7 +96,7 @@ export class OrderbookSocket {
         (el: [number, number]) => el[this.SIZE] > 0
       );
       if (filtBids.length > 0) {
-        dispatch(processSocketData({ bids: filtBids }));
+        this.dispatch(processSocketData({ bids: filtBids }));
       }
     }
 
@@ -106,17 +105,17 @@ export class OrderbookSocket {
         (el: number[]) => el[this.SIZE] > 0
       );
       if (filtAsks.length > 0) {
-        dispatch(processSocketData({ asks: filtAsks }));
+        this.dispatch(processSocketData({ asks: filtAsks }));
       }
     }
   }
 
-  private closeHandler(event: CloseEvent, dispatch: AppDispatch) {
+  private closeHandler(event: CloseEvent) {
     if (event.code === this.NORMAL_CLOSURE) {
-      dispatch(disconnectSuccess());
+      this.dispatch(disconnectSuccess());
     } else {
       console.error(`WebSocket Client Error Code: ${event.code}`);
-      dispatch(connectError());
+      this.dispatch(connectError());
     }
 
     this.socket = null;
