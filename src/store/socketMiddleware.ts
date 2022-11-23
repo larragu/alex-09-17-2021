@@ -1,5 +1,6 @@
 import { Middleware } from '@reduxjs/toolkit';
-import { OrderbookSocket } from '../OrderbookSocket';
+import { WEB_SOCKET_URL } from '../constants';
+import OrderbookSocket from '../OrderbookSocket';
 import { SocketAction } from '../types';
 import {
   connectToSocket,
@@ -14,7 +15,10 @@ const socketMiddleware: Middleware = (store) => {
   return (next) => (action: SocketAction) => {
     if (connectToSocket.match(action)) {
       if (!orderbookSocket) {
-        orderbookSocket = new OrderbookSocket(store.dispatch);
+        orderbookSocket = new OrderbookSocket(
+          new WebSocket(WEB_SOCKET_URL),
+          store.dispatch
+        );
       }
     } else if (disconnectFromSocket.match(action)) {
       orderbookSocket?.closeSocket();
