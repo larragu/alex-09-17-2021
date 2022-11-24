@@ -1,11 +1,10 @@
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 
 import { initialResult } from '../mocks';
 import useSocket from '../hooks/useSocket';
 import Orderbook from './Orderbook';
 import { Market } from '../types';
 import * as hooks from '../hooks';
-import userEvent from '@testing-library/user-event';
 
 jest.mock('../hooks/useSocket');
 
@@ -45,9 +44,9 @@ describe('Orderbook component', () => {
     const useAppSelectorMock = jest.spyOn(hooks, 'useAppSelector');
     useAppSelectorMock.mockReturnValue(initialResult);
 
-    const { getByRole } = render(<Orderbook />);
+    render(<Orderbook />);
 
-    expect(getByRole('heading', { level: 4 })).toHaveTextContent(
+    expect(screen.getByRole('heading', { level: 4 })).toHaveTextContent(
       'Connection Failed'
     );
   });
@@ -63,9 +62,9 @@ describe('Orderbook component', () => {
     const useAppSelectorMock = jest.spyOn(hooks, 'useAppSelector');
     useAppSelectorMock.mockReturnValue(initialResult);
 
-    const { getByRole } = render(<Orderbook />);
+    render(<Orderbook />);
 
-    expect(getByRole('heading', { level: 4 })).toHaveTextContent(
+    expect(screen.getByRole('heading', { level: 4 })).toHaveTextContent(
       'Orderbook Disconnected'
     );
   });

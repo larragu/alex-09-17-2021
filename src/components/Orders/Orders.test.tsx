@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 
 import Orders from './Orders';
 import { initialResult } from '../../mocks';
@@ -12,8 +12,10 @@ describe('Orders component', () => {
       ask: initialResult.ask,
     });
 
-    const { getByRole } = render(<Orders />);
+    render(<Orders />);
 
-    expect(getByRole('heading', { level: 2 })).toHaveTextContent(/Spread/i);
+    expect(screen.getByRole('heading', { level: 2 })).toHaveTextContent(
+      /Spread/i
+    );
   });
 });

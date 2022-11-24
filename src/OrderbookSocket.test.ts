@@ -18,13 +18,12 @@ describe('OrderbookSocket', () => {
   let orderbookSocket: OrderbookSocket;
 
   beforeEach(() => {
-    dispatchMock.mockClear();
     mockServer = new Server(fakeURL);
     socketMock = new MockSocket(fakeURL);
     orderbookSocket = new OrderbookSocket(socketMock, dispatchMock);
   });
 
-  test('should create a succesful connection', (t: any) => {
+  test('should create a succesful connection', (t) => {
     setTimeout(() => {
       mockServer.stop(t);
       expect(dispatchMock).toHaveBeenCalledWith(connectSuccess());
@@ -34,7 +33,7 @@ describe('OrderbookSocket', () => {
     }, 100);
   });
 
-  test('should call "subscribeToMarket"', (t: any) => {
+  test('should call "subscribeToMarket"', (t) => {
     mockServer.on('connection', (socket) => {
       socket.on('message', (data) => {
         socket.send('{"event": "subscribed", "product_ids":["PI_ETHUSD"]}');
@@ -58,7 +57,7 @@ describe('OrderbookSocket', () => {
     }, 100);
   });
 
-  test('should call  "unsubscribeFromMarket"', (t: any) => {
+  test('should call  "unsubscribeFromMarket"', (t) => {
     mockServer.on('connection', (socket) => {
       socket.on(
         'message',
@@ -92,7 +91,7 @@ describe('OrderbookSocket', () => {
     }, 100);
   });
 
-  test('sould call "closeSocket" and succesfully disconnect', (t: any) => {
+  test('sould call "closeSocket" and succesfully disconnect', (t) => {
     orderbookSocket.closeSocket();
 
     setTimeout(() => {
