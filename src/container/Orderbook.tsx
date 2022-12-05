@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 import cn from 'classnames';
 
 import styles from './Orderbook.module.scss';
@@ -21,6 +21,8 @@ const Orderbook = () => {
     isSubscribed,
   } = useSocket();
 
+  const connectSocketRef = useRef(false);
+
   const reconnectSocketHandler = useCallback(() => {
     connectSocket(selectedMarket);
   }, [connectSocket, selectedMarket]);
@@ -39,7 +41,10 @@ const Orderbook = () => {
   }, [disconnectSocket]);
 
   useEffect(() => {
-    connectSocket(Market.XBT_USD);
+    if (!connectSocketRef.current) {
+      connectSocketRef.current = true;
+      connectSocket(Market.XBT_USD);
+    }
   }, [connectSocket]);
 
   useEffect(() => {
