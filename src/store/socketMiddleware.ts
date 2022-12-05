@@ -10,23 +10,20 @@ import {
 } from './socket-slice';
 
 const socketMiddleware: Middleware = (store) => {
-  let orderbookSocket: OrderbookSocket | null;
+  let orderbookSocket: OrderbookSocket;
 
   return (next) => (action: SocketAction) => {
     if (connectToSocket.match(action)) {
-      if (!orderbookSocket) {
-        orderbookSocket = new OrderbookSocket(
-          new WebSocket(WEB_SOCKET_URL),
-          store.dispatch
-        );
-      }
+      orderbookSocket = new OrderbookSocket(
+        new WebSocket(WEB_SOCKET_URL),
+        store.dispatch
+      );
     } else if (disconnectFromSocket.match(action)) {
-      orderbookSocket?.closeSocket();
-      orderbookSocket = null;
+      orderbookSocket.closeSocket();
     } else if (subscribeToMarket.match(action)) {
-      orderbookSocket?.subscribeToMarket(action.payload);
+      orderbookSocket.subscribeToMarket(action.payload);
     } else if (unsubscribeFromMarket.match(action)) {
-      orderbookSocket?.unsuscribeFromMarket(action.payload);
+      orderbookSocket.unsuscribeFromMarket(action.payload);
     }
 
     next(action);
