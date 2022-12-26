@@ -1,23 +1,20 @@
 import { Middleware } from '@reduxjs/toolkit';
-import { WEB_SOCKET_URL } from '../constants';
-import OrderbookSocket from '../OrderbookSocket';
-import { SocketAction } from '../types';
+import orderbookSocket from './OrderbookSocket';
+import { SocketAction } from '../../types';
+import { WEB_SOCKET_URL } from '../../constants';
+import WebSocketClient from './WebSocketClient';
 import {
   connectToSocket,
   disconnectFromSocket,
   subscribeToMarket,
   unsubscribeFromMarket,
-} from './socket-slice';
+} from '../socket-slice';
 
 const socketMiddleware: Middleware = (store) => {
-  let orderbookSocket: OrderbookSocket;
-
   return (next) => (action: SocketAction) => {
     if (connectToSocket.match(action)) {
-      orderbookSocket = new OrderbookSocket(
-        new WebSocket(WEB_SOCKET_URL),
-        store.dispatch
-      );
+      const webSocketClient = new WebSocketClient(WEB_SOCKET_URL);
+      orderbookSocket.open(webSocketClient, store.dispatch);
     } else if (disconnectFromSocket.match(action)) {
       orderbookSocket.closeSocket();
     } else if (subscribeToMarket.match(action)) {

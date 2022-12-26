@@ -2,7 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 
 import feedSlice from './feed-slice';
 import socketSlice from './socket-slice';
-import socketMiddleware from './socketMiddleware';
+import socketMiddleware from './middleware/socketMiddleware';
 
 const store = configureStore({
   reducer: { feed: feedSlice, socket: socketSlice },

@@ -1,26 +1,25 @@
-import { WebSocket as MockSocket, Server } from 'mock-socket';
+import { Server } from 'mock-socket';
 
-import OrderbookSocket from './OrderbookSocket';
-import { changeMarket } from './store/feed-slice';
+import orderbookSocket from './OrderbookSocket';
+import { changeMarket } from '../feed-slice';
 import {
   connectSuccess,
   disconnectSuccess,
   subscribeSuccess,
   unsubscribeSuccess,
-} from './store/socket-slice';
-import { Market } from './types';
+} from '../socket-slice';
+import { Market } from '../../types';
+import { MockSocketClient } from '../../mocks/MockSocketClient';
 
 describe('OrderbookSocket', () => {
   const fakeURL = 'wss://test';
   const dispatchMock = jest.fn();
   let mockServer: Server;
-  let socketMock: WebSocket;
-  let orderbookSocket: OrderbookSocket;
 
   beforeEach(() => {
     mockServer = new Server(fakeURL);
-    socketMock = new MockSocket(fakeURL);
-    orderbookSocket = new OrderbookSocket(socketMock, dispatchMock);
+    const socketMockClient = new MockSocketClient(fakeURL);
+    orderbookSocket.open(socketMockClient, dispatchMock);
   });
 
   test('should create a succesful connection', (t) => {
@@ -57,7 +56,7 @@ describe('OrderbookSocket', () => {
     }, 100);
   });
 
-  test('should call  "unsubscribeFromMarket"', (t) => {
+  test('should call "unsubscribeFromMarket"', (t) => {
     mockServer.on('connection', (socket) => {
       socket.on(
         'message',
