@@ -1,7 +1,7 @@
 import styles from './Header.module.scss';
 import Spread from '../Spread';
 
-const Header = () => {
+const Header = (): JSX.Element => {
   return (
     <header className={styles.header}>
       <h1 className={styles.title}>Order Book</h1>

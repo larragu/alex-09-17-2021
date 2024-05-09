@@ -5,12 +5,12 @@ import { OrderType } from '../../../types';
 import styles from './Bar.module.scss';
 
 interface BarProps {
-  percent: number;
+  size: number;
   orderType: OrderType;
 }
 
-const Bar = ({ percent, orderType }: BarProps) => {
-  const style = { '--percent': `${percent}%` } as CSSProperties;
+const Bar = ({ size, orderType }: BarProps): JSX.Element => {
+  const style = { '--percent': `${size}%` } as CSSProperties;
 
   return (
     <div
@@ -18,7 +18,7 @@ const Bar = ({ percent, orderType }: BarProps) => {
         styles.bar,
         orderType === OrderType.BID ? styles.bid : styles.ask
       )}
-      key={percent}
+      key={size}
       style={style}
     />
   );

@@ -13,7 +13,12 @@ interface ModalProps {
   status?: ModalStatus;
 }
 
-const Modal = ({ onClose, message, buttonText, status }: ModalProps) => {
+const Modal = ({
+  onClose,
+  message,
+  buttonText,
+  status,
+}: ModalProps): JSX.Element => {
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {

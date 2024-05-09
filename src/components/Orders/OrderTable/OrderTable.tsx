@@ -13,19 +13,20 @@ interface OrderTableProps {
   orderType: OrderType;
 }
 
-const OrderTable = ({ feed, orderType }: OrderTableProps) => {
+const OrderTable = ({ feed, orderType }: OrderTableProps): JSX.Element => {
+  const { depthArray, list, map } = feed;
   const getRows = (
     totalAsksArray: number[],
     list: number[],
     map: OrderMap,
     type: OrderType
   ) => {
-    return list.map((price: number, i: number) => {
+    return list.map((price: number, index: number) => {
       let size = map[price]!;
       return (
         <OrderRow
           key={`${type}:${price}`}
-          total={totalAsksArray[i]}
+          total={totalAsksArray[index]}
           size={size}
           price={price}
           orderType={type}
@@ -33,19 +34,19 @@ const OrderTable = ({ feed, orderType }: OrderTableProps) => {
       );
     });
   };
-  const feedRows = getRows(feed.depthArray, feed.list, feed.map, orderType);
+  const feedRows = getRows(depthArray, list, map, orderType);
 
   return (
     <section className={styles.orderTableContainer}>
-      {feed.list.length > 0 && (
-        <BarGraph orderType={orderType} depthArray={feed.depthArray} />
+      {list.length > 0 && (
+        <BarGraph orderType={orderType} depthArray={depthArray} />
       )}
       <table className={styles.orderTable}>
         <OrderHeader orderType={orderType} />
         <tbody
           className={cn(
             styles.orderTableBody,
-            feed.list.length > 0 &&
+            list.length > 0 &&
               (orderType === OrderType.ASK ? styles.ask : styles.bid)
           )}
         >
@@ -56,11 +57,13 @@ const OrderTable = ({ feed, orderType }: OrderTableProps) => {
   );
 };
 
-//Makes HUGE rendering performance boost
+//Profiled the rendering performance using this algorithm and made a HUGE rendering performance boost
 const areEqual = (prevProps: OrderTableProps, nextProps: OrderTableProps) => {
+  const { depthArray: previousDepthArray, map: previousMap } = prevProps.feed;
+  const { depthArray: nextDepthArray, map: nextMap } = nextProps.feed;
+
   return (
-    isEqual(prevProps.feed.depthArray, nextProps.feed.depthArray) &&
-    isEqual(prevProps.feed.map, nextProps.feed.map)
+    isEqual(previousDepthArray, nextDepthArray) && isEqual(previousMap, nextMap)
   );
 };
 

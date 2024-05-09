@@ -3,11 +3,11 @@ import cn from 'classnames';
 import { OrderType } from '../../../../types';
 import styles from './OrderHeader.module.scss';
 
-interface OrderHeaderProp {
+interface OrderHeaderProps {
   orderType: OrderType;
 }
 
-const OrderHeader = ({ orderType }: OrderHeaderProp) => {
+const OrderHeader = ({ orderType }: OrderHeaderProps): JSX.Element => {
   const headerNames = ['TOTAL', 'SIZE', 'PRICE'];
 
   if (orderType === OrderType.ASK) {

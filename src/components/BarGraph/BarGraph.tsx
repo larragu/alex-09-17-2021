@@ -9,11 +9,18 @@ interface BarGraphProps {
   orderType: OrderType;
 }
 
-const BarGraph = ({ depthArray, orderType }: BarGraphProps) => {
-  const list = depthArray.map((total: number, i: number) => {
-    const percent = (total / depthArray[depthArray.length - 1]) * 100;
+const calculateRelativeBarSize = (
+  total: number,
+  depthArray: number[]
+): number => {
+  return (total / depthArray[depthArray.length - 1]) * 100;
+};
 
-    return <Bar key={i} orderType={orderType} percent={percent} />;
+const BarGraph = ({ depthArray, orderType }: BarGraphProps): JSX.Element => {
+  const list = depthArray.map((total: number, index: number) => {
+    const barSizePercentage = calculateRelativeBarSize(total, depthArray);
+
+    return <Bar key={index} orderType={orderType} size={barSizePercentage} />;
   });
 
   return (
