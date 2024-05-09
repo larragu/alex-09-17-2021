@@ -10,7 +10,7 @@ import useSocket from '../hooks/useSocket';
 import Modal from '../components/Modal';
 
 const VISIBILITY_CHANGE = 'visibilitychange';
-const Orderbook = () => {
+const Orderbook = (): JSX.Element => {
   const {
     isSocketConnected,
     disconnectSocket,
@@ -23,11 +23,18 @@ const Orderbook = () => {
 
   const connectSocketRef = useRef(false);
 
+  useEffect(() => {
+    if (!connectSocketRef.current) {
+      connectSocketRef.current = true;
+      connectSocket(Market.XBT_USD);
+    }
+  }, [connectSocket]);
+
   const reconnectSocketHandler = useCallback(() => {
     connectSocket(selectedMarket);
   }, [connectSocket, selectedMarket]);
 
-  const toggleHandler = useCallback(
+  const toggleFeedHandler = useCallback(
     (selectedMarket: Market) => {
       changeMarket(selectedMarket);
     },
@@ -41,17 +48,14 @@ const Orderbook = () => {
   }, [disconnectSocket]);
 
   useEffect(() => {
-    if (!connectSocketRef.current) {
-      connectSocketRef.current = true;
-      connectSocket(Market.XBT_USD);
-    }
-  }, [connectSocket]);
-
-  useEffect(() => {
     window.addEventListener(VISIBILITY_CHANGE, toggleConnectionHandler);
     return () =>
       window.removeEventListener(VISIBILITY_CHANGE, toggleConnectionHandler);
   }, [toggleConnectionHandler]);
+
+  const isDisconnectedAndMarketSelected = (): boolean => {
+    return !isSocketConnected && selectedMarket !== Market.NONE;
+  };
 
   return (
     <div className={cn(styles.orderbook, { [styles.blur]: !isSubscribed })}>
@@ -63,8 +67,7 @@ const Orderbook = () => {
           status={ModalStatus.ERROR}
         />
       ) : (
-        selectedMarket !== Market.NONE &&
-        !isSocketConnected && (
+        isDisconnectedAndMarketSelected() && (
           <Modal
             message="Orderbook Disconnected"
             buttonText="reconnect"
@@ -76,9 +79,9 @@ const Orderbook = () => {
       <Header />
       <Orders />
       <Footer
-        onToggle={toggleHandler}
+        onToggleFeed={toggleFeedHandler}
         selectedMarket={selectedMarket}
-        isDisabled={!isSocketConnected}
+        isToggleFeedEnabled={isSocketConnected}
       />
     </div>
   );

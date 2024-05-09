@@ -6,7 +6,7 @@ import Bar from './Bar';
 describe('Bar component', () => {
   test('should render Bar', () => {
     const { container } = render(
-      <Bar percent={59.4587} orderType={OrderType.BID} />
+      <Bar size={59.4587} orderType={OrderType.BID} />
     );
 
     expect(container).toBeTruthy();

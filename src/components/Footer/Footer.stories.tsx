@@ -14,7 +14,7 @@ const Template: ComponentStory<typeof Footer> = (args) => <Footer {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
-  isDisabled: false,
+  isToggleFeedEnabled: true,
   selectedMarket: Market.XBT_USD,
-  onToggle: () => {},
+  onToggleFeed: () => {},
 };

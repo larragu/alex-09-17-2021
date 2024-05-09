@@ -6,7 +6,7 @@ import Spread from '../Spread';
 import OrderTable from './OrderTable';
 import { useAppSelector } from '../../hooks';
 
-const Orders = () => {
+const Orders = (): JSX.Element => {
   const { bid, ask } = useAppSelector((state: ReducersState) => state.feed);
 
   return (

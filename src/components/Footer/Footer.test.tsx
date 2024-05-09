@@ -7,12 +7,12 @@ import Footer from './Footer';
 describe('Footer component', () => {
   const isConnected = false;
   const selectedMarket = Market.XBT_USD;
-  const toggleHandlerMock = jest.fn();
+  const toggleFeedHandlerMock = jest.fn();
 
   render(
     <Footer
-      onToggle={toggleHandlerMock}
-      isDisabled={isConnected}
+      onToggleFeed={toggleFeedHandlerMock}
+      isToggleFeedEnabled={isConnected}
       selectedMarket={selectedMarket}
     />
   );
@@ -22,14 +22,14 @@ describe('Footer component', () => {
 
   test('should toggle market button', async () => {
     let newMarket = Market.NONE;
-    const toggleHandlerMock = jest.fn((selectedMarket: Market) => {
+    const toggleFeedHandlerMock = jest.fn((selectedMarket: Market) => {
       newMarket = selectedMarket;
     });
 
     render(
       <Footer
-        onToggle={toggleHandlerMock}
-        isDisabled={isConnected}
+        onToggleFeed={toggleFeedHandlerMock}
+        isToggleFeedEnabled={!isConnected}
         selectedMarket={selectedMarket}
       />
     );
@@ -38,15 +38,15 @@ describe('Footer component', () => {
 
     await userEvent.click(buttonEl);
 
-    expect(toggleHandlerMock.mock.calls.length).toEqual(1);
+    expect(toggleFeedHandlerMock.mock.calls.length).toEqual(1);
     expect(newMarket).toEqual(Market.ETH_USD);
   });
 
   test('should disable button on disconnection', () => {
     render(
       <Footer
-        onToggle={toggleHandlerMock}
-        isDisabled={!isConnected}
+        onToggleFeed={toggleFeedHandlerMock}
+        isToggleFeedEnabled={isConnected}
         selectedMarket={selectedMarket}
       />
     );
@@ -55,6 +55,6 @@ describe('Footer component', () => {
 
     userEvent.click(buttonEl);
 
-    expect(toggleHandlerMock.mock.calls.length).toEqual(0);
+    expect(toggleFeedHandlerMock.mock.calls.length).toEqual(0);
   });
 });

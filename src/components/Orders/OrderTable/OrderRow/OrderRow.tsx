@@ -11,12 +11,12 @@ interface OrderRowProps {
   orderType: OrderType;
 }
 
-const OrderRow: React.FunctionComponent<OrderRowProps> = ({
+const OrderRow = ({
   total,
   size,
   price,
   orderType,
-}) => {
+}: OrderRowProps): JSX.Element => {
   const totalCell = (
     <td key={`total:${total}`} className={styles.cell}>
       {total.toLocaleString()}

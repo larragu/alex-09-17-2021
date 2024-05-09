@@ -3,7 +3,7 @@ import { useAppSelector } from '../../hooks';
 import { ReducersState } from '../../types';
 import styles from './Spread.module.scss';
 
-const Spread = () => {
+const Spread = (): JSX.Element => {
   const highestBidPrice = useAppSelector(
     (state: ReducersState) => state.feed.bid.highestBidPrice
   );

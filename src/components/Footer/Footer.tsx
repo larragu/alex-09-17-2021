@@ -4,33 +4,44 @@ import { Market } from '../../types';
 import styles from './Footer.module.scss';
 
 interface FooterProps {
-  onToggle: (selectedMarket: Market) => void;
-  isDisabled: boolean;
+  onToggleFeed: (selectedMarket: Market) => void;
+  isToggleFeedEnabled?: boolean;
   selectedMarket: Market;
 }
 
-const Footer = ({ onToggle, isDisabled, selectedMarket }: FooterProps) => {
-  const [tempDisabled, setTempDisabled] = useState(true);
+const Footer = ({
+  onToggleFeed,
+  isToggleFeedEnabled = false,
+  selectedMarket,
+}: FooterProps): JSX.Element => {
+  const [isToggleFeedDisabled, setIsToggleFeedDisabled] = useState(
+    !isToggleFeedEnabled
+  );
+
+  useEffect(() => {
+    setIsToggleFeedDisabled(!isToggleFeedEnabled);
+  }, [isToggleFeedEnabled]);
+
   useEffect(() => {
     if (selectedMarket !== Market.NONE) {
-      setTempDisabled(false);
+      setIsToggleFeedDisabled(false);
     }
   }, [selectedMarket]);
 
-  const toggleHandler = (selectedMarket: Market) => {
+  const toggleFeedHandler = (selectedMarket: Market) => {
     const newMarket =
       selectedMarket === Market.XBT_USD ? Market.ETH_USD : Market.XBT_USD;
 
-    setTempDisabled(true);
-    onToggle(newMarket);
+    setIsToggleFeedDisabled(true);
+    onToggleFeed(newMarket);
   };
 
   return (
     <footer className={styles.footer}>
       <button
-        disabled={isDisabled || tempDisabled}
+        disabled={isToggleFeedDisabled}
         className={styles.buttonToggle}
-        onClick={() => toggleHandler(selectedMarket)}
+        onClick={() => toggleFeedHandler(selectedMarket)}
       >
         Toggle Feed
       </button>
